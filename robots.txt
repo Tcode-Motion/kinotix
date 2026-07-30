@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tanmoy.github.io/wallverse/sitemap.xml

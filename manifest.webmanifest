@@ -1,0 +1,21 @@
+{
+  "name": "KinotiX — Ultra HD Wallpaper Engine",
+  "short_name": "KinotiX",
+  "start_url": "/wallverse/index.html",
+  "display": "standalone",
+  "background_color": "#0a0c10",
+  "theme_color": "#00f0ff",
+  "description": "Next-Gen 3D Gyro Parallax, OpenGL ES Fluid & Ultra HD 4K Wallpaper Engine for Android.",
+  "icons": [
+    {
+      "src": "/wallverse/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/wallverse/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
