@@ -3,28 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KinotiX — Next-Gen Android Wallpaper Engine</title>
-  <meta name="description" content="KinotiX is a flagship open-source Android wallpaper app featuring 3D Gyro Parallax, OpenGL ES Fluid dynamics, Live Camera backgrounds, and 4K Ultra HD visual art.">
-  <meta name="keywords" content="KinotiX, Wallpaper Engine Android, 3D Wallpaper, Live Wallpaper, Parallax 3D, Fluid Dynamics, 4K Wallpapers, Open Source Android App">
-  <meta name="author" content="KinotiX Team">
-  <link rel="canonical" href="https://tanmoy.github.io/wallverse/home.html">
+  <title>Landing Page — KinotiX Android Engine</title>
+  <meta name="description" content="Landing Page for KinotiX — The next-generation open-source 3D Parallax Gyro, OpenGL ES Fluid & Ultra HD 4K Android Wallpaper Application.">
+  <meta name="keywords" content="KinotiX, Wallpaper Engine Android, 3D Parallax Wallpaper, OpenGL ES Fluid, Live Wallpaper, 4K Wallpapers, Open Source Android">
+  <meta name="author" content="Tcode-Motion">
+  <link rel="canonical" href="https://tcode-motion.github.io/kinotix/index.html">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="assets/css/style.css">
   
-  <!-- OpenGraph Metadata -->
-  <meta property="og:title" content="KinotiX — Next-Gen Android Wallpaper Engine">
-  <meta property="og:description" content="Next-Gen 3D Gyro Parallax, OpenGL ES Fluid & Ultra HD 4K Wallpaper Engine for Android.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tanmoy.github.io/wallverse/">
-  <meta property="og:image" content="https://tanmoy.github.io/wallverse/assets/screenshots/home_feed.png">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="KinotiX — Next-Gen Android Wallpaper Engine">
-  <meta name="twitter:description" content="Next-Gen 3D Gyro Parallax, OpenGL ES Fluid & Ultra HD 4K Wallpaper Engine for Android.">
-  <meta name="twitter:image" content="https://tanmoy.github.io/wallverse/assets/screenshots/home_feed.png">
+  <!-- Modular CSS Includes -->
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/themes.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/animations.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+  <link rel="stylesheet" href="styles/utilities.css">
 
-  <!-- Schema.org JSON-LD -->
+  <!-- OpenGraph & Twitter Cards -->
+  <meta property="og:title" content="Landing Page — KinotiX">
+  <meta property="og:description" content="KinotiX — Next-Gen 3D Parallax Gyro & OpenGL ES Fluid Wallpaper Engine for Android.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tcode-motion.github.io/kinotix/index.html">
+  <meta property="og:image" content="https://tcode-motion.github.io/kinotix/assets/screenshots/home_feed.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Landing Page — KinotiX">
+  <meta name="twitter:description" content="Next-Gen 3D Parallax Gyro & OpenGL ES Fluid Wallpaper Engine for Android.">
+
+  <!-- JSON-LD Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -32,144 +37,113 @@
     "name": "KinotiX",
     "operatingSystem": "ANDROID 7.0+",
     "applicationCategory": "PersonalizationApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
     "softwareVersion": "1.0.0",
-    "downloadUrl": "https://tanmoy.github.io/wallverse/assets/apk/KinotiX-v1.0.0-release.apk"
+    "url": "https://tcode-motion.github.io/kinotix/",
+    "downloadUrl": "https://tcode-motion.github.io/kinotix/assets/apk/KinotiX-v1.0.0-release.apk"
   }
   </script>
 </head>
 <body>
   <header>
     <a href="index.html" class="brand">
-      <span class="brand-text">KinotiX 🌌</span>
+      <span>KinotiX 🌌</span>
     </a>
     <nav>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-menu">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="features.html" class="">Features</a></li>
         <li><a href="download.html" class="">Download</a></li>
+        <li><a href="privacy.html" class="">Privacy</a></li>
+        <li><a href="terms.html" class="">Terms</a></li>
         <li><a href="faq.html" class="">FAQ</a></li>
         <li><a href="support.html" class="">Support</a></li>
         <li><a href="roadmap.html" class="">Roadmap</a></li>
-        <li><a href="privacy.html" class="">Privacy</a></li>
+        <li><a href="https://github.com/Tcode-Motion/kinotix" target="_blank">GitHub ↗</a></li>
+        <li><a href="contact.html" class="">Contact</a></li>
       </ul>
       <button class="theme-toggle" id="theme-toggle" title="Toggle Dark/Light Mode">☀️</button>
-      <a href="download.html" class="btn-primary">Download APK</a>
+      <a href="download.html" class="btn-primary" style="padding:0.4rem 1.1rem; font-size:0.85rem;">Download APK</a>
     </nav>
   </header>
 
-  <main>
-    <section class="hero container">
-      <div class="hero-badge">🚀 Production Release v1.0.0 Out Now</div>
-      <h1>Elevate Your Screen With Ultra HD 4K & Interactive Live Engines</h1>
-      <p>KinotiX brings 3D Parallax Gyroscopic motion, real-time C++/OpenGL ES Fluid physics, Live Camera Transparent backgrounds, and a Smart 6-Signal AI Recommendation engine directly to your Android device.</p>
-      <div class="hero-buttons">
-        <a href="download.html" class="btn-primary">📥 Download Release APK (v1.0.0)</a>
-        <a href="https://github.com/Tanmoy/wallverse" target="_blank" class="btn-outline">⭐ View on GitHub</a>
-      </div>
-    </section>
-
-    <section class="container">
-      <h2 style="text-align: center; margin-bottom: 2rem;">📱 App Screenshots & Preview</h2>
-      <div class="screenshots-grid">
-        <div class="screenshot-card">
-          <img src="assets/screenshots/home_feed.png" alt="Dynamic Home Feed">
-          <div style="padding: 1rem; text-align: center;"><strong>Personalized Home Feed</strong></div>
+    <main class="container">
+      <section class="hero">
+        <div class="hero-badge">🚀 KinotiX Flagship Release v1.0.0 Available</div>
+        <h1>Next-Gen 3D Gyro Parallax & OpenGL ES Fluid Wallpaper Engine</h1>
+        <p>Experience ultra-high-definition visual art with 4 native live engines, 0.001ms O(1) deduplication, 2ms WebP thumbnail caching, and a smart 6-signal AI recommendation matrix on your Android device.</p>
+        <div class="flex-center mt-4">
+          <a href="download.html" class="btn-primary">📥 Download Release APK (v1.0.0)</a>
+          <a href="https://github.com/Tcode-Motion/kinotix" target="_blank" class="btn-outline">⭐ GitHub Repository</a>
         </div>
-        <div class="screenshot-card">
-          <img src="assets/screenshots/discover_feed.png" alt="Discover Feed">
-          <div style="padding: 1rem; text-align: center;"><strong>O(1) Deduplicated Search</strong></div>
+      </section>
+      <section class="mt-4">
+        <h2 class="text-center mb-4">📱 App Screenshots & Live Preview</h2>
+        <div class="screenshots-grid">
+          <div class="screenshot-card"><img src="assets/screenshots/home_feed.png" alt="Home Feed"><div class="text-center" style="padding:0.75rem;">Personalized Home Feed</div></div>
+          <div class="screenshot-card"><img src="assets/screenshots/discover_feed.png" alt="Discover Feed"><div class="text-center" style="padding:0.75rem;">Search & Discover Feed</div></div>
+          <div class="screenshot-card"><img src="assets/screenshots/collections.png" alt="Collections"><div class="text-center" style="padding:0.75rem;">Curated Collections</div></div>
+          <div class="screenshot-card"><img src="assets/screenshots/detail_apply.png" alt="Detail View"><div class="text-center" style="padding:0.75rem;">Ultra HD 4K Apply</div></div>
         </div>
-        <div class="screenshot-card">
-          <img src="assets/screenshots/collections.png" alt="Collections Screen">
-          <div style="padding: 1rem; text-align: center;"><strong>Curated Collections</strong></div>
-        </div>
-        <div class="screenshot-card">
-          <img src="assets/screenshots/detail_apply.png" alt="Detail View & Apply">
-          <div style="padding: 1rem; text-align: center;"><strong>Ultra HD 4K Apply</strong></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="container">
-      <h2 style="text-align: center; margin-bottom: 2rem;">🔥 Core Engineering Highlights</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <span class="feature-icon">🌀</span>
-          <h3>3D Parallax Gyro Engine</h3>
-          <p>Multi-layered depth simulation powered by Android hardware rotation sensors for true 3D spatial motion.</p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🌊</span>
-          <h3>OpenGL ES Fluid Simulator</h3>
-          <p>Interactive Navier-Stokes fluid physics with real-time particle dynamics, touch turbulence, and customizable bloom glow.</p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">📷</span>
-          <h3>Live Camera Transparent Background</h3>
-          <p>Stream live camera feed directly onto your Android wallpaper surface using high-efficiency foreground service rendering.</p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🧠</span>
-          <h3>Smart 6-Signal AI Recommendation</h3>
-          <p>Combines favorites, search history, downloads, recently viewed, onboarding preferences, and popularity metrics for personalized feeds.</p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">⚡</span>
-          <h3>2ms Fast WebP Thumbnail Caching</h3>
-          <p>Scroll smoothly at 60 FPS with 20KB WebP transformation, backed by Coil 3 1GB disk cache and 45% RAM memory pool.</p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🛡️</span>
-          <h3>Automatic 404 Interception</h3>
-          <p>Network failure recovery replaces broken image links with 100% verified HTTP 200 OK curated fallback wallpapers instantly.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
+      </section>
+    </main>
+    
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
         <h4>KinotiX 🌌</h4>
-        <p style="color: var(--text-secondary); font-size:0.9rem;">Next-Gen 3D Parallax Gyro & OpenGL ES Fluid Wallpaper Engine for Android.</p>
+        <p style="color: var(--text-secondary); font-size:0.88rem;">Next-Gen 3D Parallax Gyro & OpenGL ES Fluid Wallpaper Engine for Android.</p>
+        <p style="color: var(--text-muted); font-size:0.8rem; margin-top:0.5rem;">Version 1.0.0 (Build 1)</p>
       </div>
       <div class="footer-col">
-        <h4>Navigation</h4>
+        <h4>Pages & Portal</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
+          <li><a href="home.html">App Overview</a></li>
           <li><a href="features.html">Features</a></li>
           <li><a href="download.html">Download APK & AAB</a></li>
-          <li><a href="roadmap.html">Roadmap</a></li>
-          <li><a href="changelog.html">Changelog</a></li>
+          <li><a href="about.html">About Developer</a></li>
+          <li><a href="blog.html">News & Updates</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Support & Docs</h4>
+        <h4>Community & Code</h4>
+        <ul>
+          <li><a href="opensource.html">Open Source Stance</a></li>
+          <li><a href="contributors.html">Contributors</a></li>
+          <li><a href="acknowledgements.html">Acknowledgements</a></li>
+          <li><a href="press.html">Press & Media Kit</a></li>
+          <li><a href="community.html">Community Hub</a></li>
+          <li><a href="media.html">Media Showcase</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support & Legal</h4>
         <ul>
           <li><a href="support.html">Support Center</a></li>
           <li><a href="faq.html">FAQ (40+ Answers)</a></li>
-          <li><a href="contact.html">Contact Developer</a></li>
-          <li><a href="licenses.html">Open Source Licenses</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal & Policy</h4>
-        <ul>
           <li><a href="privacy.html">Privacy Policy</a></li>
           <li><a href="terms.html">Terms of Service</a></li>
           <li><a href="cookies.html">Cookies Policy</a></li>
+          <li><a href="licenses.html">Third-Party Licenses</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 KinotiX Team. Open Source project released under the MIT License.</p>
+      <div>
+        <span>&copy; 2026 KinotiX Team by <strong>Tcode-Motion</strong>. MIT License.</span>
+      </div>
+      <div style="display:flex; gap:1rem; align-items:center;">
+        <span>📧 kinotix.app@gmail.com</span>
+        <button class="back-to-top" id="back-to-top">↑ Back to Top</button>
+      </div>
     </div>
   </footer>
-  <script src="assets/js/main.js"></script>
+  
+  <!-- Modular JS Includes -->
+  <script src="scripts/theme.js"></script>
+  <script src="scripts/navigation.js"></script>
+  <script src="scripts/faq.js"></script>
+  <script src="scripts/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+/* Light Theme System */
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --glow-cyan: rgba(0, 240, 255, 0.15);
+  --shadow-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
+}
