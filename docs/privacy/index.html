@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy & Data Safety — KinotiX Android App</title>
-  <meta name="description" content="Official Google Play Compliant Privacy Policy for KinotiX (com.kinotix.app). Full transparency on permissions, Google AdMob, Firebase Messaging, Crashlytics, and data safety.">
+  <title>Privacy Policy — KinotiX Android Engine</title>
+  <meta name="description" content="Official Privacy Policy for KinotiX (com.kinotix.app). Detailed transparency on permissions, Google AdMob, Firebase services, and data handling practices.">
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -22,103 +22,123 @@
       <li><a href="https://github.com/Tcode-Motion/kinotix" target="_blank">GitHub ↗</a></li>
     </ul>
     <div style="display:flex; gap:1rem; align-items:center;">
-      
       <a href="../download/" class="btn-gradient" style="padding:0.5rem 1.2rem; font-size:0.85rem;">Download APK</a>
     </div>
   </header>
 
   <main class="main-container">
     <div style="margin-bottom: 3rem; text-align:center;">
-      <div class="hero-pill">🛡️ Google Play Policy & Data Safety Compliant</div>
-      <h1 style="font-size: 3rem; font-weight: 900; margin-bottom: 1rem;">Privacy Policy & Transparency Notice</h1>
+      <div class="hero-pill">🛡️ Data Safety & Google Play Compliant Policy</div>
+      <h1 style="font-size: 3rem; font-weight: 900; margin-bottom: 1rem;">Privacy Policy</h1>
       <p style="color: var(--text-secondary); max-width: 800px; margin: 0 auto; font-size: 1.1rem;">
-        Effective Date: July 30, 2026 | Application: <strong>KinotiX</strong> | Package Name: <code>com.kinotix.app</code>
+        Effective Date: July 30, 2026 | Last Updated: July 30, 2026 | Application: <strong>KinotiX</strong> (<code>com.kinotix.app</code>)
       </p>
     </div>
 
     <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2.8rem; line-height: 1.8; box-shadow: var(--shadow-lg);">
-      <h2 style="color: var(--cyan); font-size: 1.7rem; margin-bottom: 1rem;">1. Introduction & Core Privacy Philosophy</h2>
+      <h2 style="color: var(--cyan); font-size: 1.7rem; margin-bottom: 1rem;">1. Introduction</h2>
       <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
-        KinotiX ("we", "our", or "us") respects your personal privacy. We do not require user account registration, social login, names, email addresses, phone numbers, or physical location addresses. This Privacy Policy provides full transparency regarding the Android permissions and third-party SDKs integrated into KinotiX (Package Name: <code>com.kinotix.app</code>) in strict compliance with the Google Play Developer Policy and Data Safety disclosures.
+        KinotiX ("we", "our", or "us") is committed to maintaining user privacy and transparency. This Privacy Policy outlines how information is handled when you use the KinotiX Android mobile application (Package Name: <code>com.kinotix.app</code>).
       </p>
 
-      <h2 style="color: var(--purple); font-size: 1.7rem; margin: 2.5rem 0 1rem;">2. Android System Permissions & Purpose</h2>
+      <!-- Section: Information We Do Not Collect -->
+      <h2 style="color: var(--purple); font-size: 1.7rem; margin: 2.5rem 0 1rem;">2. Information We Do Not Collect</h2>
       <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-        KinotiX requests only the Android system permissions necessary to deliver core wallpaper features:
+        KinotiX is designed to operate without requiring unnecessary personal identifier collection. KinotiX does <strong>not</strong> collect or require:
+      </p>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-bottom: 1.5rem;">
+        <li>User accounts or personal profile registration</li>
+        <li>Personal names or passwords</li>
+        <li>Email addresses or phone numbers</li>
+        <li>Personal contacts list</li>
+        <li>SMS or call log data</li>
+        <li>Calendar events or personal document files</li>
+        <li>Precise GPS location data</li>
+      </ul>
+
+      <!-- Section: Android Permissions -->
+      <h2 style="color: var(--emerald); font-size: 1.7rem; margin: 2.5rem 0 1rem;">3. Android System Permissions & Purpose</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+        KinotiX requests only the system permissions necessary to provide wallpaper features:
       </p>
       <table class="data-table">
-        <tr><th>Permission Name</th><th>Type</th><th>Purpose & Strict Data Handling</th></tr>
+        <tr><th>Permission</th><th>Type</th><th>Functional Purpose</th></tr>
         <tr>
-          <td><code>android.permission.INTERNET</code><br><code>android.permission.ACCESS_NETWORK_STATE</code></td>
-          <td>Network</td>
-          <td>Streams high-resolution wallpaper catalog items, WebP thumbnails, and checks network connection (Wi-Fi vs mobile data).</td>
+          <td><code>INTERNET</code><br><code>ACCESS_NETWORK_STATE</code></td>
+          <td>Network Access</td>
+          <td>Streams online wallpaper catalog items and checks connectivity state (e.g., Wi-Fi vs. cellular network).</td>
         </tr>
         <tr>
-          <td><code>android.permission.SET_WALLPAPER</code><br><code>android.permission.SET_WALLPAPER_HINTS</code></td>
+          <td><code>SET_WALLPAPER</code><br><code>SET_WALLPAPER_HINTS</code></td>
           <td>System Wallpaper</td>
-          <td>Applies static, 3D Parallax, OpenGL ES Fluid, and Video wallpapers directly to your Home and Lock screens.</td>
+          <td>Applies static, 3D Parallax, OpenGL ES Fluid, and Video wallpapers to your Home and Lock screens.</td>
         </tr>
         <tr>
-          <td><code>android.permission.CAMERA</code><br><code>android.permission.FOREGROUND_SERVICE_CAMERA</code></td>
+          <td><code>CAMERA</code><br><code>FOREGROUND_SERVICE_CAMERA</code></td>
           <td>Hardware Camera</td>
-          <td>Used <strong>strictly</strong> to stream real-time camera preview background for the Transparent Camera live wallpaper. <br><em style="color:var(--pink);">Notice: No camera video or photos are ever recorded, saved, uploaded, or transmitted anywhere.</em></td>
+          <td>Camera data is processed locally on your device to provide the Transparent Camera wallpaper feature and is not uploaded to remote servers.</td>
         </tr>
         <tr>
-          <td><code>android.permission.POST_NOTIFICATIONS</code></td>
+          <td><code>POST_NOTIFICATIONS</code></td>
           <td>Notifications</td>
-          <td>Optional Android 13+ permission used to deliver push notifications regarding fresh wallpaper drops and collection updates.</td>
+          <td>Optional Android 13+ permission used to deliver push notifications regarding wallpaper drops and updates.</td>
         </tr>
         <tr>
-          <td><code>android.permission.WRITE_EXTERNAL_STORAGE</code></td>
-          <td>Storage (legacy)</td>
-          <td>Used on Android 9 (API 28) and below to save downloaded wallpapers to gallery. Android 10+ uses standard MediaStore API.</td>
+          <td><code>WRITE_EXTERNAL_STORAGE</code></td>
+          <td>Storage Access</td>
+          <td>Used on Android 9 and lower to save wallpapers to your media gallery. Android 10 and higher uses standard MediaStore API access.</td>
         </tr>
         <tr>
-          <td><code>android.permission.WAKE_LOCK</code></td>
+          <td><code>WAKE_LOCK</code></td>
           <td>System Power</td>
-          <td>Holds temporary wake locks while initializing hardware sensors and GPU wallpaper surface setup.</td>
+          <td>Used temporarily during active rendering setup for dynamic live wallpaper surfaces.</td>
         </tr>
       </table>
 
-      <h2 style="color: var(--emerald); font-size: 1.7rem; margin: 2.5rem 0 1rem;">3. Integrated Third-Party SDKs & Services</h2>
-
-      <h3 style="color: var(--cyan); margin-top: 1.5rem;">A. Google AdMob (Advertising)</h3>
+      <!-- Section: Third-Party SDKs -->
+      <h2 style="color: var(--pink); font-size: 1.7rem; margin: 2.5rem 0 1rem;">4. Third-Party Services & Advertising</h2>
       <p style="color: var(--text-secondary);">
-        KinotiX integrates <strong>Google AdMob</strong> (App ID: <code>ca-app-pub-6497553076878553~7081144164</code>) to serve Banner, Native, Interstitial, and Rewarded Ads (used to unlock Ultra HD 4K master downloads). AdMob may collect non-personally identifiable Advertising IDs (AAID), coarse IP location, and ad interaction metrics to serve relevant ads. Learn more at <a href="https://policies.google.com/privacy" target="_blank">Google Privacy & Terms</a>.
+        KinotiX utilizes third-party SDK services to support monetization, notifications, and application stability:
       </p>
-
-      <h3 style="color: var(--cyan); margin-top: 1.5rem;">B. Firebase Cloud Messaging (FCM Push Notifications)</h3>
-      <p style="color: var(--text-secondary);">
-        Used to route opt-in push notifications for new wallpaper releases. FCM processes anonymous device registration tokens to route notification payloads.
-      </p>
-
-      <h3 style="color: var(--cyan); margin-top: 1.5rem;">C. Firebase Crashlytics & Analytics</h3>
-      <p style="color: var(--text-secondary);">
-        By default, Firebase Analytics and Crashlytics collection is <strong>disabled</strong> (<code>firebase_analytics_collection_enabled = false</code>). When explicitly opted in by the user, Crashlytics collects anonymous crash stack traces, device model, and OS version to fix bugs and improve performance.
-      </p>
-
-      <h2 style="color: var(--pink); font-size: 1.7rem; margin: 2.5rem 0 1rem;">4. Google Play Data Safety Compliance Summary</h2>
-      <ul style="color: var(--text-secondary); padding-left: 1.5rem; line-height: 1.9;">
-        <li><strong>Data Collected</strong>: Non-personal Advertising ID (AdMob), Device Crash Logs (Opt-in Crashlytics), Notification Tokens (FCM).</li>
-        <li><strong>Data Shared</strong>: Non-personal Advertising ID shared with Google AdMob for ad rendering.</li>
-        <li><strong>On-Device Local Storage</strong>: User category preferences, search history, favorites, and offline wallpaper caches are saved 100% locally in SQLite Room DB and SharedPreferences.</li>
-        <li><strong>Data Security</strong>: All network requests use HTTPS (TLS 1.2/1.3) encryption. Cleartext HTTP traffic is disabled.</li>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; line-height: 1.9; margin-top: 1rem;">
+        <li><strong>Google AdMob</strong>: KinotiX uses Google AdMob to display advertisements. AdMob may process non-personal advertising identifiers and device data in accordance with <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
+        <li><strong>Firebase Cloud Messaging (FCM)</strong>: Used to route opt-in push notifications regarding new wallpaper drops.</li>
+        <li><strong>Firebase Analytics & Crashlytics</strong>: Firebase Analytics and Crashlytics collection is disabled by default in application configuration. When enabled, non-personal diagnostic logs help diagnose application crashes.</li>
       </ul>
 
-      <h2 style="color: var(--cyan); font-size: 1.7rem; margin: 2.5rem 0 1rem;">5. Children's Privacy (COPPA & Families Policy)</h2>
+      <!-- Section: Local Storage -->
+      <h2 style="color: var(--cyan); font-size: 1.7rem; margin: 2.5rem 0 1rem;">5. Local Device Storage</h2>
       <p style="color: var(--text-secondary);">
-        KinotiX complies with COPPA and Google Play Families policy requirements. We do not knowingly collect personal information from children under the age of 13.
+        Information such as favorites, onboarding category preferences, search history, and cached wallpapers is stored locally on your device to provide offline wallpaper capability.
       </p>
 
-      <h2 style="color: var(--purple); font-size: 1.7rem; margin: 2.5rem 0 1rem;">6. Data Control & Deletion Rights</h2>
+      <!-- Section: Uninstall Data Retention -->
+      <h2 style="color: var(--purple); font-size: 1.7rem; margin: 2.5rem 0 1rem;">6. Data Retention & Uninstall Behavior</h2>
       <p style="color: var(--text-secondary);">
-        Because KinotiX does not store user data on remote servers or require user accounts, uninstalling KinotiX immediately and permanently purges all local databases, preferences, and cached files from your device.
+        Most locally stored data is removed when the application is uninstalled, although Android system behavior may vary depending on device manufacturer and system backup settings.
       </p>
 
-      <h2 style="color: var(--emerald); font-size: 1.7rem; margin: 2.5rem 0 1rem;">7. Contact Support</h2>
+      <!-- Section: Children's Privacy -->
+      <h2 style="color: var(--emerald); font-size: 1.7rem; margin: 2.5rem 0 1rem;">7. Children's Privacy</h2>
       <p style="color: var(--text-secondary);">
-        If you have any questions or data safety inquiries regarding KinotiX, please contact us via our official issue tracker at <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">GitHub Issue Support</a>.
+        KinotiX complies with COPPA and Google Play Families policy guidelines. KinotiX does not knowingly collect personal information from children under the age of 13.
       </p>
+
+      <!-- Section: Policy Updates -->
+      <h2 style="color: var(--pink); font-size: 1.7rem; margin: 2.5rem 0 1rem;">8. Policy Updates</h2>
+      <p style="color: var(--text-secondary);">
+        We may update this Privacy Policy from time to time. The latest version will always be available on this page, and the Effective Date will be updated accordingly.
+      </p>
+
+      <!-- Section: Contact -->
+      <h2 style="color: var(--cyan); font-size: 1.7rem; margin: 2.5rem 0 1rem;">9. Contact Information</h2>
+      <p style="color: var(--text-secondary);">
+        If you have any questions or feedback regarding this Privacy Policy, you may contact us through:
+      </p>
+      <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 0.8rem;">
+        <li><strong>GitHub Issues</strong>: <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">https://github.com/Tcode-Motion/kinotix/issues</a></li>
+        <li><strong>Web Portal</strong>: <a href="https://techscript.is-a.dev/kinotix/" target="_blank">https://techscript.is-a.dev/kinotix/</a></li>
+      </ul>
     </div>
   </main>
 
