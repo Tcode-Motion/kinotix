@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — KinotiX Android App</title>
+  <meta name="description" content="KinotiX is a flagship open-source Android wallpaper app featuring 3D Gyro Parallax, OpenGL ES Fluid dynamics, Live Camera backgrounds, and 4K Ultra HD visual art.">
+  <meta name="keywords" content="KinotiX, Wallpaper Engine Android, 3D Wallpaper, Live Wallpaper, Parallax 3D, Fluid Dynamics, 4K Wallpapers, Open Source Android App">
+  <meta name="author" content="KinotiX Team">
+  <link rel="canonical" href="https://tanmoy.github.io/wallverse/privacy.html">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="Privacy Policy — KinotiX Android App">
+  <meta property="og:description" content="Next-Gen 3D Gyro Parallax, OpenGL ES Fluid & Ultra HD 4K Wallpaper Engine for Android.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tanmoy.github.io/wallverse/">
+  <meta property="og:image" content="https://tanmoy.github.io/wallverse/assets/screenshots/home_feed.png">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Privacy Policy — KinotiX Android App">
+  <meta name="twitter:description" content="Next-Gen 3D Gyro Parallax, OpenGL ES Fluid & Ultra HD 4K Wallpaper Engine for Android.">
+  <meta name="twitter:image" content="https://tanmoy.github.io/wallverse/assets/screenshots/home_feed.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "KinotiX",
+    "operatingSystem": "ANDROID 7.0+",
+    "applicationCategory": "PersonalizationApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "softwareVersion": "1.0.0",
+    "downloadUrl": "https://tanmoy.github.io/wallverse/assets/apk/KinotiX-v1.0.0-release.apk"
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="brand">
+      <span class="brand-text">KinotiX 🌌</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html" class="">Home</a></li>
+        <li><a href="features.html" class="">Features</a></li>
+        <li><a href="download.html" class="">Download</a></li>
+        <li><a href="faq.html" class="">FAQ</a></li>
+        <li><a href="support.html" class="">Support</a></li>
+        <li><a href="roadmap.html" class="">Roadmap</a></li>
+        <li><a href="privacy.html" class="active">Privacy</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" title="Toggle Dark/Light Mode">☀️</button>
+      <a href="download.html" class="btn-primary">Download APK</a>
+    </nav>
+  </header>
+
+  <main class="container doc-content" style="max-width: 900px;">
+    <div class="doc-header">
+      <h1>🔒 Privacy Policy</h1>
+      <p>Effective Date: July 30, 2026 | Last Updated: July 30, 2026</p>
+    </div>
+
+    <p>KinotiX ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy outlines how your information is handled when you use the KinotiX Android mobile application (Package Name: <code>com.kinotix.app</code>).</p>
+
+    <h2>1. Information We Collect</h2>
+    <p>KinotiX is designed with an <strong>opt-in, privacy-first stance</strong>. We do not require account registration, and we do not collect your real name, email address, phone number, physical address, or contact list.</p>
+
+    <h3>A. Local On-Device Data</h3>
+    <ul>
+      <li><strong>User Preferences & Search Keywords</strong>: Your selected category onboarding preferences and search terms are saved strictly locally on your device in SharedPreferences.</li>
+      <li><strong>Favorites & Offline Caching</strong>: Wallpapers favorited or saved for offline access are stored in a local SQLite database (Room DB).</li>
+    </ul>
+
+    <h3>B. Device Permissions & System Features</h3>
+    <ul>
+      <li><code>android.permission.INTERNET</code> & <code>ACCESS_NETWORK_STATE</code>: Used solely to fetch public high-resolution wallpaper catalog items and online feeds.</li>
+      <li><code>android.permission.SET_WALLPAPER</code> & <code>SET_WALLPAPER_HINTS</code>: Required to set static and dynamic live wallpapers on your device home/lock screen.</li>
+      <li><code>android.permission.CAMERA</code> & <code>FOREGROUND_SERVICE_CAMERA</code>: Required strictly to render the live camera stream for the <strong>Live Camera Transparent Wallpaper</strong> feature. <em>No camera feed is ever recorded, stored, uploaded, or transmitted anywhere.</em></li>
+      <li><code>android.permission.POST_NOTIFICATIONS</code>: Required on Android 13+ to send optional push notifications regarding new wallpaper collections. You may revoke this permission at any time.</li>
+      <li><code>android.permission.WRITE_EXTERNAL_STORAGE</code>: Used on Android 9 (API 28) and below to save wallpapers to gallery. Android 10+ uses standard MediaStore API without broad storage access.</li>
+    </ul>
+
+    <h2>2. Third-Party Services & SDKs</h2>
+    <p>KinotiX integrates trusted third-party SDKs to deliver core functionality and support development:</p>
+    <ul>
+      <li><strong>Google AdMob</strong>: Used to serve advertisements and rewarded ads (to unlock Ultra HD 4K downloads). AdMob may collect non-personally identifiable advertising IDs according to <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
+      <li><strong>Firebase Cloud Messaging (FCM)</strong>: Used to deliver opt-in push notifications.</li>
+      <li><strong>Firebase Analytics & Crashlytics</strong>: Disabled by default (<code>firebase_analytics_collection_enabled = false</code>). Users may opt in via Settings to share anonymous crash diagnostics.</li>
+    </ul>
+
+    <h2>3. Children's Privacy</h2>
+    <p>KinotiX complies with COPPA and Google Play Designed for Families guidelines. We do not knowingly collect any personal data from children under the age of 13.</p>
+
+    <h2>4. Data Retention & User Rights</h2>
+    <p>Because all user preference data, favorites, and offline caches reside locally on your device, you have complete control over your data. Uninstalling KinotiX immediately and permanently removes all stored app data from your device.</p>
+
+    <h2>5. Contact Us</h2>
+    <p>If you have any questions regarding this Privacy Policy, please contact us via email at <strong>kinotix.app@gmail.com</strong>.</p>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>KinotiX 🌌</h4>
+        <p style="color: var(--text-secondary); font-size:0.9rem;">Next-Gen 3D Parallax Gyro & OpenGL ES Fluid Wallpaper Engine for Android.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="download.html">Download APK & AAB</a></li>
+          <li><a href="roadmap.html">Roadmap</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support & Docs</h4>
+        <ul>
+          <li><a href="support.html">Support Center</a></li>
+          <li><a href="faq.html">FAQ (40+ Answers)</a></li>
+          <li><a href="contact.html">Contact Developer</a></li>
+          <li><a href="licenses.html">Open Source Licenses</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal & Policy</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookies.html">Cookies Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 KinotiX Team. Open Source project released under the MIT License.</p>
+    </div>
+  </footer>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
