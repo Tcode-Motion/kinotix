@@ -89,6 +89,82 @@
           <a href="assets/apk/KinotiX-v1.0.0-release.aab" download class="btn-outline">📦 Download Play Store Bundle (.aab)</a>
         </div>
       </div>
+
+      <!-- Foreground Camera Service & Security Disclosure Section -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 800px; margin: 3rem auto; box-shadow: var(--shadow-lg);">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <span style="background: rgba(168, 85, 247, 0.15); border: 1px solid var(--accent-purple, #a855f7); color: var(--accent-purple, #a855f7); padding: 0.35rem 1rem; border-radius: 20px; font-weight: 700; font-size: 0.85rem; display: inline-block; margin-bottom: 0.75rem;">
+            📷 Live Foreground Camera Service & Security Audit
+          </span>
+          <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem; color: var(--accent-cyan);">
+            Camera Permission Execution & Privacy Guarantee
+          </h2>
+          <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-size: 1.05rem;">
+            Watch the screen recording demonstration below showing how KinotiX executes the foreground camera service in real-time on Android, alongside our transparent privacy rules.
+          </p>
+        </div>
+
+        <!-- Video & Grid Container -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; align-items: center;">
+          
+          <!-- Screen Recording Video Showcase -->
+          <div style="text-align: center; background: rgba(0, 0, 0, 0.4); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+              <span style="width: 10px; height: 10px; background-color: var(--accent-emerald, #10b981); border-radius: 50%; display: inline-block;"></span>
+              <strong style="color: var(--accent-cyan); font-size: 0.9rem;">Live Phone Screen Recording</strong>
+            </div>
+            
+            <video controls autoplay loop muted playsinline style="width: 100%; max-width: 260px; height: auto; border-radius: var(--radius-md); border: 2px solid var(--accent-cyan); aspect-ratio: 9/16; object-fit: cover;">
+              <source src="assets/videos/camera_permission_demo.mp4" type="video/mp4">
+              Your browser does not support HTML5 video tag.
+            </video>
+            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.75rem;">
+              ▶️ Real-device camera service execution preview
+            </p>
+          </div>
+
+          <!-- 4 Security Guarantees List -->
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-cyan); padding: 1rem 1.25rem; border-radius: var(--radius-md);">
+              <h4 style="color: var(--accent-cyan); font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span>🔒</span> 100% Local & Offline Execution
+              </h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">
+                The camera feed is processed strictly on your local device memory in real-time. No internet connection is used or required for camera functionality.
+              </p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-emerald, #10b981); padding: 1rem 1.25rem; border-radius: var(--radius-md);">
+              <h4 style="color: var(--accent-emerald, #10b981); font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span>🌐</span> Zero Server Transmission & Sharing
+              </h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">
+                No image, camera frames, video data, metadata, or telemetry are ever uploaded to any external server or shared with third parties.
+              </p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-purple, #a855f7); padding: 1rem 1.25rem; border-radius: var(--radius-md);">
+              <h4 style="color: var(--accent-purple, #a855f7); font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span>📹</span> No Video Recording — Live Preview Only
+              </h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">
+                The app performs zero video or photo recording and saves no media to disk. It only renders a real-time live preview stream directly onto the wallpaper surface.
+              </p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-pink, #ec4899); padding: 1rem 1.25rem; border-radius: var(--radius-md);">
+              <h4 style="color: var(--accent-pink, #ec4899); font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span>⚡</span> Scoped Strictly to Live Camera Wallpaper
+              </h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">
+                Camera permission and <code>FOREGROUND_SERVICE_CAMERA</code> are active <strong>ONLY</strong> while using the Transparent Camera Live Wallpaper. If you switch to another wallpaper (e.g. 3D Gyro or Fluid), the camera service completely turns off.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </main>
     
   <footer>
