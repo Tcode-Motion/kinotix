@@ -366,9 +366,10 @@
       // Configure Open in KinotiX Deep Link & Auto-redirect
       const currentUrl = window.location.href;
       const playStoreUrlWithReferrer = 'https://play.google.com/store/apps/details?id=com.kinotix.app&referrer=' + encodeURIComponent(currentUrl);
+      const customSchemeUri = 'kinotix://i/' + (id || 'KX_share') + (window.location.search || '');
       const intentUri = 'intent://techscript.is-a.dev/kinotix/i/' + (id || 'KX_share') + (window.location.search || '') + '#Intent;scheme=https;package=com.kinotix.app;S.browser_fallback_url=' + encodeURIComponent(playStoreUrlWithReferrer) + ';end';
 
-      openAppBtn.href = intentUri;
+      openAppBtn.href = customSchemeUri;
 
       // Copy share URL to clipboard for seamless deferred deep linking after Play Store installation
       try {
@@ -377,17 +378,33 @@
         }
       } catch (_) {}
 
-      // Instant Auto-Redirect on Android devices
+      function launchAppDirectly() {
+        const isAndroid = /android/i.test(navigator.userAgent);
+        if (!isAndroid) return;
+
+        const startTime = Date.now();
+        // 1. First attempt: Direct custom scheme
+        window.location.href = customSchemeUri;
+
+        // 2. Fallback after timeout if app not installed
+        setTimeout(function() {
+          if (document.hidden || document.webkitHidden || (Date.now() - startTime > 2500)) {
+            return; // App opened successfully
+          }
+          // App not installed -> redirect to Play Store
+          window.location.href = playStoreUrlWithReferrer;
+        }, 1200);
+      }
+
+      // Auto-launch on mobile load
       const isAndroid = /android/i.test(navigator.userAgent);
       if (isAndroid) {
-        // Try launching app immediately via intent URI
-        window.location.href = intentUri;
+        launchAppDirectly();
       }
 
       openAppBtn.addEventListener('click', function(e) {
-        if (isAndroid) {
-          window.location.href = intentUri;
-        }
+        e.preventDefault();
+        launchAppDirectly();
       });
 
       // Configure Source Link safely
