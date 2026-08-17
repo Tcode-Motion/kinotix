@@ -7,7 +7,31 @@
   <meta name="description" content="Page Not Found for KinotiX — The next-generation open-source 3D Parallax Gyro, OpenGL ES Fluid & Ultra HD 4K Android Wallpaper Application.">
   <meta name="keywords" content="KinotiX, Wallpaper Engine Android, 3D Parallax Wallpaper, OpenGL ES Fluid, Live Wallpaper, 4K Wallpapers, Open Source Android">
   <meta name="author" content="Tcode-Motion">
-  <link rel="canonical" href="https://tcode-motion.github.io/kinotix/404.html">
+  <script>
+    // GitHub Pages SPA router for /kinotix/i/ share links
+    (function() {
+      var path = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
+
+      if (path.indexOf('/i/') !== -1 || path.indexOf('/i/KX_') !== -1) {
+        var segments = path.split('/').filter(Boolean);
+        var kxId = '';
+        for (var i = 0; i < segments.length; i++) {
+          if (segments[i].indexOf('KX_') === 0) {
+            kxId = segments[i];
+            break;
+          }
+        }
+        var isCustomDomain = window.location.hostname === 'techscript.is-a.dev';
+        var basePath = (path.indexOf('/kinotix') === 0 || isCustomDomain) ? '/kinotix' : '';
+        var separator = search ? (search.indexOf('?') === 0 ? '&' : '?') : '?';
+        var targetUrl = basePath + '/i/index.html' + (search || '') + (kxId ? separator + 'id=' + encodeURIComponent(kxId) : '') + hash;
+        window.location.replace(targetUrl);
+      }
+    })();
+  </script>
+  <link rel="canonical" href="https://techscript.is-a.dev/kinotix/404.html">
   <link rel="manifest" href="manifest.webmanifest">
   
   <!-- Modular CSS Includes -->

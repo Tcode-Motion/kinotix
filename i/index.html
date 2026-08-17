@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KinotiX Shared Wallpaper — Ultra HD 4K Live Engine</title>
+  <meta name="description" content="View and apply this stunning high-resolution wallpaper with KinotiX Android Engine.">
+  <meta name="author" content="Tcode-Motion">
+  <link rel="stylesheet" href="../css/style.css">
+  
+  <!-- Dynamic OpenGraph & Twitter Meta Tags (fallback defaults) -->
+  <meta property="og:title" id="og-title" content="KinotiX Shared Wallpaper">
+  <meta property="og:description" id="og-desc" content="View and apply this stunning wallpaper with KinotiX — 3D Parallax & OpenGL ES Fluid Wallpaper Engine.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" id="og-image" content="../assets/screenshots/home_feed.png">
+  <meta property="og:site_name" content="KinotiX">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" id="tw-title" content="KinotiX Shared Wallpaper">
+  <meta name="twitter:description" id="tw-desc" content="View and apply this wallpaper with KinotiX Android Engine.">
+  <meta name="twitter:image" id="tw-image" content="../assets/screenshots/home_feed.png">
+
+  <style>
+    .share-container {
+      min-height: calc(100vh - 160px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .wallpaper-preview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .wallpaper-preview-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
+    }
+    .image-frame {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      max-height: 480px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #020408;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 1.25rem;
+    }
+    .wallpaper-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+    }
+    .wallpaper-img.loaded {
+      opacity: 1;
+    }
+    .image-loader {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border: 3px solid rgba(0, 240, 255, 0.2);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--cyan);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .wallpaper-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+      line-height: 1.25;
+      word-break: break-word;
+    }
+    .wallpaper-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .action-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+    .btn-action-primary {
+      background: var(--gradient-main);
+      color: #ffffff;
+      padding: 0.85rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .btn-action-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 240, 255, 0.5);
+      opacity: 1;
+    }
+    .btn-action-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .btn-action-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      opacity: 1;
+    }
+    .source-link {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      display: inline-block;
+      text-decoration: underline;
+      transition: var(--transition);
+    }
+    .source-link:hover {
+      color: var(--cyan);
+    }
+    .error-card {
+      display: none;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .error-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../index.html" class="brand">
+      KinotiX <span class="badge">PRO 🌌</span>
+    </a>
+    <div style="display:flex; gap:1rem; align-items:center;">
+      <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" class="btn-gradient" style="padding:0.45rem 1.1rem; font-size:0.82rem;">Get App</a>
+    </div>
+  </header>
+
+  <main class="share-container">
+    <!-- Active Wallpaper Preview -->
+    <div class="wallpaper-preview-card" id="preview-card">
+      <div class="meta-badge" id="badge-text">✦ Ultra HD Wallpaper</div>
+      
+      <div class="image-frame">
+        <div class="image-loader" id="image-loader"></div>
+        <img id="wallpaper-image" class="wallpaper-img" alt="Shared Wallpaper" />
+      </div>
+
+      <h1 class="wallpaper-title" id="wallpaper-title">Loading Wallpaper...</h1>
+      <p class="wallpaper-subtitle" id="wallpaper-subtitle">Shared via KinotiX Android Engine</p>
+
+      <div class="action-group">
+        <a id="btn-open-app" href="#" class="btn-action-primary">
+          <span>🚀 Open in KinotiX</span>
+        </a>
+        <a id="btn-install-app" href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" class="btn-action-secondary">
+          <span>📥 Install on Google Play</span>
+        </a>
+      </div>
+
+      <div>
+        <a id="source-link" href="#" target="_blank" rel="noopener noreferrer" class="source-link" style="display:none;">View Original Source ↗</a>
+      </div>
+    </div>
+
+    <!-- Error Fallback Card -->
+    <div class="wallpaper-preview-card error-card" id="error-card">
+      <div class="error-icon" id="error-icon">🌌</div>
+      <h2 class="wallpaper-title" id="error-title">Wallpaper Unavailable</h2>
+      <p class="wallpaper-subtitle" id="error-message">This shared wallpaper could not be resolved or the link has expired.</p>
+      
+      <div class="action-group">
+        <a href="../index.html" class="btn-action-primary">
+          <span>Explore KinotiX Home</span>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" class="btn-action-secondary">
+          <span>Install KinotiX App</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer style="border-top:1px solid var(--border); padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.8rem;">
+    <p>© 2026 KinotiX Android Engine • Open-Source 3D Parallax & Live Engine</p>
+  </footer>
+
+  <script>
+    (function() {
+      // 1. Safe URL validation (Only HTTPS / HTTP allowed, reject dangerous schemes)
+      function isValidHttpUrl(string) {
+        if (!string || typeof string !== 'string') return false;
+        try {
+          const url = new URL(string.trim());
+          return url.protocol === 'https:' || url.protocol === 'http:';
+        } catch (_) {
+          return false;
+        }
+      }
+
+      // 2. Base64 & Base64URL Safe Decoder
+      function safeDecodeBase64Json(encodedStr) {
+        if (!encodedStr || typeof encodedStr !== 'string') return null;
+        try {
+          // Normalize Base64URL to standard Base64
+          let base64 = encodedStr.trim()
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+          
+          while (base64.length % 4 !== 0) {
+            base64 += '=';
+          }
+
+          const binStr = atob(base64);
+          const bytes = new Uint8Array(binStr.length);
+          for (let i = 0; i < binStr.length; i++) {
+            bytes[i] = binStr.charCodeAt(i);
+          }
+          const decodedText = new TextDecoder('utf-8').decode(bytes);
+          return JSON.parse(decodedText);
+        } catch (e) {
+          console.warn('Payload decode error:', e);
+          return null;
+        }
+      }
+
+      // 3. Extract KinotiX ID and payload from URL
+      function parseShareParameters() {
+        const urlParams = new URLSearchParams(window.location.search);
+        let payloadParam = urlParams.get('p');
+        let idParam = urlParams.get('id');
+
+        // Extract ID from pathname: /kinotix/i/KX_... or /i/KX_...
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        for (const segment of pathSegments) {
+          if (segment.startsWith('KX_')) {
+            idParam = segment;
+            break;
+          }
+        }
+
+        return {
+          id: idParam || '',
+          payload: payloadParam || ''
+        };
+      }
+
+      // 4. UI Rendering Helpers
+      const previewCard = document.getElementById('preview-card');
+      const errorCard = document.getElementById('error-card');
+      const imageEl = document.getElementById('wallpaper-image');
+      const loaderEl = document.getElementById('image-loader');
+      const titleEl = document.getElementById('wallpaper-title');
+      const openAppBtn = document.getElementById('btn-open-app');
+      const sourceLink = document.getElementById('source-link');
+      const errorTitleEl = document.getElementById('error-title');
+      const errorMsgEl = document.getElementById('error-message');
+
+      function showError(title, message) {
+        previewCard.style.display = 'none';
+        errorCard.style.display = 'block';
+        errorTitleEl.textContent = title || 'Shared Wallpaper Unavailable';
+        errorMsgEl.textContent = message || 'The shared image link could not be loaded.';
+        document.title = 'Wallpaper Unavailable — KinotiX';
+      }
+
+      // Main Resolver Execution
+      const { id, payload } = parseShareParameters();
+
+      let imageUrl = '';
+      let imageTitle = 'Shared Wallpaper';
+
+      if (payload) {
+        const decoded = safeDecodeBase64Json(payload);
+        if (decoded && typeof decoded === 'object') {
+          if (decoded.u && isValidHttpUrl(decoded.u)) {
+            imageUrl = decoded.u.trim();
+          }
+          if (decoded.t && typeof decoded.t === 'string') {
+            imageTitle = decoded.t.trim() || 'Shared Wallpaper';
+          }
+        }
+      }
+
+      // Fallback: If no payload provided or payload invalid, check ID validity
+      if (!imageUrl) {
+        if (!id || !id.startsWith('KX_')) {
+          showError('Invalid Share Link', 'This KinotiX share link is invalid or incomplete.');
+          return;
+        } else {
+          // Valid ID but no payload token
+          showError('Image Unavailable', 'This shared wallpaper requires the KinotiX Android App to resolve.');
+          return;
+        }
+      }
+
+      // Populate UI Safely
+      titleEl.textContent = imageTitle;
+      document.title = imageTitle + ' — KinotiX Wallpaper Engine';
+
+      // Update OpenGraph & Twitter tags
+      const ogTitle = document.getElementById('og-title');
+      const ogImage = document.getElementById('og-image');
+      const twTitle = document.getElementById('tw-title');
+      const twImage = document.getElementById('tw-image');
+      if (ogTitle) ogTitle.content = imageTitle + ' — KinotiX';
+      if (ogImage) ogImage.content = imageUrl;
+      if (twTitle) twTitle.content = imageTitle + ' — KinotiX';
+      if (twImage) twImage.content = imageUrl;
+
+      // Configure Open in KinotiX Deep Link
+      const deepLinkUrl = window.location.href;
+      openAppBtn.href = deepLinkUrl;
+
+      // When clicked, try intent scheme or direct app link
+      openAppBtn.addEventListener('click', function(e) {
+        const isAndroid = /android/i.test(navigator.userAgent);
+        if (isAndroid) {
+          // Allow normal App Link propagation or fallback to Play Store after timeout
+          setTimeout(function() {
+            window.location.href = 'https://play.google.com/store/apps/details?id=com.kinotix.app';
+          }, 1500);
+        }
+      });
+
+      // Configure Source Link safely
+      if (isValidHttpUrl(imageUrl)) {
+        sourceLink.href = imageUrl;
+        sourceLink.style.display = 'inline-block';
+      }
+
+      // Handle Image Loading States
+      imageEl.onload = function() {
+        loaderEl.style.display = 'none';
+        imageEl.classList.add('loaded');
+      };
+      imageEl.onerror = function() {
+        showError('Image Unavailable', 'The original image source is no longer reachable.');
+      };
+
+      imageEl.src = imageUrl;
+    })();
+  </script>
+</body>
+</html>
