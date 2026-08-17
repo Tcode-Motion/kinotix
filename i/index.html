@@ -354,6 +354,7 @@
       
       <div class="image-frame" id="frame-box">
         <div class="image-loader" id="image-loader"></div>
+        <canvas id="engine-canvas" class="wallpaper-img" style="display:none; width:100%; height:100%; object-fit:cover;"></canvas>
         <img id="poster-image" class="poster-background" alt="Poster Thumbnail" style="display:none;" />
         <img id="wallpaper-image" class="wallpaper-img" alt="Shared Wallpaper" style="display:none;" />
         <video id="wallpaper-video" class="wallpaper-video" autoplay loop muted playsinline style="display:none;"></video>
@@ -644,14 +645,163 @@
         sourceLink.style.display = 'inline-block';
       }
 
-      // Render Video vs Static Artwork
+      const engineCanvas = document.getElementById('engine-canvas');
+
+      function startEngineSimulation(mode, name, themeTag) {
+        if (!engineCanvas) return;
+        engineCanvas.style.display = 'block';
+        imageEl.style.display = 'none';
+        posterEl.style.display = 'none';
+        videoEl.style.display = 'none';
+        loaderEl.style.display = 'none';
+
+        const ctx = engineCanvas.getContext('2d');
+        const rect = engineCanvas.getBoundingClientRect();
+        engineCanvas.width = rect.width * (window.devicePixelRatio || 1) || 600;
+        engineCanvas.height = rect.height * (window.devicePixelRatio || 1) || 900;
+
+        const w = engineCanvas.width;
+        const h = engineCanvas.height;
+        const lowerName = (name + ' ' + themeTag).toLowerCase();
+
+        // Detect simulation style
+        let isFire = lowerName.includes('fire') || lowerName.includes('spark') || lowerName.includes('ember') || lowerName.includes('flame');
+        let isMatrix = lowerName.includes('matrix') || lowerName.includes('digital') || lowerName.includes('code');
+        let isDna = lowerName.includes('dna') || lowerName.includes('helix');
+        let isLava = lowerName.includes('lava') || lowerName.includes('magma');
+        let isWater = lowerName.includes('water') || lowerName.includes('ocean') || lowerName.includes('ripple') || lowerName.includes('fluid') || mode === 'fluid';
+
+        let particles = [];
+        const count = isMatrix ? 45 : (isFire ? 90 : 70);
+
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * (isFire ? 1.5 : 2.5),
+            vy: isFire ? -(Math.random() * 3 + 1.2) : (isMatrix ? (Math.random() * 4 + 2) : (Math.random() - 0.5) * 2.5),
+            radius: isFire ? Math.random() * 3.5 + 1 : Math.random() * 2.8 + 1.2,
+            alpha: Math.random() * 0.7 + 0.3,
+            color: isFire ? (Math.random() > 0.4 ? '#ff5722' : '#ff9800') :
+                   isMatrix ? '#00e676' :
+                   isDna ? (i % 2 === 0 ? '#00e5ff' : '#e040fb') :
+                   isLava ? (Math.random() > 0.5 ? '#ff3d00' : '#ffab00') :
+                   isWater ? '#00b0ff' :
+                   (Math.random() > 0.5 ? '#00e5ff' : '#d500f9')
+          });
+        }
+
+        let mouse = { x: -1000, y: -1000, active: false };
+        engineCanvas.addEventListener('pointermove', function(e) {
+          const r = engineCanvas.getBoundingClientRect();
+          mouse.x = (e.clientX - r.left) * (engineCanvas.width / r.width);
+          mouse.y = (e.clientY - r.top) * (engineCanvas.height / r.height);
+          mouse.active = true;
+        });
+
+        engineCanvas.addEventListener('pointerleave', function() {
+          mouse.active = false;
+        });
+
+        engineCanvas.addEventListener('click', function() {
+          launchAppDirectly();
+        });
+
+        let t = 0;
+        function animate() {
+          t += 0.02;
+          ctx.fillStyle = isMatrix ? 'rgba(5, 8, 16, 0.25)' : 'rgba(8, 12, 24, 0.35)';
+          ctx.fillRect(0, 0, w, h);
+
+          if (isDna) {
+            // Render Rotating Double Helix
+            const strands = 2;
+            const pts = 36;
+            for (let s = 0; s < strands; s++) {
+              ctx.beginPath();
+              for (let i = 0; i < pts; i++) {
+                const py = (i / pts) * h;
+                const angle = t + (i * 0.25) + (s * Math.PI);
+                const px = (w / 2) + Math.sin(angle) * (w * 0.28);
+                const radius = Math.cos(angle) * 3 + 4;
+                ctx.fillStyle = s === 0 ? '#00e5ff' : '#e040fb';
+                ctx.beginPath();
+                ctx.arc(px, py, Math.max(1.5, radius), 0, Math.PI * 2);
+                ctx.fill();
+
+                if (s === 0 && i % 3 === 0) {
+                  const px2 = (w / 2) + Math.sin(angle + Math.PI) * (w * 0.28);
+                  ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+                  ctx.lineWidth = 1;
+                  ctx.beginPath();
+                  ctx.moveTo(px, py);
+                  ctx.lineTo(px2, py);
+                  ctx.stroke();
+                }
+              }
+            }
+          } else {
+            // Render Particles & Dynamic Connections
+            for (let i = 0; i < particles.length; i++) {
+              let p = particles[i];
+              p.x += p.vx;
+              p.y += p.vy;
+
+              if (isFire) {
+                if (p.y < 0) { p.y = h + 10; p.x = Math.random() * w; }
+              } else if (isMatrix) {
+                if (p.y > h) { p.y = -10; p.x = Math.random() * w; }
+              } else {
+                if (p.x < 0 || p.x > w) p.vx *= -1;
+                if (p.y < 0 || p.y > h) p.vy *= -1;
+              }
+
+              if (mouse.active) {
+                let dx = mouse.x - p.x;
+                let dy = mouse.y - p.y;
+                let dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                  p.x -= (dx / dist) * 4;
+                  p.y -= (dy / dist) * 4;
+                }
+              }
+
+              ctx.fillStyle = p.color;
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+              ctx.fill();
+
+              // Draw constellation connecting lines
+              if (!isFire && !isMatrix) {
+                for (let j = i + 1; j < particles.length; j++) {
+                  let p2 = particles[j];
+                  let d = Math.hypot(p.x - p2.x, p.y - p2.y);
+                  if (d < 85) {
+                    ctx.strokeStyle = `rgba(0, 240, 255, ${(1 - d / 85) * 0.25})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                  }
+                }
+              }
+            }
+          }
+
+          requestAnimationFrame(animate);
+        }
+        animate();
+      }
+
+      // Render Video vs Interactive Engine vs Static Artwork
       if (isVideo) {
+        if (engineCanvas) engineCanvas.style.display = 'none';
         imageEl.style.display = 'none';
         posterEl.style.display = 'none';
         videoEl.style.display = 'block';
         teaserOverlay.style.display = 'none';
 
-        // Check if thumbnail is a valid image (not a video)
         const isThumbAnImage = targetThumb && !targetThumb.toLowerCase().match(/\.(mp4|webm|mkv|mov)(\?.*)?$/i);
         if (isThumbAnImage) {
           videoEl.poster = targetThumb;
@@ -689,12 +839,14 @@
           }
         };
 
-        // Tap video to open directly in KinotiX app
         videoEl.style.cursor = 'pointer';
         videoEl.onclick = function() {
           launchAppDirectly();
         };
+      } else if (isParticle || isFluid) {
+        startEngineSimulation(isFluid ? 'fluid' : 'particle', cleanTitle, targetTag || targetTemplateId);
       } else {
+        if (engineCanvas) engineCanvas.style.display = 'none';
         videoEl.style.display = 'none';
         imageEl.style.display = 'block';
         
