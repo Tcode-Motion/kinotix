@@ -23,19 +23,6 @@
             break;
           }
         }
-        var isAndroid = /android/i.test(navigator.userAgent);
-        var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.kinotix.app&referrer=' + encodeURIComponent(window.location.href);
-        var customSchemeUri = 'kinotix://i/' + (kxId || 'KX_share') + (search || '');
-
-        if (isAndroid) {
-          var startTime = Date.now();
-          window.location.href = customSchemeUri;
-          setTimeout(function() {
-            if (document.hidden || document.webkitHidden || (Date.now() - startTime > 2500)) return;
-            window.location.href = playStoreUrl;
-          }, 1200);
-        }
-
         var isCustomDomain = window.location.hostname === 'techscript.is-a.dev';
         var basePath = (path.indexOf('/kinotix') === 0 || isCustomDomain) ? '/kinotix' : '';
         var separator = search ? (search.indexOf('?') === 0 ? '&' : '?') : '?';

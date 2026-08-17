@@ -381,25 +381,17 @@
       function launchAppDirectly() {
         const isAndroid = /android/i.test(navigator.userAgent);
         if (!isAndroid) return;
-
-        const startTime = Date.now();
-        // 1. First attempt: Direct custom scheme
+        // Launch via native scheme so Android can show "Open in app" or switch to app
         window.location.href = customSchemeUri;
-
-        // 2. Fallback after timeout if app not installed
-        setTimeout(function() {
-          if (document.hidden || document.webkitHidden || (Date.now() - startTime > 2500)) {
-            return; // App opened successfully
-          }
-          // App not installed -> redirect to Play Store
-          window.location.href = playStoreUrlWithReferrer;
-        }, 1200);
       }
 
-      // Auto-launch on mobile load
+      // Automatically trigger app launch once on mobile load without hijacking browser tab
       const isAndroid = /android/i.test(navigator.userAgent);
       if (isAndroid) {
-        launchAppDirectly();
+        // Trigger app opening once
+        setTimeout(function() {
+          launchAppDirectly();
+        }, 300);
       }
 
       openAppBtn.addEventListener('click', function(e) {
