@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KinotiX Shared Wallpaper — Ultra HD 4K Live Engine</title>
+  <title>KinotiX Shared Wallpaper — Ultra HD 4K & Live Engine</title>
   <meta name="description" content="View and apply this stunning high-resolution wallpaper with KinotiX Android Engine.">
   <meta name="author" content="Tcode-Motion">
   <link rel="stylesheet" href="../css/style.css">
@@ -61,15 +61,15 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       margin-bottom: 1.25rem;
     }
-    .wallpaper-img {
+    .wallpaper-img, .wallpaper-video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.4s ease;
       opacity: 0;
     }
-    .wallpaper-img.loaded {
+    .wallpaper-img.loaded, .wallpaper-video.loaded {
       opacity: 1;
     }
     .image-loader {
@@ -80,6 +80,7 @@
       border-top-color: var(--cyan);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
+      z-index: 2;
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
@@ -98,6 +99,21 @@
       margin-bottom: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+    }
+    .meta-badge.badge-live {
+      background: rgba(255, 59, 138, 0.15);
+      border-color: rgba(255, 59, 138, 0.4);
+      color: #ff3b8a;
+    }
+    .meta-badge.badge-fluid {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: rgba(0, 240, 255, 0.4);
+      color: #00f0ff;
+    }
+    .meta-badge.badge-particle {
+      background: rgba(168, 85, 247, 0.15);
+      border-color: rgba(168, 85, 247, 0.4);
+      color: #a855f7;
     }
     .wallpaper-title {
       font-size: 1.5rem;
@@ -200,6 +216,7 @@
       <div class="image-frame">
         <div class="image-loader" id="image-loader"></div>
         <img id="wallpaper-image" class="wallpaper-img" alt="Shared Wallpaper" />
+        <video id="wallpaper-video" class="wallpaper-video" autoplay loop muted playsinline style="display:none;"></video>
       </div>
 
       <h1 class="wallpaper-title" id="wallpaper-title">Loading Wallpaper...</h1>
@@ -300,12 +317,15 @@
         };
       }
 
-      // 4. UI Rendering Helpers
+      // 4. UI Rendering Elements
       const previewCard = document.getElementById('preview-card');
       const errorCard = document.getElementById('error-card');
       const imageEl = document.getElementById('wallpaper-image');
+      const videoEl = document.getElementById('wallpaper-video');
       const loaderEl = document.getElementById('image-loader');
+      const badgeEl = document.getElementById('badge-text');
       const titleEl = document.getElementById('wallpaper-title');
+      const subtitleEl = document.getElementById('wallpaper-subtitle');
       const openAppBtn = document.getElementById('btn-open-app');
       const sourceLink = document.getElementById('source-link');
       const errorTitleEl = document.getElementById('error-title');
@@ -322,56 +342,94 @@
       // Main Resolver Execution
       const { id, payload } = parseShareParameters();
 
-      let imageUrl = '';
-      let imageTitle = 'Shared Wallpaper';
+      let targetUrl = '';
+      let targetTitle = 'Shared Wallpaper';
+      let targetKind = 'static';
+      let targetThumb = '';
 
       if (payload) {
         const decoded = safeDecodeBase64Json(payload);
         if (decoded && typeof decoded === 'object') {
           if (decoded.u && isValidHttpUrl(decoded.u)) {
-            imageUrl = decoded.u.trim();
+            targetUrl = decoded.u.trim();
           }
           if (decoded.t && typeof decoded.t === 'string') {
-            imageTitle = decoded.t.trim() || 'Shared Wallpaper';
+            targetTitle = decoded.t.trim() || 'Shared Wallpaper';
+          }
+          if (decoded.k && typeof decoded.k === 'string') {
+            targetKind = decoded.k.trim().toLowerCase();
+          }
+          if (decoded.th && isValidHttpUrl(decoded.th)) {
+            targetThumb = decoded.th.trim();
           }
         }
       }
 
-      // Fallback: If no payload provided or payload invalid, check ID validity
-      if (!imageUrl) {
+      // Fallback detection from URL or ID
+      if (!targetUrl) {
         if (!id || !id.startsWith('KX_')) {
           showError('Invalid Share Link', 'This KinotiX share link is invalid or incomplete.');
           return;
         } else {
-          // Valid ID but no payload token
-          showError('Image Unavailable', 'This shared wallpaper requires the KinotiX Android App to resolve.');
+          showError('Wallpaper Unavailable', 'This shared wallpaper requires the KinotiX Android App to resolve.');
           return;
         }
       }
 
-      // Populate UI Safely
-      titleEl.textContent = imageTitle;
-      document.title = imageTitle + ' — KinotiX Wallpaper Engine';
+      const isVideo = targetKind === 'live' || targetUrl.toLowerCase().match(/\.(mp4|webm|mkv|mov)(\?.*)?$/i);
+      const isFluid = targetKind === 'fluid' || id.toLowerCase().includes('fluid_');
+      const isParticle = targetKind === 'particle' || id.toLowerCase().includes('particle_');
+
+      // Customize Badge & Subtitle per Wallpaper Type
+      if (isVideo) {
+        badgeEl.textContent = '🎥 Ultra HD Live Loop';
+        badgeEl.className = 'meta-badge badge-live';
+        subtitleEl.textContent = 'Ultra HD Live Video Loop • KinotiX Live Engine';
+      } else if (isFluid) {
+        badgeEl.textContent = '🌊 OpenGL ES Fluid Simulator';
+        badgeEl.className = 'meta-badge badge-fluid';
+        subtitleEl.textContent = 'Interactive Physics Engine • KinotiX Fluid Studio';
+      } else if (isParticle) {
+        badgeEl.textContent = '✨ 3D Gyroscope Particle Engine';
+        badgeEl.className = 'meta-badge badge-particle';
+        subtitleEl.textContent = '3D Spatial Accelerometer Simulation • KinotiX 3D Engine';
+      } else {
+        // Detect Provider Source
+        if (targetUrl.includes('images.unsplash.com')) {
+          badgeEl.textContent = '🌌 Unsplash 4K Wallpaper';
+        } else if (targetUrl.includes('pixabay.com')) {
+          badgeEl.textContent = '🌌 Pixabay HD Wallpaper';
+        } else if (targetUrl.includes('wallhaven.cc')) {
+          badgeEl.textContent = '🌌 Wallhaven Ultra HD';
+        } else if (targetUrl.includes('github')) {
+          badgeEl.textContent = '🌌 GitHub Art Collection';
+        } else {
+          badgeEl.textContent = '✦ Ultra HD 4K Wallpaper';
+        }
+        subtitleEl.textContent = 'High Fidelity Artwork • Shared via KinotiX Engine';
+      }
+
+      // Populate Title Safely
+      titleEl.textContent = targetTitle;
+      document.title = targetTitle + ' — KinotiX Wallpaper Engine';
 
       // Update OpenGraph & Twitter tags
       const ogTitle = document.getElementById('og-title');
       const ogImage = document.getElementById('og-image');
       const twTitle = document.getElementById('tw-title');
       const twImage = document.getElementById('tw-image');
-      if (ogTitle) ogTitle.content = imageTitle + ' — KinotiX';
-      if (ogImage) ogImage.content = imageUrl;
-      if (twTitle) twTitle.content = imageTitle + ' — KinotiX';
-      if (twImage) twImage.content = imageUrl;
+      const previewImgUrl = targetThumb || targetUrl;
+      if (ogTitle) ogTitle.content = targetTitle + ' — KinotiX';
+      if (ogImage) ogImage.content = previewImgUrl;
+      if (twTitle) twTitle.content = targetTitle + ' — KinotiX';
+      if (twImage) twImage.content = previewImgUrl;
 
-      // Configure Open in KinotiX Deep Link & Auto-redirect
+      // Configure Open in KinotiX Deep Link
       const currentUrl = window.location.href;
-      const playStoreUrlWithReferrer = 'https://play.google.com/store/apps/details?id=com.kinotix.app&referrer=' + encodeURIComponent(currentUrl);
       const customSchemeUri = 'kinotix://i/' + (id || 'KX_share') + (window.location.search || '');
-      const intentUri = 'intent://techscript.is-a.dev/kinotix/i/' + (id || 'KX_share') + (window.location.search || '') + '#Intent;scheme=https;package=com.kinotix.app;S.browser_fallback_url=' + encodeURIComponent(playStoreUrlWithReferrer) + ';end';
-
       openAppBtn.href = customSchemeUri;
 
-      // Copy share URL to clipboard for seamless deferred deep linking after Play Store installation
+      // Copy share URL to clipboard for deferred deep linking
       try {
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(currentUrl).catch(function() {});
@@ -381,14 +439,11 @@
       function launchAppDirectly() {
         const isAndroid = /android/i.test(navigator.userAgent);
         if (!isAndroid) return;
-        // Launch via native scheme so Android can show "Open in app" or switch to app
         window.location.href = customSchemeUri;
       }
 
-      // Automatically trigger app launch once on mobile load without hijacking browser tab
       const isAndroid = /android/i.test(navigator.userAgent);
       if (isAndroid) {
-        // Trigger app opening once
         setTimeout(function() {
           launchAppDirectly();
         }, 300);
@@ -400,21 +455,45 @@
       });
 
       // Configure Source Link safely
-      if (isValidHttpUrl(imageUrl)) {
-        sourceLink.href = imageUrl;
+      if (isValidHttpUrl(targetUrl)) {
+        sourceLink.href = targetUrl;
         sourceLink.style.display = 'inline-block';
       }
 
-      // Handle Image Loading States
-      imageEl.onload = function() {
-        loaderEl.style.display = 'none';
-        imageEl.classList.add('loaded');
-      };
-      imageEl.onerror = function() {
-        showError('Image Unavailable', 'The original image source is no longer reachable.');
-      };
-
-      imageEl.src = imageUrl;
+      // Render Video vs Image
+      if (isVideo) {
+        imageEl.style.display = 'none';
+        videoEl.style.display = 'block';
+        if (targetThumb) {
+          videoEl.poster = targetThumb;
+        }
+        videoEl.onloadeddata = function() {
+          loaderEl.style.display = 'none';
+          videoEl.classList.add('loaded');
+        };
+        videoEl.onerror = function() {
+          // If video fails, try fallback poster image
+          if (targetThumb) {
+            videoEl.style.display = 'none';
+            imageEl.style.display = 'block';
+            imageEl.src = targetThumb;
+          } else {
+            showError('Video Unavailable', 'The original video stream is no longer reachable.');
+          }
+        };
+        videoEl.src = targetUrl;
+      } else {
+        videoEl.style.display = 'none';
+        imageEl.style.display = 'block';
+        imageEl.onload = function() {
+          loaderEl.style.display = 'none';
+          imageEl.classList.add('loaded');
+        };
+        imageEl.onerror = function() {
+          showError('Image Unavailable', 'The original image source is no longer reachable.');
+        };
+        imageEl.src = targetUrl;
+      }
     })();
   </script>
 </body>
