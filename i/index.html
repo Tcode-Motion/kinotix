@@ -644,50 +644,68 @@
         sourceLink.style.display = 'inline-block';
       }
 
-      // Render Video vs Image with Instant Poster Support
+      // Render Video vs Static Artwork
       if (isVideo) {
         imageEl.style.display = 'none';
+        posterEl.style.display = 'none';
         videoEl.style.display = 'block';
-        
-        if (targetThumb) {
-          posterEl.src = targetThumb;
-          posterEl.style.display = 'block';
+        teaserOverlay.style.display = 'none';
+
+        // Check if thumbnail is a valid image (not a video)
+        const isThumbAnImage = targetThumb && !targetThumb.toLowerCase().match(/\.(mp4|webm|mkv|mov)(\?.*)?$/i);
+        if (isThumbAnImage) {
           videoEl.poster = targetThumb;
         }
 
+        videoEl.crossOrigin = 'anonymous';
+        videoEl.muted = true;
+        videoEl.defaultMuted = true;
+        videoEl.autoplay = true;
+        videoEl.loop = true;
+        videoEl.playsInline = true;
+        videoEl.setAttribute('playsinline', '');
+        videoEl.setAttribute('webkit-playsinline', '');
         videoEl.src = targetUrl;
+
         videoEl.oncanplay = function() {
           loaderEl.style.display = 'none';
+          videoEl.play().catch(function(e) {
+            console.log('Autoplay handled:', e);
+          });
         };
 
-        // 2-Second Teaser Preview
-        let teaserTimer = null;
-        videoEl.onplay = function() {
+        videoEl.onplaying = function() {
           loaderEl.style.display = 'none';
-          if (!teaserTimer) {
-            teaserTimer = setTimeout(function() {
-              videoEl.pause();
-              teaserOverlay.style.display = 'flex';
-            }, 2500);
-          }
         };
 
         videoEl.onerror = function() {
-          if (targetThumb) {
+          loaderEl.style.display = 'none';
+          if (isThumbAnImage) {
             videoEl.style.display = 'none';
             imageEl.style.display = 'block';
             imageEl.src = targetThumb;
           } else {
-            showError('Video Unavailable', 'The original video stream is currently unreachable.');
+            showError('Live Video Unavailable', 'The original video stream is currently unreachable.');
           }
+        };
+
+        // Tap video to open directly in KinotiX app
+        videoEl.style.cursor = 'pointer';
+        videoEl.onclick = function() {
+          launchAppDirectly();
         };
       } else {
         videoEl.style.display = 'none';
         imageEl.style.display = 'block';
-        if (targetThumb && targetThumb !== targetUrl) {
+        
+        const isThumbAnImage = targetThumb && targetThumb !== targetUrl && !targetThumb.toLowerCase().match(/\.(mp4|webm|mkv|mov)(\?.*)?$/i);
+        if (isThumbAnImage) {
           posterEl.src = targetThumb;
           posterEl.style.display = 'block';
+        } else {
+          posterEl.style.display = 'none';
         }
+
         imageEl.onload = function() {
           loaderEl.style.display = 'none';
         };
