@@ -8,7 +8,7 @@
   <meta name="keywords" content="KinotiX, Wallpaper Engine Android, 3D Parallax Wallpaper, OpenGL ES Fluid, Live Wallpaper, 4K Wallpapers, Open Source Android">
   <meta name="author" content="Tcode-Motion">
   <script>
-    // GitHub Pages SPA router for /kinotix/i/ share links
+    // GitHub Pages SPA router & Android intent auto-dispatcher for /kinotix/i/ share links
     (function() {
       var path = window.location.pathname;
       var search = window.location.search;
@@ -23,6 +23,14 @@
             break;
           }
         }
+        var isAndroid = /android/i.test(navigator.userAgent);
+        var playStoreUrl = 'https://play.google.com/store/apps/details?id=com.kinotix.app&referrer=' + encodeURIComponent(window.location.href);
+
+        if (isAndroid) {
+          var intentUri = 'intent://techscript.is-a.dev/kinotix/i/' + (kxId || 'KX_share') + (search || '') + '#Intent;scheme=https;package=com.kinotix.app;S.browser_fallback_url=' + encodeURIComponent(playStoreUrl) + ';end';
+          window.location.href = intentUri;
+        }
+
         var isCustomDomain = window.location.hostname === 'techscript.is-a.dev';
         var basePath = (path.indexOf('/kinotix') === 0 || isCustomDomain) ? '/kinotix' : '';
         var separator = search ? (search.indexOf('?') === 0 ? '&' : '?') : '?';

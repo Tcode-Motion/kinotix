@@ -363,18 +363,30 @@
       if (twTitle) twTitle.content = imageTitle + ' — KinotiX';
       if (twImage) twImage.content = imageUrl;
 
-      // Configure Open in KinotiX Deep Link
-      const deepLinkUrl = window.location.href;
-      openAppBtn.href = deepLinkUrl;
+      // Configure Open in KinotiX Deep Link & Auto-redirect
+      const currentUrl = window.location.href;
+      const playStoreUrlWithReferrer = 'https://play.google.com/store/apps/details?id=com.kinotix.app&referrer=' + encodeURIComponent(currentUrl);
+      const intentUri = 'intent://techscript.is-a.dev/kinotix/i/' + (id || 'KX_share') + (window.location.search || '') + '#Intent;scheme=https;package=com.kinotix.app;S.browser_fallback_url=' + encodeURIComponent(playStoreUrlWithReferrer) + ';end';
 
-      // When clicked, try intent scheme or direct app link
+      openAppBtn.href = intentUri;
+
+      // Copy share URL to clipboard for seamless deferred deep linking after Play Store installation
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(currentUrl).catch(function() {});
+        }
+      } catch (_) {}
+
+      // Instant Auto-Redirect on Android devices
+      const isAndroid = /android/i.test(navigator.userAgent);
+      if (isAndroid) {
+        // Try launching app immediately via intent URI
+        window.location.href = intentUri;
+      }
+
       openAppBtn.addEventListener('click', function(e) {
-        const isAndroid = /android/i.test(navigator.userAgent);
         if (isAndroid) {
-          // Allow normal App Link propagation or fallback to Play Store after timeout
-          setTimeout(function() {
-            window.location.href = 'https://play.google.com/store/apps/details?id=com.kinotix.app';
-          }, 1500);
+          window.location.href = intentUri;
         }
       });
 
