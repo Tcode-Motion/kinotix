@@ -2,15 +2,16 @@
 
 # 🌌 KinotiX — Next-Gen Android Wallpaper Engine
 
-[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge&logo=android)](https://github.com/Tanmoy/wallverse)
-[![Release Version](https://img.shields.io/badge/Release-v1.0.0-blue?style=for-the-badge&logo=github)](https://github.com/Tanmoy/wallverse/releases)
+[![Google Play](https://img.shields.io/badge/Google_Play-Install_KinotiX-34A853?style=for-the-badge&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.kinotix.app)
+[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge&logo=android)](https://github.com/Tcode-Motion/kinotix)
+[![Release Version](https://img.shields.io/badge/Release-v1.2.0-blue?style=for-the-badge&logo=github)](https://github.com/Tcode-Motion/kinotix/releases)
 [![Min Android SDK](https://img.shields.io/badge/Android-7.0%2B%20%28API%2024%2B%29-green?style=for-the-badge&logo=android)](https://developer.android.com)
 [![Kotlin](https://img.shields.io/badge/Language-Kotlin%202.0-purple?style=for-the-badge&logo=kotlin)](https://kotlinlang.org)
 [![License](https://img.shields.io/badge/License-MIT-orange?style=for-the-badge)](LICENSE)
 
 **KinotiX** is a flagship open-source Android application designed for ultra-high-definition visual experiences. Featuring 3D Parallax Gyroscope live wallpapers, interactive C++/OpenGL ES fluid dynamics simulations, high-bitrate video loops, transparent live camera backgrounds, and a smart 6-signal AI recommendation engine.
 
-[🌐 Official Website](https://tanmoy.github.io/wallverse/) • [📥 Download APK](docs/assets/apk/KinotiX-v1.0.0-release.apk) • [📖 Documentation](docs/index.html) • [❓ FAQ](FAQ.md)
+[🌐 Official Website](https://tcode-motion.github.io/kinotix/) • [📱 Google Play Store](https://play.google.com/store/apps/details?id=com.kinotix.app) • [📖 Documentation](https://tcode-motion.github.io/kinotix/features.html) • [❓ FAQ](https://tcode-motion.github.io/kinotix/faq.html)
 
 ---
 

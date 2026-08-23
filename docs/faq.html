@@ -3,153 +3,944 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frequently Asked Questions (40+ Q&A) — KinotiX Android Engine</title>
-  <meta name="description" content="Frequently Asked Questions (40+ Q&A) for KinotiX — The next-generation open-source 3D Parallax Gyro, OpenGL ES Fluid & Ultra HD 4K Android Wallpaper Application.">
-  <meta name="keywords" content="KinotiX, Wallpaper Engine Android, 3D Parallax Wallpaper, OpenGL ES Fluid, Live Wallpaper, 4K Wallpapers, Open Source Android">
+  <title>FAQ & Help Center (60+ Answers) — KinotiX Android Engine</title>
+  <meta name="description" content="Comprehensive Help Center & FAQ for KinotiX. 60+ answers on 3D Gyro Engine, OpenGL ES Fluid physics, Camera Wallpaper, Ultra HD downloads, battery fix, and privacy.">
+  <meta name="keywords" content="KinotiX FAQ, Android Wallpaper Help, 3D Gyro Parallax Guide, OpenGL ES Fluid Troubleshooting, KinotiX Support, Live Wallpaper Battery Life">
   <meta name="author" content="Tcode-Motion">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://tcode-motion.github.io/kinotix/faq.html">
   <link rel="manifest" href="manifest.webmanifest">
-  
-  <!-- Modular CSS Includes -->
-  <link rel="stylesheet" href="styles/variables.css">
-  <link rel="stylesheet" href="styles/themes.css">
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/components.css">
-  <link rel="stylesheet" href="styles/animations.css">
-  <link rel="stylesheet" href="styles/responsive.css">
-  <link rel="stylesheet" href="styles/utilities.css">
+  <link rel="stylesheet" href="css/style.css">
 
-  <!-- OpenGraph & Twitter Cards -->
-  <meta property="og:title" content="Frequently Asked Questions (40+ Q&A) — KinotiX">
-  <meta property="og:description" content="KinotiX — Next-Gen 3D Parallax Gyro & OpenGL ES Fluid Wallpaper Engine for Android.">
+  <!-- OpenGraph & Twitter Meta Tags -->
+  <meta property="og:title" content="KinotiX FAQ & Documentation">
+  <meta property="og:description" content="Detailed answers to over 60 questions about KinotiX features, engines, Google Play downloads, battery life, and privacy.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tcode-motion.github.io/kinotix/faq.html">
-  <meta property="og:image" content="https://tcode-motion.github.io/kinotix/assets/screenshots/home_feed.png">
+  <meta property="og:image" content="https://tcode-motion.github.io/kinotix/assets/screenshots/discover_feed.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Frequently Asked Questions (40+ Q&A) — KinotiX">
-  <meta name="twitter:description" content="Next-Gen 3D Parallax Gyro & OpenGL ES Fluid Wallpaper Engine for Android.">
-
-  <!-- JSON-LD Schema.org -->
+  <meta name="twitter:title" content="KinotiX FAQ & Help Center">
+  <meta name="twitter:description" content="60+ answers on 3D Parallax Gyro, OpenGL ES Fluid, Camera Wallpaper, and Ultra HD 4K downloads.">
+  <meta name="twitter:image" content="https://tcode-motion.github.io/kinotix/assets/screenshots/discover_feed.png">
+  
+  <!-- Schema.org FAQPage JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "KinotiX",
-    "operatingSystem": "ANDROID 7.0+",
-    "applicationCategory": "PersonalizationApplication",
-    "softwareVersion": "1.0.0",
-    "url": "https://tcode-motion.github.io/kinotix/",
-    "downloadUrl": "https://tcode-motion.github.io/kinotix/assets/apk/KinotiX-v1.0.0-release.apk"
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is KinotiX?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "KinotiX is a flagship open-source Android visual wallpaper engine featuring 3D Gyroscope Parallax, OpenGL ES Fluid dynamics, Live Camera backgrounds, and 4K Ultra HD visual art."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I install KinotiX on my Android phone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can install KinotiX safely and directly from the Google Play Store. Simply search for 'KinotiX' on Google Play or tap the 'Get it on Google Play' button on our website to install with verified Google Play Protect security."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is KinotiX free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! KinotiX is 100% free with rich Ultra HD 4K master quality downloads and native live wallpaper engines."
+        }
+      }
+    ]
   }
   </script>
 </head>
 <body>
   <header>
-    <a href="index.html" class="brand">
-      <span>KinotiX 🌌</span>
-    </a>
-    <nav>
-      <ul class="nav-links" id="nav-menu">
-        <li><a href="index.html" class="">Home</a></li>
-        <li><a href="features.html" class="">Features</a></li>
-        <li><a href="download.html" class="">Download</a></li>
-        <li><a href="privacy.html" class="">Privacy</a></li>
-        <li><a href="terms.html" class="">Terms</a></li>
+    <a href="index.html" class="brand" aria-label="KinotiX Home">KinotiX <span class="badge">PRO 🌌</span></a>
+    <nav aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="download.html">Download</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="terms.html">Terms</a></li>
         <li><a href="faq.html" class="active">FAQ</a></li>
-        <li><a href="support.html" class="">Support</a></li>
-        <li><a href="roadmap.html" class="">Roadmap</a></li>
-        <li><a href="https://github.com/Tcode-Motion/kinotix" target="_blank">GitHub ↗</a></li>
-        <li><a href="contact.html" class="">Contact</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="https://github.com/Tcode-Motion/kinotix" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
       </ul>
-      
-      <a href="download.html" class="btn-primary" style="padding:0.4rem 1.1rem; font-size:0.85rem;">Download APK</a>
     </nav>
+    <div style="display:flex; gap:1rem; align-items:center;">
+      <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-playstore btn-playstore-sm" aria-label="Get KinotiX on Google Play">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <path fill="#4285F4" d="M32.5 12.2c-5.8 6.1-9.3 15.6-9.3 27.8v432c0 12.2 3.5 21.7 9.3 27.8l1.5 1.5L263 272.3v-5.6L34 10.7l-1.5 1.5z"/>
+          <path fill="#FBBC04" d="M340.6 349.9l-77.6-77.6v-5.6l77.6-77.6 1.7 1 91.9 52.2c26.2 14.9 26.2 39.2 0 54.1l-91.9 52.2-1.7 1.3z"/>
+          <path fill="#EA4335" d="M263 266.7L34 10.7C41.3 2.5 53.6-1.5 67.5 6.4l274.8 156.2-79.3 104.1z"/>
+          <path fill="#34A853" d="M263 272.3L67.5 496.6c-13.9 7.9-26.2 3.9-33.5-4.3L263 272.3z"/>
+        </svg>
+        <span class="play-text">
+          <span class="play-subtitle">GET IT ON</span>
+          <span class="play-title">Google Play</span>
+        </span>
+      </a>
+    </div>
   </header>
 
-    <main class="container" style="max-width: 900px;">
-      <div class="doc-header text-center">
-        <h1>❓ Frequently Asked Questions (FAQ)</h1>
-      </div>
-      <input type="text" id="faq-search-input" class="faq-search" placeholder="🔍 Search questions (e.g. 3D Gyro, Ultra HD, Battery, Privacy, Camera)...">
-      <div class="faq-item">
-        <div class="faq-question">1. What is KinotiX? <span>+</span></div>
-        <div class="faq-answer">KinotiX is a flagship Android wallpaper app featuring 3D Gyro Parallax, OpenGL ES Fluid dynamics, Live Camera backgrounds, and 4K Ultra HD visual art.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">2. Is KinotiX free to use? <span>+</span></div>
-        <div class="faq-answer">Yes! KinotiX is 100% free with optional rewarded ads to unlock 4K master downloads.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">3. Which Android versions are supported? <span>+</span></div>
-        <div class="faq-answer">KinotiX supports Android 7.0 (API 24) up to Android 15 (API 35).</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">4. How does the 3D Gyroscope Engine work? <span>+</span></div>
-        <div class="faq-answer">It reads hardware rotation sensors via Android SensorManager to tilt background artwork layers in real-time.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">5. How does the OpenGL ES Fluid Engine work? <span>+</span></div>
-        <div class="faq-answer">It executes native C++/OpenGL ES shaders to simulate fluid velocity and density equations when you touch your screen.</div>
-      </div>
-    </main>
+  <main class="main-container">
+    <div style="text-align: center; margin-bottom: 3.5rem;">
+      <div class="hero-pill">❓ Documentation & Help Center</div>
+      <h1 style="font-size: 3.2rem; font-weight: 900; margin-bottom: 1rem;">Frequently Asked Questions</h1>
+      <p style="color: var(--text-secondary); max-width: 800px; margin: 0 auto; font-size: 1.15rem;">
+        Find detailed technical answers to over 60 common questions about KinotiX, wallpaper engines, downloads, privacy, performance, battery optimization, and troubleshooting.
+      </p>
+    </div>
+
+    <!-- Live Smart Search Box -->
+    <input type="text" id="faq-search-input" class="faq-search-box" placeholder="🔍 Instant search across 60+ questions (e.g. 3D Gyro, Fluid, Camera, Ultra HD, Battery, Privacy, AdMob)...">
+
+    <!-- Category Filter Tabs -->
+    <div style="display:flex; gap:0.6rem; flex-wrap:wrap; justify-content:center; margin-bottom:2.5rem;" id="faq-tabs">
+      <button class="btn-secondary faq-tab-btn active" onclick="filterFAQ('All')" style="padding:0.4rem 1rem; font-size:0.85rem;">All (60+)</button>
+      <button class="btn-secondary faq-tab-btn" onclick="filterFAQ('General')" style="padding:0.4rem 1rem; font-size:0.85rem;">General</button>
+      <button class="btn-secondary faq-tab-btn" onclick="filterFAQ('3D Gyro')" style="padding:0.4rem 1rem; font-size:0.85rem;">3D Gyro</button>
+      <button class="btn-secondary faq-tab-btn" onclick="filterFAQ('OpenGL Fluid')" style="padding:0.4rem 1rem; font-size:0.85rem;">OpenGL Fluid</button>
+      <button class="btn-secondary faq-tab-btn" onclick="filterFAQ('Camera Wallpaper')" style="padding:0.4rem 1rem; font-size:0.85rem;">Camera Wallpaper</button>
+      <button class="btn-secondary faq-tab-btn" onclick="filterFAQ('Video Loop')" style="padding:0.4rem 1rem; font-size:0.85rem;">Video Loop</button>
+      <button class="btn-secondary faq-tab-btn" onclick="filterFAQ('Downloads')" style="padding:0.4rem 1rem; font-size:0.85rem;">Downloads & 4K</button>
+      <button class="btn-secondary faq-tab-btn" onclick="filterFAQ('Favorites')" style="padding:0.4rem 1rem; font-size:0.85rem;">Favorites</button>
+      <button class="btn-secondary faq-tab-btn" onclick="filterFAQ('Privacy')" style="padding:0.4rem 1rem; font-size:0.85rem;">Privacy & Safety</button>
+      <button class="btn-secondary faq-tab-btn" onclick="filterFAQ('Troubleshooting')" style="padding:0.4rem 1rem; font-size:0.85rem;">Troubleshooting</button>
+    </div>
+
+    <!-- FAQ Accordion Nodes -->
     
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h4>KinotiX 🌌</h4>
-        <p style="color: var(--text-secondary); font-size:0.88rem;">Next-Gen 3D Parallax Gyro & OpenGL ES Fluid Wallpaper Engine for Android.</p>
-        <p style="color: var(--text-muted); font-size:0.8rem; margin-top:0.5rem;">Version 1.0.0 (Build 1)</p>
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>1. [General] What is KinotiX?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
       </div>
-      <div class="footer-col">
-        <h4>Pages & Portal</h4>
+      <div class="faq-node-answer">
+        <p>KinotiX is a flagship open-source Android visual personalization application featuring 3D Gyroscope Parallax wallpapers, interactive OpenGL ES Fluid dynamics, Live Video loops, Transparent Camera live backgrounds, and Ultra HD 4K static wallpapers.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>2. [General] Is KinotiX free to use?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! KinotiX is 100% free with optional rewarded ads to unlock 24-hour unlimited Ultra HD 4K master quality downloads.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>3. [General] Which Android versions are supported?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>KinotiX supports Android 7.0 (API Level 24 Nougat) up to Android 15.0 (API Level 35 Vanilla Ice Cream).</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>4. [General] Does KinotiX require root access?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>No. KinotiX uses standard Android WallpaperService APIs and requires zero root access.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>5. [General] Is an internet connection required?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>An internet connection is used to fetch initial online feeds, but KinotiX includes an offline Room database cache so previously loaded wallpapers work offline!</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>6. [General] How do I install KinotiX on my Android phone?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>You can install KinotiX directly from the Google Play Store. Simply search for 'KinotiX' on Google Play or tap the 'Get it on Google Play' button on our website to install with verified Google Play Protect security.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer">Get it on Google Play ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="3D Gyro">
+      <div class="faq-node-question">
+        <span>7. [3D Gyro] What is the 3D Gyroscope Parallax Engine?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>It is a native engine (LiveWallpaperService.kt) that renders multi-layered depth wallpapers that respond in real time to your hardware rotation sensors.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">3D Gyro</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="3D Gyro">
+      <div class="faq-node-question">
+        <span>8. [3D Gyro] How does hardware rotation sensor mapping work?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>KinotiX reads Android SensorManager rotation vector sensors to calculate device tilt pitch and roll angles.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">3D Gyro</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="3D Gyro">
+      <div class="faq-node-question">
+        <span>9. [3D Gyro] Does 3D Gyro wallpaper drain battery?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>No! Sensor listeners and OpenGL rendering loops pause immediately when your screen turns off or when another app is open.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">3D Gyro</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="3D Gyro">
+      <div class="faq-node-question">
+        <span>10. [3D Gyro] Can I customize 3D motion depth and smoothness?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! Open live wallpaper customizer settings to adjust tilt sensitivity, depth scale, and motion smoothing.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">3D Gyro</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="OpenGL Fluid">
+      <div class="faq-node-question">
+        <span>11. [OpenGL Fluid] What is the Magic OpenGL ES Fluid Engine?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>It is an interactive fluid dynamics engine (FluidWallpaperService.kt) executing native C++/OpenGL ES shaders on your GPU.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">OpenGL Fluid</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="OpenGL Fluid">
+      <div class="faq-node-question">
+        <span>12. [OpenGL Fluid] How do touch physics work in the fluid engine?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Touching your screen calculates real-time Navier-Stokes fluid velocity and density equations on GPU shaders.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">OpenGL Fluid</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="OpenGL Fluid">
+      <div class="faq-node-question">
+        <span>13. [OpenGL Fluid] Can I customize fluid colors and bloom glow?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! You can customize primary/secondary colors, viscosity, particle size, bloom glow, and turbulence.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">OpenGL Fluid</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="OpenGL Fluid">
+      <div class="faq-node-question">
+        <span>14. [OpenGL Fluid] Does fluid simulation pause when screen is off?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! Particle physics calculations freeze instantly when the device screen turns off.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">OpenGL Fluid</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Camera Wallpaper">
+      <div class="faq-node-question">
+        <span>15. [Camera Wallpaper] What is the Live Camera Transparent Wallpaper?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>It transforms your phone into a see-through device by streaming real-time camera preview background via CameraWallpaperService.kt.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Camera Wallpaper</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Camera Wallpaper">
+      <div class="faq-node-question">
+        <span>16. [Camera Wallpaper] Why does Camera Wallpaper require camera permission?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Camera permission is strictly required to capture the live preview stream for the transparent background effect.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Camera Wallpaper</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Camera Wallpaper">
+      <div class="faq-node-question">
+        <span>17. [Camera Wallpaper] Are camera feeds recorded, saved, or uploaded?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>No! Camera data is processed locally on your device to render the preview surface and is never recorded, saved, or uploaded.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Camera Wallpaper</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Camera Wallpaper">
+      <div class="faq-node-question">
+        <span>18. [Camera Wallpaper] Why is FOREGROUND_SERVICE_CAMERA required?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Android 14+ requires a foreground service declaration to stream camera preview frames on the wallpaper surface.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Camera Wallpaper</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Video Loop">
+      <div class="faq-node-question">
+        <span>19. [Video Loop] What is the Video Loop Engine?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>It is a hardware-accelerated engine (VideoWallpaperService.kt) rendering high-bitrate MP4 live video loops.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Video Loop</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Video Loop">
+      <div class="faq-node-question">
+        <span>20. [Video Loop] How does 32KB buffer disk caching work?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>It buffers video stream bytes into local cache files for smooth 60 FPS playback without network buffering stutter.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Video Loop</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Video Loop">
+      <div class="faq-node-question">
+        <span>21. [Video Loop] Can I mute video wallpaper audio?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! Audio playback can be toggled on or off in the video wallpaper control bar.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Video Loop</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Downloads">
+      <div class="faq-node-question">
+        <span>22. [Downloads] What is Ultra HD 4K Quality Mode?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Ultra HD Mode unlocks uncompressed 4K master artwork resolution streams (w=3840, q=100) directly from high-res servers.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Downloads</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Downloads">
+      <div class="faq-node-question">
+        <span>23. [Downloads] How do I download wallpapers to my phone gallery?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Tap any wallpaper preview card and tap the Cloud Download icon. Wallpapers are saved to Pictures/KinotiX via MediaStore API.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Downloads</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Downloads">
+      <div class="faq-node-question">
+        <span>24. [Downloads] How do I unlock Ultra HD Mode?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Go to Reward Center in the app and watch a rewarded ad to unlock 24-hour unlimited Ultra HD master downloads.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Downloads</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Downloads">
+      <div class="faq-node-question">
+        <span>25. [Downloads] What is 2ms WebP thumbnail caching?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Feed thumbnails are 20KB WebP images generated on-the-fly via wsrv.nl CDN for 2ms instant scrolling.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Downloads</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Downloads">
+      <div class="faq-node-question">
+        <span>26. [Downloads] How does the 0.001ms O(1) DeduplicationEngine work?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>It fingerprints CDN photo IDs, file paths, and image dimensions to eliminate duplicate visual cards across all feeds.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Downloads</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Downloads">
+      <div class="faq-node-question">
+        <span>27. [Downloads] What happens if a wallpaper link returns 404?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Automatic 404 Interception catches network errors and replaces broken links with verified HTTP 200 OK fallback wallpapers in 0ms.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Downloads</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>28. [General] How does onboarding category selection work?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>During first launch, you select your favorite categories. KinotiX dynamically tailors your Home feed based strictly on your choices.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>29. [General] Can I change my category preferences later?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! Go to Settings > Preference Settings to update your category choices at any time.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>30. [General] How does the Smart 6-Signal AI Recommendation Engine work?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>It ranks wallpapers by weighting favorites (w=3.0), search history (w=2.5), downloads (w=2.0), recency (w=2.0), onboarding preferences (w=1.5), and popularity (w=1.0).</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Favorites">
+      <div class="faq-node-question">
+        <span>31. [Favorites] Where are bookmarked wallpapers stored?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Favorites are saved locally on your device in SQLite Room DB (FavoriteEntity).</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Favorites</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Favorites">
+      <div class="faq-node-question">
+        <span>32. [Favorites] How does Offline Wallpaper Access work?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Wallpapers toggled for offline access download high-res files locally so they can be viewed without internet.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Favorites</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Privacy">
+      <div class="faq-node-question">
+        <span>33. [Privacy] Does KinotiX collect personal identities?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>No! KinotiX does not collect personal names, email addresses, phone numbers, or account details.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Privacy</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Privacy">
+      <div class="faq-node-question">
+        <span>34. [Privacy] Why are Firebase Analytics and Crashlytics disabled by default?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>In compliance with GDPR and CCPA, analytics and crash reporting are disabled by default until you explicitly opt in.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Privacy</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Privacy">
+      <div class="faq-node-question">
+        <span>35. [Privacy] How are Google AdMob ads served?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>KinotiX uses Google AdMob to display banner, native, and rewarded ads. AdMob processes non-personal advertising identifiers.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Privacy</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Privacy">
+      <div class="faq-node-question">
+        <span>36. [Privacy] How do push notifications work?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Firebase Cloud Messaging routes optional push notifications regarding new wallpaper drops if POST_NOTIFICATIONS permission is granted.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Privacy</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Troubleshooting">
+      <div class="faq-node-question">
+        <span>37. [Troubleshooting] How do I stop Android from killing live wallpapers?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Go to your phone's Settings > Apps > KinotiX > Battery > Unrestricted to prevent background task killers from stopping wallpaper services.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Troubleshooting</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Troubleshooting">
+      <div class="faq-node-question">
+        <span>38. [Troubleshooting] What should I do if a live wallpaper freezes?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Re-apply the wallpaper from KinotiX or restart your device launcher.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Troubleshooting</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Troubleshooting">
+      <div class="faq-node-question">
+        <span>39. [Troubleshooting] Why does my wallpaper reset after rebooting?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Some Android OEMs (e.g. MIUI, ColorOS) force-close wallpaper services on reboot. Enable Auto-Start for KinotiX in your device settings.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Troubleshooting</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Troubleshooting">
+      <div class="faq-node-question">
+        <span>40. [Troubleshooting] How do I clear app cache?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Go to Settings > Storage > Clear Cache inside KinotiX or in Android System App Settings.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Troubleshooting</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Troubleshooting">
+      <div class="faq-node-question">
+        <span>41. [Troubleshooting] How do I report bugs?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Open a ticket on our GitHub Issue Tracker at https://github.com/Tcode-Motion/kinotix/issues.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Troubleshooting</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>42. [General] Is KinotiX open source?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! KinotiX source code is publicly hosted under the MIT License at https://github.com/Tcode-Motion/kinotix.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>43. [General] Does KinotiX support tablet devices?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! KinotiX features responsive Jetpack Compose grid layouts optimized for tablets and foldable devices.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="General">
+      <div class="faq-node-question">
+        <span>44. [General] Does KinotiX support Material You dynamic colors?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! Wallpaper colors integrate smoothly with Android Material 3 system accents.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">General</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Downloads">
+      <div class="faq-node-question">
+        <span>45. [Downloads] Can I download wallpapers on Wi-Fi only?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! Turn on 'Wi-Fi Only Downloads' in Settings to save mobile data usage.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Downloads</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Performance">
+      <div class="faq-node-question">
+        <span>46. [Performance] What is the memory footprint of KinotiX?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>KinotiX utilizes Coil 3 memory pools (capped at 45% RAM) to prevent Out-Of-Memory memory leaks.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Performance</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Performance">
+      <div class="faq-node-question">
+        <span>47. [Performance] Does KinotiX support 120Hz high refresh rate screens?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! Live engines render up to 120 FPS on high refresh rate displays.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Performance</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Performance">
+      <div class="faq-node-question">
+        <span>48. [Performance] What rendering API is used for fluid physics?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>OpenGL ES 2.0/3.0 shaders with native C++ NDK bindings.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Performance</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Performance">
+      <div class="faq-node-question">
+        <span>49. [Performance] How fast does the search feed load?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Search engine queries evaluate in under 15ms via local FTS4 full-text search database indexing.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Performance</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Camera Wallpaper">
+      <div class="faq-node-question">
+        <span>50. [Camera Wallpaper] Can I switch between front and back cameras?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! Open Camera Wallpaper settings to toggle between rear and front selfie camera preview.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Camera Wallpaper</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Camera Wallpaper">
+      <div class="faq-node-question">
+        <span>51. [Camera Wallpaper] Does Camera Wallpaper work in low light?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Camera preview quality depends on your hardware camera sensor low-light capabilities.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Camera Wallpaper</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="3D Gyro">
+      <div class="faq-node-question">
+        <span>52. [3D Gyro] What happens on devices without a gyroscope?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>KinotiX falls back smoothly to touch-drag 3D parallax motion.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">3D Gyro</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="OpenGL Fluid">
+      <div class="faq-node-question">
+        <span>53. [OpenGL Fluid] Can I save custom fluid color presets?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! Custom fluid presets are saved to your local device SharedPreferences.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">OpenGL Fluid</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Video Loop">
+      <div class="faq-node-question">
+        <span>54. [Video Loop] What video formats are supported?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>KinotiX supports standard H.264 MP4 and WebM video files.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Video Loop</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Privacy">
+      <div class="faq-node-question">
+        <span>55. [Privacy] Can I revoke camera permission anytime?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Yes! You can revoke camera permission under Android Settings > Apps > KinotiX > Permissions.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Privacy</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Privacy">
+      <div class="faq-node-question">
+        <span>56. [Privacy] Is cleartext HTTP traffic allowed?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>No. KinotiX enforces HTTPS TLS 1.2/1.3 encryption across all network calls.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Privacy</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Troubleshooting">
+      <div class="faq-node-question">
+        <span>57. [Troubleshooting] Why did a wallpaper download fail?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Check internet connectivity and ensure storage permissions are enabled on Android 9 or below.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Troubleshooting</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Troubleshooting">
+      <div class="faq-node-question">
+        <span>58. [Troubleshooting] How do I reset all settings?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Go to KinotiX Settings > Reset App Preferences to restore default configuration.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Troubleshooting</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-node" data-category="Troubleshooting">
+      <div class="faq-node-question">
+        <span>59. [Troubleshooting] Where can I request new features?</span>
+        <span style="color:var(--cyan); font-size:1.2rem;">+</span>
+      </div>
+      <div class="faq-node-answer">
+        <p>Submit feature requests on GitHub Issues or Discussions at https://github.com/Tcode-Motion/kinotix/issues.</p>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:var(--text-muted);">
+          Related Topic: <strong style="color:var(--cyan);">Troubleshooting</strong> • <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank">Need more help?</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Still Need Help Section -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2.8rem; text-align:center; margin-top: 4rem;">
+      <h2 style="color: var(--cyan); font-size: 1.8rem; margin-bottom: 0.8rem;">💬 Still Need Help?</h2>
+      <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto 2rem;">
+        Can't find the answer you're looking for? Reach out directly through our support center or GitHub issue tracker.
+      </p>
+      <div style="display:flex; justify-content:center; gap:1.25rem; flex-wrap:wrap;">
+        <a href="support/" class="btn-gradient">🛠️ Support Center</a>
+        <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank" class="btn-secondary">💬 Open GitHub Issue</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-wrap">
+      <div class="footer-column">
+        <h4>KinotiX 🌌</h4>
+        <p style="color: var(--text-secondary); font-size:0.9rem;">Next-Gen 3D Parallax Gyro & OpenGL ES Fluid Wallpaper Engine for Android.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Ecosystem</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="home.html">App Overview</a></li>
           <li><a href="features.html">Features</a></li>
-          <li><a href="download.html">Download APK & AAB</a></li>
-          <li><a href="about.html">About Developer</a></li>
-          <li><a href="blog.html">News & Updates</a></li>
+          <li><a href="download.html">Download on Google Play</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Community & Code</h4>
-        <ul>
-          <li><a href="opensource.html">Open Source Stance</a></li>
-          <li><a href="contributors.html">Contributors</a></li>
-          <li><a href="acknowledgements.html">Acknowledgements</a></li>
-          <li><a href="press.html">Press & Media Kit</a></li>
-          <li><a href="community.html">Community Hub</a></li>
-          <li><a href="media.html">Media Showcase</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
+      <div class="footer-column">
         <h4>Support & Legal</h4>
         <ul>
           <li><a href="support.html">Support Center</a></li>
-          <li><a href="faq.html">FAQ (40+ Answers)</a></li>
           <li><a href="privacy.html">Privacy Policy</a></li>
           <li><a href="terms.html">Terms of Service</a></li>
-          <li><a href="cookies.html">Cookies Policy</a></li>
-          <li><a href="licenses.html">Third-Party Licenses</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div>
-        <span>&copy; 2026 KinotiX Team by <strong>Tcode-Motion</strong>. MIT License.</span>
-      </div>
-      <div style="display:flex; gap:1rem; align-items:center;">
-        <span>💬 Support via </span>
-        <button class="back-to-top" id="back-to-top">↑ Back to Top</button>
-      </div>
+    <div class="footer-bar">
+      <span>&copy; 2026 KinotiX Team by Tcode-Motion. Open Source under MIT License.</span>
+      <a href="https://github.com/Tcode-Motion/kinotix/issues" target="_blank" style="color:var(--text-secondary);">💬 GitHub Support & Issues</a>
     </div>
   </footer>
-  
-  <!-- Modular JS Includes -->
-  <script src="scripts/theme.js"></script>
-  <script src="scripts/navigation.js"></script>
-  <script src="scripts/faq.js"></script>
-  <script src="scripts/main.js"></script>
+
+  <script src="js/theme.js"></script>
+  <script src="js/faq.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function filterFAQ(category) {
+      const nodes = document.querySelectorAll('.faq-node');
+      nodes.forEach(node => {
+        if (category === 'All' || node.getAttribute('data-category') === category) {
+          node.style.display = 'block';
+        } else {
+          node.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>

@@ -157,6 +157,75 @@ header {
   transform: translateY(-3px);
 }
 
+/* Sleek Google Play Store Badge Button */
+.btn-playstore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: #05070c;
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 0.65rem 1.4rem;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  transition: var(--transition);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+.btn-playstore::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+}
+.btn-playstore:hover {
+  background: #0c1017;
+  border-color: var(--cyan);
+  box-shadow: 0 8px 30px rgba(0, 240, 255, 0.35);
+  transform: translateY(-2px) scale(1.02);
+}
+.btn-playstore svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+.btn-playstore .play-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.15;
+}
+.btn-playstore .play-subtitle {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.btn-playstore .play-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+}
+.btn-playstore-sm {
+  padding: 0.4rem 0.95rem;
+  border-radius: 10px;
+  gap: 0.6rem;
+}
+.btn-playstore-sm svg {
+  width: 20px;
+  height: 20px;
+}
+.btn-playstore-sm .play-subtitle {
+  font-size: 0.58rem;
+}
+.btn-playstore-sm .play-title {
+  font-size: 0.88rem;
+}
+
 /* Hero Section */
 .hero-section {
   text-align: center;
@@ -184,6 +253,7 @@ header {
   margin-bottom: 1.5rem;
   background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
