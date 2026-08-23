@@ -15,12 +15,19 @@
 
 ---
 
-### 📱 Live Device Preview
+### 📱 Google Play Store Screenshots
 <p align="center">
-  <img src="docs/assets/screenshots/home_feed.png" width="220" alt="Home Feed" />
-  <img src="docs/assets/screenshots/discover_feed.png" width="220" alt="Discover Feed" />
-  <img src="docs/assets/screenshots/collections.png" width="220" alt="Collections" />
-  <img src="docs/assets/screenshots/detail_apply.png" width="220" alt="Detail & Apply" />
+  <img src="docs/assets/screenshots/play_screenshot_1.png" width="180" alt="Home Feed & Recommendations" />
+  <img src="docs/assets/screenshots/play_screenshot_2.png" width="180" alt="3D Gyro Parallax Engine" />
+  <img src="docs/assets/screenshots/play_screenshot_3.png" width="180" alt="OpenGL ES Fluid Simulation" />
+  <img src="docs/assets/screenshots/play_screenshot_4.png" width="180" alt="Curated 4K Collections" />
+  <img src="docs/assets/screenshots/play_screenshot_5.png" width="180" alt="Ultra HD 4K Apply" />
+</p>
+<p align="center">
+  <img src="docs/assets/screenshots/play_screenshot_6.png" width="180" alt="Live Camera Background" />
+  <img src="docs/assets/screenshots/play_screenshot_7.png" width="180" alt="Discover Hub" />
+  <img src="docs/assets/screenshots/play_screenshot_8.png" width="180" alt="Offline Favorites" />
+  <img src="docs/assets/screenshots/play_screenshot_9.png" width="180" alt="Clean Dark Mode UI" />
 </p>
 
 </div>
