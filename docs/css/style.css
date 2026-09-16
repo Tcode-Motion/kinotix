@@ -157,6 +157,8 @@ header {
   height: var(--header-height);
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
 }
 
 .header-inner {
@@ -1128,7 +1130,8 @@ footer {
   padding: 4rem 1.5rem 2.5rem;
 }
 
-.footer-wrap {
+.footer-wrap,
+.footer-grid {
   display: grid;
   grid-template-columns: 2fr repeat(3, 1fr);
   gap: 3rem;
@@ -1136,7 +1139,9 @@ footer {
   margin: 0 auto 3rem;
 }
 
-.footer-column h4 {
+.footer-column h4,
+.footer-col h3,
+.footer-col .footer-heading {
   font-size: 0.95rem;
   font-weight: 700;
   margin-bottom: 1.25rem;
@@ -1144,25 +1149,62 @@ footer {
   letter-spacing: 0.02em;
 }
 
-.footer-column ul {
+.footer-column ul,
+.footer-col ul,
+.footer-links {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.footer-column li {
+.footer-column li,
+.footer-col li {
   margin-bottom: 0.65rem;
 }
 
-.footer-column a {
+.footer-column a,
+.footer-col a,
+.footer-links a {
   color: var(--text-muted);
   font-size: 0.88rem;
   transition: var(--transition-fast);
 }
 
-.footer-column a:hover {
+.footer-column a:hover,
+.footer-col a:hover,
+.footer-links a:hover {
   color: var(--text-primary);
 }
 
-.footer-bottom {
+.footer-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.footer-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.footer-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  font-family: 'Outfit', sans-serif;
+}
+
+.footer-desc {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.footer-bottom,
+.footer-bar {
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding-top: 2rem;

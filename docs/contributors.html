@@ -45,35 +45,42 @@
   </script>
 </head>
 <body>
-  <header>
-    <a href="index.html" class="brand" aria-label="KinotiX Home"><img src="assets/icons/icon.png" alt="KinotiX Icon" class="brand-icon"><span>KinotiX</span></a>
-    <nav>
-      <ul class="nav-links" id="nav-menu">
-        <li><a href="index.html" class="">Home</a></li>
-        <li><a href="features.html" class="">Features</a></li>
-        <li><a href="download.html" class="">Download</a></li>
-        <li><a href="privacy.html" class="">Privacy</a></li>
-        <li><a href="terms.html" class="">Terms</a></li>
-        <li><a href="faq.html" class="">FAQ</a></li>
-        <li><a href="support.html" class="">Support</a></li>
-        <li><a href="roadmap.html" class="">Roadmap</a></li>
-        <li><a href="https://github.com/Tcode-Motion/kinotix" target="_blank">GitHub ↗</a></li>
-        <li><a href="contact.html" class="">Contact</a></li>
-      </ul>
-      
-            <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-playstore btn-playstore-sm" aria-label="Get KinotiX on Google Play">
-        <svg viewBox="0 0 512 512" aria-hidden="true">
-          <path fill="#4285F4" d="M32.5 12.2c-5.8 6.1-9.3 15.6-9.3 27.8v432c0 12.2 3.5 21.7 9.3 27.8l1.5 1.5L263 272.3v-5.6L34 10.7l-1.5 1.5z"/>
-          <path fill="#FBBC04" d="M340.6 349.9l-77.6-77.6v-5.6l77.6-77.6 1.7 1 91.9 52.2c26.2 14.9 26.2 39.2 0 54.1l-91.9 52.2-1.7 1.3z"/>
-          <path fill="#EA4335" d="M263 266.7L34 10.7C41.3 2.5 53.6-1.5 67.5 6.4l274.8 156.2-79.3 104.1z"/>
-          <path fill="#34A853" d="M263 272.3L67.5 496.6c-13.9 7.9-26.2 3.9-33.5-4.3L263 272.3z"/>
-        </svg>
-        <span class="play-text">
-          <span class="play-subtitle">GET IT ON</span>
-          <span class="play-title">Google Play</span>
-        </span>
+      <header>
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="KinotiX Home">
+        <img src="assets/icons/icon.png" alt="KinotiX Icon" class="brand-icon">
+        <span>KinotiX</span>
       </a>
-    </nav>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="4k-wallpapers/">Collections</a></li>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="download.html">Download</a></li>
+          <li><a href="roadmap.html">Roadmap</a></li>
+          <li><a href="https://github.com/Tcode-Motion/kinotix" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-top-install" aria-label="Install KinotiX on Google Play">
+          <svg viewBox="0 0 512 512" width="16" height="16" aria-hidden="true">
+            <path fill="#4285F4" d="M32.5 12.2c-5.8 6.1-9.3 15.6-9.3 27.8v432c0 12.2 3.5 21.7 9.3 27.8l1.5 1.5L263 272.3v-5.6L34 10.7l-1.5 1.5z"/>
+            <path fill="#FBBC04" d="M340.6 349.9l-77.6-77.6v-5.6l77.6-77.6 1.7 1 91.9 52.2c26.2 14.9 26.2 39.2 0 54.1l-91.9 52.2-1.7 1.3z"/>
+            <path fill="#EA4335" d="M263 266.7L34 10.7C41.3 2.5 53.6-1.5 67.5 6.4l274.8 156.2-79.3 104.1z"/>
+            <path fill="#34A853" d="M263 272.3L67.5 496.6c-13.9 7.9-26.2 3.9-33.5-4.3L263 272.3z"/>
+          </svg>
+          <span class="install-text-wrap">
+            <span class="install-primary-text">Install App</span>
+            <span class="install-secondary-text">Google Play</span>
+          </span>
+        </a>
+        <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
   </header>
 
     <main class="container doc-content" style="max-width: 900px;">
@@ -81,56 +88,65 @@
       <p>Thank you to all community members and developers contributing to KinotiX on GitHub!</p>
     </main>
     
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h4>KinotiX</h4>
-        <p style="color: var(--text-secondary); font-size:0.88rem;">Next-Gen 3D Parallax Gyro & OpenGL ES Fluid Wallpaper Engine for Android.</p>
-        <p style="color: var(--text-muted); font-size:0.8rem; margin-top:0.5rem;">Version 1.0.0 (Build 1)</p>
+      <footer>
+    <div class="footer-wrap">
+      <div class="footer-brand">
+        <a href="index.html" class="brand" aria-label="KinotiX Home">
+          <img src="assets/icons/icon.png" alt="KinotiX Icon" class="brand-icon">
+          <span>KinotiX</span>
+        </a>
+        <p class="footer-tagline">
+          Next-generation 4K, AMOLED, Live, Fluid & 3D Parallax wallpaper engine built with modern Kotlin and zero battery drain.
+        </p>
       </div>
-      <div class="footer-col">
-        <h4>Pages & Portal</h4>
+
+      <div class="footer-column">
+        <h4>Collections</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="home.html">App Overview</a></li>
-          <li><a href="features.html">Features</a></li>
-          <li><a href="download.html">Download on Google Play</a></li>
-          <li><a href="about.html">About Developer</a></li>
-          <li><a href="blog.html">News & Updates</a></li>
+          <li><a href="4k-wallpapers/">4K Wallpapers</a></li>
+          <li><a href="anime-wallpapers/">Anime 4K</a></li>
+          <li><a href="amoled-wallpapers/">AMOLED Pure Black</a></li>
+          <li><a href="live-wallpapers/">4K Live Motion</a></li>
+          <li><a href="3d-wallpapers/">3D Parallax Gyro</a></li>
+          <li><a href="nature-wallpapers/">Nature Landscapes</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Community & Code</h4>
+
+      <div class="footer-column">
+        <h4>Product & Guides</h4>
         <ul>
-          <li><a href="opensource.html">Open Source Stance</a></li>
-          <li><a href="contributors.html">Contributors</a></li>
-          <li><a href="acknowledgements.html">Acknowledgements</a></li>
-          <li><a href="press.html">Press & Media Kit</a></li>
-          <li><a href="community.html">Community Hub</a></li>
-          <li><a href="media.html">Media Showcase</a></li>
+          <li><a href="index.html">Home Overview</a></li>
+          <li><a href="features.html">Engine Features</a></li>
+          <li><a href="download.html">Download App</a></li>
+          <li><a href="roadmap.html">Development Roadmap</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Support & Legal</h4>
+
+      <div class="footer-column">
+        <h4>Legal & Privacy</h4>
         <ul>
-          <li><a href="support.html">Support Center</a></li>
-          <li><a href="faq.html">FAQ (40+ Answers)</a></li>
           <li><a href="privacy.html">Privacy Policy</a></li>
           <li><a href="terms.html">Terms of Service</a></li>
-          <li><a href="cookies.html">Cookies Policy</a></li>
-          <li><a href="licenses.html">Third-Party Licenses</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+          <li><a href="licenses.html">Open Source Licenses</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="faq.html">Frequently Asked Questions</a></li>
+          <li><a href="support.html">Help & Support</a></li>
+          <li><a href="contact.html">Contact Team</a></li>
+          <li><a href="https://github.com/Tcode-Motion/kinotix" target="_blank" rel="noopener noreferrer">GitHub Repository ↗</a></li>
         </ul>
       </div>
     </div>
+
     <div class="footer-bottom">
-      <div>
-        <span>&copy; 2026 KinotiX Team by <strong>Tcode-Motion</strong>. MIT License.</span>
-      </div>
-      <div style="display:flex; gap:1rem; align-items:center;">
-        <span>💬 Support via </span>
-        <button class="back-to-top" id="back-to-top">↑ Back to Top</button>
-      </div>
+      <span>&copy; 2026 KinotiX • Developed by Tcode-Motion. All rights reserved.</span>
+      <span>Google Play and the Google Play logo are trademarks of Google LLC.</span>
     </div>
   </footer>
   
@@ -139,5 +155,7 @@
   <script src="scripts/navigation.js"></script>
   <script src="scripts/faq.js"></script>
   <script src="scripts/main.js"></script>
+  
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
