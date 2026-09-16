@@ -1,11 +1,18 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.kinotix.app",
       "sha256_cert_fingerprints": [
-        "14:D5:7B:A2:3E:5E:2A:B4:48:9A:FF:D2:C3:68:57:05:3F:8F:7C:1E:E7:09:A4:47:06:54:19:D9:D2:FF:16:D5"
+        "58:EF:02:A6:EE:4C:9D:9B:C5:47:83:FF:81:6B:12:8B:6A:D5:2A:03:BD:4E:42:5B:45:09:59:50:AC:1F:02:D6",
+        "14:D5:7B:A2:3E:5E:2A:B4:48:9A:FF:D2:C3:68:57:05:3F:8F:7C:1E:E7:09:A4:47:06:54:19:D9:D2:FF:16:D5",
+        "E2:DD:58:2D:9A:C5:F8:AC:D1:AF:DD:DC:75:AD:5A:CA:76:C6:FF:91:0A:EF:FC:0E:9E:DA:72:55:8E:AC:37:D2",
+        "3F:86:74:E4:8E:D2:8F:7C:CA:1B:9B:8F:1C:67:EE:14:6B:57:DF:49:78:4F:AC:32:74:51:D5:C4:9A:D2:72:8A",
+        "36:9A:44:46:5D:14:CD:3C:F2:04:95:57:3E:B9:CE:C7:78:7C:E2:77:01:03:8B:52:B6:E8:34:66:EE:FC:7A:8B"
       ]
     }
   }

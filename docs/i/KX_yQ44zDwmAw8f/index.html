@@ -196,7 +196,7 @@
       </div>
 
       <div class="btn-action-group">
-        <a href="kinotix://i/KX_yQ44zDwmAw8f" class="btn-apply-app">
+        <a href="intent://i/KX_yQ44zDwmAw8f#Intent;scheme=kinotix;package=com.kinotix.app;end" class="btn-apply-app">
           Open in KinotiX App
         </a>
         <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-play-store">
@@ -211,5 +211,24 @@
       <span>&copy; 2026 KinotiX Engine • Developed by Tcode-Motion</span>
     </div>
   </footer>
+  <script>
+    (function tryAutoOpenInApp() {
+      var isAndroid = /Android/i.test(navigator.userAgent || '');
+      if (!isAndroid) return;
+      var pathParts = window.location.pathname.split('/').filter(Boolean);
+      var token = pathParts.find(function(p) { return p.indexOf('KX_') === 0; }) || 'KX_yQ44zDwmAw8f';
+      var sessionKey = 'kx_auto_' + token;
+      if (sessionStorage.getItem(sessionKey)) return;
+      sessionStorage.setItem(sessionKey, '1');
+      var fallbackUrl = encodeURIComponent(window.location.href);
+      var intentUri = 'intent://i/' + encodeURIComponent(token) + '#Intent;scheme=kinotix;package=com.kinotix.app;S.browser_fallback_url=' + fallbackUrl + ';end';
+      var directUri = 'kinotix://i/' + encodeURIComponent(token);
+      setTimeout(function() {
+        try { window.location.href = intentUri; } catch (e) {
+          try { window.location.href = directUri; } catch (_) {}
+        }
+      }, 350);
+    })();
+  </script>
 </body>
 </html>

@@ -469,7 +469,7 @@ function renderSharePageHtml({ imageId, title, typeLabel, cdnUrl, rawUrl, creato
       </div>
 
       <div class="btn-action-group">
-        <a href="kinotix://i/${imageId}" class="btn-apply-app">
+        <a href="intent://i/${imageId}#Intent;scheme=kinotix;package=com.kinotix.app;end" class="btn-apply-app">
           Open in KinotiX App
         </a>
         <a href="../../${categorySlug}/" class="btn-play-store">
@@ -495,6 +495,32 @@ function renderSharePageHtml({ imageId, title, typeLabel, cdnUrl, rawUrl, creato
       if (el && (el.complete || el.readyState >= 2)) {
         el.classList.add('loaded');
       }
+    })();
+
+    // Automatically attempt to open in the KinotiX app if on Android mobile
+    (function tryAutoOpenInApp() {
+      const ua = navigator.userAgent || '';
+      const isAndroid = /android/i.test(ua);
+      if (!isAndroid) return;
+
+      const imageId = '${imageId}';
+      const sessionKey = 'kx_auto_' + imageId;
+      if (sessionStorage.getItem(sessionKey)) return;
+      sessionStorage.setItem(sessionKey, '1');
+
+      const fallbackUrl = encodeURIComponent(window.location.href);
+      const intentUri = 'intent://i/' + encodeURIComponent(imageId) + '#Intent;scheme=kinotix;package=com.kinotix.app;S.browser_fallback_url=' + fallbackUrl + ';end';
+      const directUri = 'kinotix://i/' + encodeURIComponent(imageId);
+
+      setTimeout(function() {
+        try {
+          window.location.href = intentUri;
+        } catch (e) {
+          try {
+            window.location.href = directUri;
+          } catch (_) {}
+        }
+      }, 350);
     })();
   </script>
 </body>

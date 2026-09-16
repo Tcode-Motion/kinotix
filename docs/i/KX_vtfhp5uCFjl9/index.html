@@ -268,7 +268,7 @@
       </div>
 
       <div class="btn-action-group">
-        <a href="kinotix://i/KX_vtfhp5uCFjl9" class="btn-apply-app">
+        <a href="intent://i/KX_vtfhp5uCFjl9#Intent;scheme=kinotix;package=com.kinotix.app;end" class="btn-apply-app">
           Open in KinotiX App
         </a>
         <a href="../../4k-wallpapers/" class="btn-play-store">
@@ -294,6 +294,25 @@
       if (el && (el.complete || el.readyState >= 2)) {
         el.classList.add('loaded');
       }
+    })();
+  </script>
+  <script>
+    (function tryAutoOpenInApp() {
+      var isAndroid = /Android/i.test(navigator.userAgent || '');
+      if (!isAndroid) return;
+      var pathParts = window.location.pathname.split('/').filter(Boolean);
+      var token = pathParts.find(function(p) { return p.indexOf('KX_') === 0; }) || 'KX_vtfhp5uCFjl9';
+      var sessionKey = 'kx_auto_' + token;
+      if (sessionStorage.getItem(sessionKey)) return;
+      sessionStorage.setItem(sessionKey, '1');
+      var fallbackUrl = encodeURIComponent(window.location.href);
+      var intentUri = 'intent://i/' + encodeURIComponent(token) + '#Intent;scheme=kinotix;package=com.kinotix.app;S.browser_fallback_url=' + fallbackUrl + ';end';
+      var directUri = 'kinotix://i/' + encodeURIComponent(token);
+      setTimeout(function() {
+        try { window.location.href = intentUri; } catch (e) {
+          try { window.location.href = directUri; } catch (_) {}
+        }
+      }, 350);
     })();
   </script>
 </body>
