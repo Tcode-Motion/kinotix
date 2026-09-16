@@ -533,47 +533,86 @@
       function showError(title, message) {
         previewCard.style.display = 'none';
         errorCard.style.display = 'block';
-        document.getElementById('error-title').textContent = title || 'Shared Wallpaper Unavailable';
-        document.getElementById('error-message').textContent = message || 'The shared link could not be loaded.';
-        document.title = 'Wallpaper Unavailable — KinotiX';
+        document.getElementById('error-title').textContent = title || 'Wallpaper Preview Unavailable';
+        document.getElementById('error-message').textContent = message || 'This wallpaper may have been updated, moved, or is available directly inside the KinotiX Android App.';
+        document.title = 'KinotiX — Ultra HD 4K & 3D Wallpaper Engine';
       }
 
-      const { id, payload } = parseShareParameters();
+      async function init() {
+        const { id, payload } = parseShareParameters();
 
-      let targetUrl = '';
-      let targetTitle = 'Shared Wallpaper';
-      let targetKind = 'static';
-      let targetThumb = '';
-      let targetSource = '';
-      let targetTemplateId = '';
-      let targetTag = '';
+        let targetUrl = '';
+        let targetTitle = 'Shared Wallpaper';
+        let targetKind = 'static';
+        let targetThumb = '';
+        let targetSource = '';
+        let targetTemplateId = '';
+        let targetTag = '';
 
-      if (payload) {
-        const decoded = decryptPayload(payload);
-        if (decoded && typeof decoded === 'object') {
-          if (decoded.u && isValidHttpUrl(decoded.u)) targetUrl = decoded.u.trim();
-          if (decoded.t && typeof decoded.t === 'string') targetTitle = decoded.t.trim();
-          if (decoded.k && typeof decoded.k === 'string') targetKind = decoded.k.trim().toLowerCase();
-          if (decoded.th && isValidHttpUrl(decoded.th)) targetThumb = decoded.th.trim();
-          if (decoded.src && typeof decoded.src === 'string') targetSource = decoded.src.trim().toLowerCase();
-          if (decoded.tpl && typeof decoded.tpl === 'string') targetTemplateId = decoded.tpl.trim().toLowerCase();
-          if (decoded.tag && typeof decoded.tag === 'string') targetTag = decoded.tag.trim().toLowerCase();
+        if (payload) {
+          const decoded = decryptPayload(payload);
+          if (decoded && typeof decoded === 'object') {
+            if (decoded.u && isValidHttpUrl(decoded.u)) targetUrl = decoded.u.trim();
+            if (decoded.t && typeof decoded.t === 'string') targetTitle = decoded.t.trim();
+            if (decoded.k && typeof decoded.k === 'string') targetKind = decoded.k.trim().toLowerCase();
+            if (decoded.th && isValidHttpUrl(decoded.th)) targetThumb = decoded.th.trim();
+            if (decoded.src && typeof decoded.src === 'string') targetSource = decoded.src.trim().toLowerCase();
+            if (decoded.tpl && typeof decoded.tpl === 'string') targetTemplateId = decoded.tpl.trim().toLowerCase();
+            if (decoded.tag && typeof decoded.tag === 'string') targetTag = decoded.tag.trim().toLowerCase();
+          }
         }
-      }
 
-      if (!targetUrl) {
-        showError('Invalid Share Link', 'This KinotiX share link is invalid or incomplete.');
-        return;
-      }
+        // If no payload, resolve from built-in presets or catalog.json
+        if (!targetUrl && id) {
+          const idLower = id.toLowerCase();
+          if (idLower.includes('fluid') || id === 'KX_cosmic_glow') {
+            targetTitle = 'Cosmic Glow Fluid';
+            targetKind = 'fluid';
+            targetThumb = '../assets/screenshots/discover_feed.png';
+            targetSource = 'app_engine';
+          } else if (idLower.includes('particle') || id === 'KX_astropixel') {
+            targetTitle = 'Astropixel 3D Engine';
+            targetKind = 'particle';
+            targetThumb = '../assets/screenshots/collections.png';
+            targetSource = 'app_engine';
+          } else if (idLower.includes('camera')) {
+            targetTitle = 'Transparent Camera Live';
+            targetKind = 'camera';
+            targetThumb = '../assets/screenshots/home_feed.png';
+            targetSource = 'app_engine';
+          } else {
+            try {
+              const resp = await fetch('./catalog.json');
+              if (resp.ok) {
+                const catalog = await resp.json();
+                if (catalog && catalog[id]) {
+                  const entry = catalog[id];
+                  targetUrl = entry.previewUrl || '';
+                  targetTitle = entry.title || 'Ultra HD 4K Wallpaper';
+                  targetKind = entry.isVideo ? 'live' : (entry.isFluid ? 'fluid' : (entry.isParticle ? 'particle' : 'static'));
+                  targetThumb = entry.previewUrl || '';
+                  targetSource = 'kinotix';
+                }
+              }
+            } catch (e) {
+              console.warn('Catalog resolution error:', e);
+            }
+          }
+        }
 
-      const isVideo = targetKind === 'live' || targetKind === 'live_video' || targetUrl.toLowerCase().match(/\.(mp4|webm|mkv|mov)(\?.*)?$/i);
-      const isFluid = targetKind === 'fluid' || targetKind === 'fluid_sim' || id.toLowerCase().includes('fluid_');
-      const isParticle = targetKind === 'particle' || targetKind === 'particle_3d' || id.toLowerCase().includes('particle_');
-      const isCamera = targetKind === 'camera' || targetKind === 'camera_live' || id.toLowerCase().includes('camera');
+        if (!targetUrl && targetKind !== 'fluid' && targetKind !== 'particle' && targetKind !== 'camera') {
+          showError('Wallpaper Preview Unavailable', 'This wallpaper may have been updated, moved, or is available directly inside the KinotiX Android App.');
+          return;
+        }
 
-      const cleanTitle = sanitizeTitle(targetTitle);
-      titleEl.textContent = cleanTitle;
-      document.title = cleanTitle + ' — KinotiX Wallpaper Engine';
+        const isVideo = targetKind === 'live' || targetKind === 'live_video' || targetUrl.toLowerCase().match(/\.(mp4|webm|mkv|mov)(\?.*)?$/i);
+        const isFluid = targetKind === 'fluid' || targetKind === 'fluid_sim' || (id && id.toLowerCase().includes('fluid_'));
+        const isParticle = targetKind === 'particle' || targetKind === 'particle_3d' || (id && id.toLowerCase().includes('particle_'));
+        const isCamera = targetKind === 'camera' || targetKind === 'camera_live' || (id && id.toLowerCase().includes('camera'));
+
+        const cleanTitle = sanitizeTitle(targetTitle);
+        titleEl.textContent = cleanTitle;
+        document.title = cleanTitle + ' — KinotiX Wallpaper Engine';
 
       featurePillsEl.innerHTML = '';
       function addPill(text) {
@@ -1000,6 +1039,8 @@
         };
         imageEl.src = targetUrl;
       }
+
+      init();
 
       // Smart Sheet 3-Strike Rule
       const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falling glass pill animation 💊 • KinotiX</title>
+  <meta name="description" content="Discover this 3D Live Wallpaper by KinotiX 3D Studio on KinotiX — 3D Parallax & OpenGL ES Fluid Wallpaper Engine.">
+  <link rel="canonical" href="https://techscript.is-a.dev/kinotix/i/KX_DBofqrjcOWiI">
+  <link rel="stylesheet" href="../../css/style.css">
+
+  <!-- OpenGraph Metadata (Pre-rendered for WhatsApp, Telegram, Discord, Facebook) -->
+  <meta property="og:title" content="Falling glass pill animation 💊 • KinotiX">
+  <meta property="og:description" content="Discover this 3D Live Wallpaper by KinotiX 3D Studio on KinotiX — 3D Parallax & OpenGL ES Fluid Wallpaper Engine.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/main/3D%20&amp;%20Optical%20Illusion/Floating%20Objects/Falling%20glass%20pill%20animation%20%F0%9F%92%8A.jpg">
+  <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/main/3D%20&amp;%20Optical%20Illusion/Floating%20Objects/Falling%20glass%20pill%20animation%20%F0%9F%92%8A.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://techscript.is-a.dev/kinotix/i/KX_DBofqrjcOWiI">
+  <meta property="og:site_name" content="KinotiX">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Falling glass pill animation 💊 • KinotiX">
+  <meta name="twitter:description" content="Discover this 3D Live Wallpaper by KinotiX 3D Studio on KinotiX — 3D Parallax & OpenGL ES Fluid Wallpaper Engine.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/main/3D%20&amp;%20Optical%20Illusion/Floating%20Objects/Falling%20glass%20pill%20animation%20%F0%9F%92%8A.jpg">
+
+  <style>
+    .share-container {
+      min-height: calc(100vh - 160px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .wallpaper-preview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .wallpaper-preview-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
+    }
+    .image-frame {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      max-height: 480px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #020408;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 1.25rem;
+    }
+    .wallpaper-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .wallpaper-img:hover {
+      transform: scale(1.02);
+    }
+    .meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--cyan);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .title-display {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.02em;
+    }
+    .creator-tag {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+    }
+    .feature-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .feature-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.25rem 0.7rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .btn-action-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+    .btn-apply-app {
+      background: linear-gradient(135deg, var(--cyan), #0070f3);
+      color: #000;
+      font-weight: 800;
+      padding: 0.85rem 1.5rem;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(0, 240, 255, 0.4);
+    }
+    .btn-apply-app:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 240, 255, 0.6);
+    }
+    .btn-play-store {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-primary);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+    .btn-play-store:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../../index.html" class="brand">
+      <span>KinotiX 🌌</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../features.html">Features</a></li>
+        <li><a href="../../download.html">Download</a></li>
+        <li><a href="https://github.com/Tcode-Motion/kinotix" target="_blank">GitHub ↗</a></li>
+      </ul>
+      <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-playstore btn-playstore-sm" aria-label="Get KinotiX on Google Play">
+        <span class="play-title">Google Play</span>
+      </a>
+    </nav>
+  </header>
+
+  <main class="share-container">
+    <div class="wallpaper-preview-card">
+      <div class="image-frame">
+        <img src="https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/main/3D%20&amp;%20Optical%20Illusion/Floating%20Objects/Falling%20glass%20pill%20animation%20%F0%9F%92%8A.jpg" alt="Falling glass pill animation 💊" class="wallpaper-img" onerror="this.onerror=null; this.src='../../assets/screenshots/home_feed.png';">
+      </div>
+      <div class="meta-badge">3D Live Wallpaper</div>
+      <h1 class="title-display">Falling glass pill animation 💊</h1>
+      <div class="creator-tag">by <strong>KinotiX 3D Studio</strong></div>
+
+      <div class="feature-pills">
+        <span class="feature-pill">⚡ Ultra HD 4K</span>
+        <span class="feature-pill">🛡️ Lossless Quality</span>
+        <span class="feature-pill">🔋 Zero Battery Drain</span>
+      </div>
+
+      <div class="btn-action-group">
+        <a href="kinotix://i/KX_DBofqrjcOWiI" class="btn-apply-app">
+          <span>🚀 Open in KinotiX App</span>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-play-store">
+          <span>Get KinotiX on Google Play</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-bottom">
+      <span>&copy; 2026 KinotiX Engine • Tcode-Motion</span>
+    </div>
+  </footer>
+</body>
+</html>
