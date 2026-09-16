@@ -2,8 +2,13 @@
  * KinotiX Automated Share Page Generator
  * Production-Grade Static Generator for GitHub Pages & Social Previews
  * 
- * Generates static /kinotix/i/{imageId}/index.html pages with genuine
- * HTTP 200 server-rendered Open Graph & Twitter Card metadata.
+ * Generates ultra-fast static /kinotix/i/{imageId}/index.html pages with:
+ * 1. High-priority eager image loading (fetchpriority="high", loading="eager", decoding="async")
+ * 2. Instant preload link in <head> for zero-delay image discovery
+ * 3. Fast Edge CDN (jsDelivr Cloudflare edge) with automatic raw.githubusercontent.com fallback
+ * 4. Shimmering aspect-ratio reserved skeleton to eliminate layout shift (CLS = 0)
+ * 5. Complete 1200x630 Open Graph & Twitter Card tags for WhatsApp & social crawlers
+ * 6. Clean, type-aware titles with zero ugly filenames or IDs
  */
 
 const fs = require('fs');
@@ -60,8 +65,14 @@ function generateImageId(canonicalUrl) {
 // Clean title validator matching Android KinotixShareResolver
 function isMeaningfulTitle(title) {
   if (!title || typeof title !== 'string') return false;
-  const clean = title.replace(/\s*\(Live Loop\)\s*$/i, '').trim();
+  let clean = title.replace(/\s*\(Live Loop\)\s*$/i, '').trim();
   if (!clean) return false;
+  
+  // Reject hashtags or social tag dumps
+  if (clean.startsWith('#') || clean.includes('#wallpapers') || clean.includes('#livewallpaper') || clean.includes('_page')) {
+    return false;
+  }
+
   if (/^\d+$/.test(clean)) return false;
   if (/^wallpaper[\s_-]*\d+$/i.test(clean)) return false;
   if (/^wallpaper[\s_-]*[0-9a-fA-F-]{6,}$/i.test(clean)) return false;
@@ -81,8 +92,14 @@ function isMeaningfulTitle(title) {
 
 // Clean display name generator matching Android
 function getShareDisplayName(rawTitle, rawType, themeTag, id) {
-  const clean = (rawTitle || '').replace(/\s*\(Live Loop\)\s*$/i, '').trim();
-  if (isMeaningfulTitle(clean)) return clean;
+  let clean = (rawTitle || '').replace(/\s*\(Live Loop\)\s*$/i, '').trim();
+  
+  if (isMeaningfulTitle(clean)) {
+    // Strip trailing parenthetical numbers e.g. " (1)"
+    clean = clean.replace(/\s*\(\d+\)$/, '').trim();
+    if (clean) return clean;
+  }
+
   const typeLower = (rawType || '').toLowerCase();
   const idLower = (id || '').toLowerCase();
   const tagLower = (themeTag || '').toLowerCase();
@@ -96,7 +113,7 @@ function getShareDisplayName(rawTitle, rawType, themeTag, id) {
     if (tagLower.includes('neon')) return 'Neon 3D Live Wallpaper';
     return 'Particle Live Wallpaper';
   }
-  if (typeLower === '3d' || idLower.includes('3d')) {
+  if (typeLower === '3d' || idLower.includes('3d') || tagLower.includes('3d')) {
     return tagLower.includes('neon') ? 'Neon 3D Live Wallpaper' : '3D Live Wallpaper';
   }
   if (typeLower.includes('live') || typeLower.includes('video') || idLower.startsWith('loop_')) {
@@ -115,6 +132,10 @@ function getShareDisplayName(rawTitle, rawType, themeTag, id) {
     case 'cyberpunk':
     case 'neon': return 'Neon Ultra HD 4K Wallpaper';
     case 'amoled': return 'AMOLED Ultra HD 4K Wallpaper';
+    case 'superheroes': return 'Superheroes 4K Wallpaper';
+    case 'cars': return 'Supercars 4K Wallpaper';
+    case 'bikes': return 'Superbikes 4K Wallpaper';
+    case 'abstract': return 'Abstract 4K Wallpaper';
     default: return 'Ultra HD 4K Wallpaper';
   }
 }
@@ -129,16 +150,27 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
-function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, category, isVideo, isFluid, isParticle }) {
+function renderSharePageHtml({ imageId, title, typeLabel, cdnUrl, rawUrl, creator, category, isVideo }) {
   const canonicalUrl = `${BASE_URL}${imageId}`;
   const escTitle = escapeHtml(title);
   const escType = escapeHtml(typeLabel);
-  const escPreview = escapeHtml(previewUrl);
+  const escCdnUrl = escapeHtml(cdnUrl);
+  const escRawUrl = escapeHtml(rawUrl);
   const escCreator = creator ? escapeHtml(creator) : '';
 
   const creatorBadge = escCreator ? `<div class="creator-tag">Curated by <strong>${escCreator}</strong></div>` : '';
   const creatorOg = escCreator ? ` by ${escCreator}` : '';
   const ogDesc = `Experience this ${escType}${creatorOg} with 3D Parallax Gyro & OpenGL ES Fluid simulation in KinotiX for Android.`;
+
+  // Preload tag in <head> ensures immediate network discovery
+  const preloadTag = isVideo
+    ? `<link rel="preload" as="video" href="${escCdnUrl}">`
+    : `<link rel="preload" as="image" href="${escCdnUrl}" fetchpriority="high">`;
+
+  // Media element with eager loading and instant fallback
+  const mediaElement = isVideo
+    ? `<video src="${escCdnUrl}" autoplay loop muted playsinline class="wallpaper-img loaded" onerror="if(this.src!=='${escRawUrl}'){this.src='${escRawUrl}';}"></video>`
+    : `<img src="${escCdnUrl}" alt="${escTitle}" class="wallpaper-img" loading="eager" fetchpriority="high" decoding="async" onload="this.classList.add('loaded');" onerror="if(this.src!=='${escRawUrl}'){this.src='${escRawUrl}';}else{this.classList.add('loaded');}">`;
 
   return `<!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -151,12 +183,15 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
   <link rel="icon" type="image/png" href="../../assets/icons/icon-192.png">
   <link rel="stylesheet" href="../../css/style.css">
 
-  <!-- OpenGraph Metadata (WhatsApp, Telegram, Discord, Facebook, X) -->
+  <!-- Critical Immediate Preload -->
+  ${preloadTag}
+
+  <!-- OpenGraph Metadata for WhatsApp, Telegram, Discord, Facebook, X -->
   <meta property="og:title" content="${escTitle} • KinotiX">
   <meta property="og:description" content="${ogDesc}">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="${escPreview}">
-  <meta property="og:image:secure_url" content="${escPreview}">
+  <meta property="og:image" content="${escRawUrl}">
+  <meta property="og:image:secure_url" content="${escRawUrl}">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -167,7 +202,7 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escTitle} • KinotiX">
   <meta name="twitter:description" content="${ogDesc}">
-  <meta name="twitter:image" content="${escPreview}">
+  <meta name="twitter:image" content="${escRawUrl}">
 
   <style>
     .share-container {
@@ -200,7 +235,9 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
       max-height: 480px;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      background: #000000;
+      background: linear-gradient(110deg, #121520 8%, #1c2132 18%, #121520 33%);
+      background-size: 200% 100%;
+      animation: 1.6s shimmer linear infinite;
       position: relative;
       display: flex;
       align-items: center;
@@ -208,11 +245,21 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
       border: 1px solid var(--border-subtle);
       margin-bottom: 1.25rem;
     }
+    @keyframes shimmer {
+      to {
+        background-position-x: -200%;
+      }
+    }
     .wallpaper-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+    }
+    .wallpaper-img.loaded {
+      opacity: 1;
     }
     .meta-badge {
       display: inline-block;
@@ -325,7 +372,7 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
   <main class="share-container">
     <div class="wallpaper-preview-card">
       <div class="image-frame">
-        <img src="${escPreview}" alt="${escTitle}" class="wallpaper-img" onerror="this.onerror=null; this.src='../../assets/screenshots/home_feed.png';">
+        ${mediaElement}
       </div>
       <div class="meta-badge">${escType}</div>
       <h1 class="title-display">${escTitle}</h1>
@@ -353,6 +400,16 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
       <span>&copy; 2026 KinotiX Engine • Developed by Tcode-Motion</span>
     </div>
   </footer>
+
+  <script>
+    // Instant visibility if cached in memory/disk
+    (function() {
+      const el = document.querySelector('.wallpaper-img');
+      if (el && (el.complete || el.readyState >= 2)) {
+        el.classList.add('loaded');
+      }
+    })();
+  </script>
 </body>
 </html>`;
 }
@@ -360,65 +417,102 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
 // Main Generation Routine
 function main() {
   const rootDir = path.resolve(__dirname, '..');
+  const scriptsDir = __dirname;
   const repoRoot = path.resolve(rootDir, '..');
   const primaryAssetsDir = path.join(repoRoot, 'app', 'src', 'main', 'assets');
-  const fallbackAssetsDir = path.join(__dirname, 'data');
 
-  console.log('--- KinotiX Share Page Static Generator ---');
+  console.log('--- KinotiX Share Page Static Generator (Ultra-Fast Immediate Loading) ---');
 
-  let wallpapersIndexPath = path.join(primaryAssetsDir, 'wallpapers_index.json');
-  let threeDIndexPath = path.join(primaryAssetsDir, 'three_d_index.json');
-
-  if (!fs.existsSync(wallpapersIndexPath)) {
-    wallpapersIndexPath = path.join(fallbackAssetsDir, 'wallpapers_index.json');
-    threeDIndexPath = path.join(fallbackAssetsDir, 'three_d_index.json');
-  }
-
-  console.log('Using wallpaper index path:', wallpapersIndexPath);
+  const phoneTreePath = path.join(scriptsDir, 'phone_wallpaper_tree.json');
+  const liveTreePath = path.join(scriptsDir, 'live_wallpaper_tree.json');
+  const threeDIndexPath = path.join(primaryAssetsDir, 'three_d_index.json');
 
   let wallpapers = [];
 
-  // 1. Process curated static wallpapers index
-  if (fs.existsSync(wallpapersIndexPath)) {
+  // 1. Process all real wallpapers from phone-wallpaper (branch: master)
+  if (fs.existsSync(phoneTreePath)) {
     try {
-      const list = JSON.parse(fs.readFileSync(wallpapersIndexPath, 'utf8'));
+      const list = JSON.parse(fs.readFileSync(phoneTreePath, 'utf8'));
       for (const item of list) {
-        if (typeof item === 'string') {
-          const rawUrl = `https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/main/${encodeURI(item)}`;
+        if (typeof item === 'string' && item.trim()) {
+          const encodedSegments = item.split('/').map(encodeURIComponent).join('/');
+          const rawUrl = `https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/${encodedSegments}`;
+          const cdnUrl = `https://cdn.jsdelivr.net/gh/venomleo2o1-byte/phone-wallpaper@master/${encodedSegments}`;
           const canonicalUrl = normalizeUrl(rawUrl);
           const imageId = generateImageId(canonicalUrl);
 
           const segments = item.split('/');
-          const category = segments.length > 1 ? segments[1] : 'general';
+          const category = segments[0];
           const filename = segments[segments.length - 1];
           const rawTitle = filename.replace(/\.[a-zA-Z0-9]+$/, '');
-          const title = getShareDisplayName(rawTitle, 'static', category, imageId);
+          const is3D = category.toLowerCase().includes('3d') || category.toLowerCase().includes('optical');
+          const typeLabel = is3D ? '3D Live Wallpaper' : (category.toLowerCase() === 'anime' ? 'Anime Ultra HD 4K Wallpaper' : `${category} 4K Wallpaper`);
+          const title = getShareDisplayName(rawTitle, is3D ? '3d' : 'static', category, imageId);
 
           wallpapers.push({
             imageId,
             title,
-            typeLabel: category === 'anime' ? 'Anime Ultra HD 4K Wallpaper' : 'Ultra HD 4K Wallpaper',
-            previewUrl: rawUrl,
-            creator: 'KinotiX Studio',
+            typeLabel,
+            cdnUrl,
+            rawUrl,
+            creator: is3D ? 'KinotiX 3D Studio' : 'KinotiX Studio',
             category,
             isVideo: false
           });
         }
       }
-      console.log(`Loaded ${list.length} static wallpapers from wallpapers_index.json`);
+      console.log(`Loaded ${wallpapers.length} wallpapers from phone_wallpaper_tree.json`);
     } catch (e) {
-      console.warn('Error reading wallpapers_index.json:', e.message);
+      console.warn('Error reading phone_wallpaper_tree.json:', e.message);
     }
   }
 
-  // 2. Process 3D Optical Illusions
+  // 2. Process all real live wallpapers from live-wallpaper (branch: main)
+  if (fs.existsSync(liveTreePath)) {
+    try {
+      const list = JSON.parse(fs.readFileSync(liveTreePath, 'utf8'));
+      let liveCount = 0;
+      for (const item of list) {
+        if (typeof item === 'string' && item.trim()) {
+          const encodedSegments = item.split('/').map(encodeURIComponent).join('/');
+          const rawUrl = `https://raw.githubusercontent.com/venomleo2o1-byte/live-wallpaper/main/${encodedSegments}`;
+          const cdnUrl = `https://cdn.jsdelivr.net/gh/venomleo2o1-byte/live-wallpaper@main/${encodedSegments}`;
+          const canonicalUrl = normalizeUrl(rawUrl);
+          const imageId = generateImageId(canonicalUrl);
+
+          const filename = item.split('/').pop();
+          const rawTitle = filename.replace(/\.[a-zA-Z0-9]+$/, '');
+          const title = getShareDisplayName(rawTitle, 'live', 'live', imageId);
+
+          wallpapers.push({
+            imageId,
+            title,
+            typeLabel: '4K Live Video Wallpaper',
+            cdnUrl,
+            rawUrl,
+            creator: 'KinotiX Live Studio',
+            category: 'live',
+            isVideo: true
+          });
+          liveCount++;
+        }
+      }
+      console.log(`Loaded ${liveCount} live video wallpapers from live_wallpaper_tree.json`);
+    } catch (e) {
+      console.warn('Error reading live_wallpaper_tree.json:', e.message);
+    }
+  }
+
+  // 3. Fallback: Process three_d_index.json if present
   if (fs.existsSync(threeDIndexPath)) {
     try {
       const data = JSON.parse(fs.readFileSync(threeDIndexPath, 'utf8'));
       for (const [catKey, list] of Object.entries(data)) {
         if (Array.isArray(list)) {
           for (const item of list) {
-            const rawUrl = `https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/main/${encodeURI(item)}`;
+            const encodedSegments = item.split('/').map(encodeURIComponent).join('/');
+            const rawUrl = `https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/${encodedSegments}`;
+            const cdnUrl = `https://cdn.jsdelivr.net/gh/venomleo2o1-byte/phone-wallpaper@master/${encodedSegments}`;
             const canonicalUrl = normalizeUrl(rawUrl);
             const imageId = generateImageId(canonicalUrl);
 
@@ -431,7 +525,8 @@ function main() {
               imageId,
               title,
               typeLabel: '3D Live Wallpaper',
-              previewUrl: rawUrl,
+              cdnUrl,
+              rawUrl,
               creator: 'KinotiX 3D Studio',
               category: '3d',
               isVideo: false
@@ -439,7 +534,6 @@ function main() {
           }
         }
       }
-      console.log(`Loaded 3D optical illusions from three_d_index.json`);
     } catch (e) {
       console.warn('Error reading three_d_index.json:', e.message);
     }
@@ -477,7 +571,7 @@ function main() {
       fs.writeFileSync(filePath, html, 'utf8');
       generatedCount++;
     }
-    console.log(`Wrote ${generatedCount} static share pages into ${outDir}`);
+    console.log(`Wrote ${generatedCount} ultra-fast share pages into ${outDir}`);
   }
 
   console.log('Share page generation completed successfully!');

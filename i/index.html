@@ -39,20 +39,32 @@
     .image-frame {
       width: 100%;
       aspect-ratio: 9 / 16;
-      max-height: 460px;
+      max-height: 480px;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      background: #000000;
+      background: linear-gradient(110deg, #121520 8%, #1c2132 18%, #121520 33%);
+      background-size: 200% 100%;
+      animation: 1.6s shimmer linear infinite;
       border: 1px solid var(--border-subtle);
       margin-bottom: 1.25rem;
       display: flex;
       align-items: center;
       justify-content: center;
     }
+    @keyframes shimmer {
+      to {
+        background-position-x: -200%;
+      }
+    }
     .wallpaper-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+    }
+    .wallpaper-img.loaded {
+      opacity: 1;
     }
     .unavailable-state {
       display: none;
@@ -88,7 +100,14 @@
       <!-- Active Resolved State -->
       <div id="resolved-state">
         <div class="image-frame">
-          <img id="wallpaper-display" src="../assets/screenshots/home_feed.png" alt="Wallpaper Preview" class="wallpaper-img">
+          <img id="wallpaper-display" 
+               src="../assets/screenshots/home_feed.png" 
+               alt="Wallpaper Preview" 
+               class="wallpaper-img"
+               loading="eager"
+               fetchpriority="high"
+               decoding="async"
+               onload="this.classList.add('loaded');">
         </div>
         <div id="type-badge" style="display: inline-block; font-size: 0.75rem; font-weight: 600; color: var(--primary); background: rgba(99, 102, 241, 0.12); padding: 0.25rem 0.75rem; border-radius: var(--radius-full); margin-bottom: 0.5rem;">
           Ultra HD 4K Wallpaper
@@ -141,6 +160,13 @@
   <script>
     (function() {
       const params = new URLSearchParams(window.location.search);
+      const idParam = params.get('id');
+      if (idParam && idParam.startsWith('KX_')) {
+        // Fast redirect to pre-rendered static page
+        window.location.replace('/kinotix/i/' + idParam + '/');
+        return;
+      }
+
       const imageParam = params.get('p') || params.get('image') || params.get('url');
       const resolvedState = document.getElementById('resolved-state');
       const unavailableState = document.getElementById('unavailable-state');

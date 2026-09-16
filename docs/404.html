@@ -8,6 +8,26 @@
   <meta name="robots" content="noindex, follow">
   <link rel="icon" type="image/png" href="assets/icons/icon-192.png">
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    // Critical Share Link Auto-Resolver: Immediately intercept shared links before rendering 404
+    (function() {
+      try {
+        const path = window.location.pathname;
+        const search = window.location.search;
+        const match = path.match(/\/(?:kinotix\/)?i\/(KX_[a-zA-Z0-9_-]+)/);
+        if (match) {
+          const imageId = match[1];
+          // Normalizes missing trailing slash or GitHub Pages route variance
+          window.location.replace('/kinotix/i/' + imageId + '/' + search);
+          return;
+        }
+        if (search.includes('p=') || search.includes('id=')) {
+          window.location.replace('/kinotix/i/' + search);
+          return;
+        }
+      } catch (e) {}
+    })();
+  </script>
   <style>
     .error-container {
       min-height: calc(100vh - 160px);
