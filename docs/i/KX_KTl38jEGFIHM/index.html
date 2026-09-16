@@ -295,22 +295,29 @@
         el.classList.add('loaded');
       }
     })();
-  </script>
-  <script>
+
+    // Automatically attempt to open in the KinotiX app if on Android mobile
     (function tryAutoOpenInApp() {
-      var isAndroid = /Android/i.test(navigator.userAgent || '');
+      const ua = navigator.userAgent || '';
+      const isAndroid = /android/i.test(ua);
       if (!isAndroid) return;
-      var pathParts = window.location.pathname.split('/').filter(Boolean);
-      var token = pathParts.find(function(p) { return p.indexOf('KX_') === 0; }) || 'KX_KTl38jEGFIHM';
-      var sessionKey = 'kx_auto_' + token;
+
+      const imageId = 'KX_KTl38jEGFIHM';
+      const sessionKey = 'kx_auto_' + imageId;
       if (sessionStorage.getItem(sessionKey)) return;
       sessionStorage.setItem(sessionKey, '1');
-      var fallbackUrl = encodeURIComponent(window.location.href);
-      var intentUri = 'intent://i/' + encodeURIComponent(token) + '#Intent;scheme=kinotix;package=com.kinotix.app;S.browser_fallback_url=' + fallbackUrl + ';end';
-      var directUri = 'kinotix://i/' + encodeURIComponent(token);
+
+      const fallbackUrl = encodeURIComponent(window.location.href);
+      const intentUri = 'intent://i/' + encodeURIComponent(imageId) + '#Intent;scheme=kinotix;package=com.kinotix.app;S.browser_fallback_url=' + fallbackUrl + ';end';
+      const directUri = 'kinotix://i/' + encodeURIComponent(imageId);
+
       setTimeout(function() {
-        try { window.location.href = intentUri; } catch (e) {
-          try { window.location.href = directUri; } catch (_) {}
+        try {
+          window.location.href = intentUri;
+        } catch (e) {
+          try {
+            window.location.href = directUri;
+          } catch (_) {}
         }
       }, 350);
     })();

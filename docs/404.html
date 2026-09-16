@@ -466,19 +466,15 @@
           
           openAppBtn.onclick = function(e) {
             e.preventDefault();
-            const intentUri = 'intent://i/' + encodeURIComponent(imageId) + '#Intent;scheme=kinotix;package=com.kinotix.app;end';
-            const directUri = 'kinotix://i/' + encodeURIComponent(imageId);
+            // Try opening Android app link / custom scheme
+            const intentUri = 'kinotix://i/' + imageId;
             const start = Date.now();
-            try {
-              window.location.href = intentUri;
-            } catch (err) {
-              window.location.href = directUri;
-            }
+            window.location.href = intentUri;
             setTimeout(function() {
               if (Date.now() - start < 1500) {
                 window.location.href = PLAY_STORE_URL;
               }
-            }, 1000);
+            }, 800);
           };
 
           shareBtn.onclick = function() {
@@ -491,31 +487,6 @@
               showToast('Link copied');
             }
           };
-
-          // Automatically attempt to open in the KinotiX app if on Android mobile
-          (function tryAutoOpenInApp() {
-            const ua = navigator.userAgent || '';
-            const isAndroid = /android/i.test(ua);
-            if (!isAndroid) return;
-
-            const sessionKey = 'kx_auto_' + imageId;
-            if (sessionStorage.getItem(sessionKey)) return;
-            sessionStorage.setItem(sessionKey, '1');
-
-            const fallbackUrl = encodeURIComponent(window.location.href);
-            const intentUri = 'intent://i/' + encodeURIComponent(imageId) + '#Intent;scheme=kinotix;package=com.kinotix.app;S.browser_fallback_url=' + fallbackUrl + ';end';
-            const directUri = 'kinotix://i/' + encodeURIComponent(imageId);
-
-            setTimeout(function() {
-              try {
-                window.location.href = intentUri;
-              } catch (e) {
-                try {
-                  window.location.href = directUri;
-                } catch (_) {}
-              }
-            }, 350);
-          })();
         }
 
         // 1. Check if imageId itself or ?p= contains an encrypted payload

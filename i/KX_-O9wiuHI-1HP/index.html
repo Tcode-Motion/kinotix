@@ -268,7 +268,7 @@
       </div>
 
       <div class="btn-action-group">
-        <a href="kinotix://i/KX_-O9wiuHI-1HP" class="btn-apply-app">
+        <a href="intent://i/KX_-O9wiuHI-1HP#Intent;scheme=kinotix;package=com.kinotix.app;end" class="btn-apply-app">
           Open in KinotiX App
         </a>
         <a href="../../3d-wallpapers/" class="btn-play-store">
@@ -294,6 +294,32 @@
       if (el && (el.complete || el.readyState >= 2)) {
         el.classList.add('loaded');
       }
+    })();
+
+    // Automatically attempt to open in the KinotiX app if on Android mobile
+    (function tryAutoOpenInApp() {
+      const ua = navigator.userAgent || '';
+      const isAndroid = /android/i.test(ua);
+      if (!isAndroid) return;
+
+      const imageId = 'KX_-O9wiuHI-1HP';
+      const sessionKey = 'kx_auto_' + imageId;
+      if (sessionStorage.getItem(sessionKey)) return;
+      sessionStorage.setItem(sessionKey, '1');
+
+      const fallbackUrl = encodeURIComponent(window.location.href);
+      const intentUri = 'intent://i/' + encodeURIComponent(imageId) + '#Intent;scheme=kinotix;package=com.kinotix.app;S.browser_fallback_url=' + fallbackUrl + ';end';
+      const directUri = 'kinotix://i/' + encodeURIComponent(imageId);
+
+      setTimeout(function() {
+        try {
+          window.location.href = intentUri;
+        } catch (e) {
+          try {
+            window.location.href = directUri;
+          } catch (_) {}
+        }
+      }, 350);
     })();
   </script>
 </body>
