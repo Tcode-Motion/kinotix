@@ -134,6 +134,48 @@
     if (!lightbox) return;
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
+    if (lightboxAppBtn) lightboxAppBtn.textContent = 'Open in KinotiX App';
+    if (lightboxDownloadBtn) lightboxDownloadBtn.textContent = 'Download High-Res Asset';
+  }
+
+  // Bind Lightbox to Phone Screenshot Cards
+  const phoneCards = document.querySelectorAll('.phone-card');
+  if (phoneCards.length > 0) {
+    phoneCards.forEach((card) => {
+      const openCard = () => {
+        const imgSrc = card.getAttribute('data-img');
+        const title = card.getAttribute('data-title') || 'KinotiX Android App';
+        const badge = card.getAttribute('data-badge') || 'Official Google Play Store';
+        if (!lightbox || !imgSrc) return;
+
+        if (lightboxImg) {
+          lightboxImg.src = imgSrc;
+          lightboxImg.alt = title;
+        }
+        if (lightboxTitle) lightboxTitle.textContent = title;
+        if (lightboxBadge) lightboxBadge.textContent = badge;
+        if (lightboxAppBtn) {
+          lightboxAppBtn.href = 'https://play.google.com/store/apps/details?id=com.kinotix.app';
+          lightboxAppBtn.textContent = 'Install on Google Play';
+        }
+        if (lightboxDownloadBtn) {
+          lightboxDownloadBtn.href = imgSrc;
+          lightboxDownloadBtn.setAttribute('download', `${title.replace(/[^a-zA-Z0-9_-]/g, '_')}.png`);
+          lightboxDownloadBtn.textContent = 'View Full Size';
+        }
+
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      };
+
+      card.addEventListener('click', openCard);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openCard();
+        }
+      });
+    });
   }
 
   if (lightboxClose) {

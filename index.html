@@ -85,16 +85,16 @@
         </ul>
       </nav>
       <div class="header-actions">
-        <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-playstore btn-playstore-sm" aria-label="Get KinotiX on Google Play">
+        <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-top-install" aria-label="Install KinotiX from Google Play">
           <svg viewBox="0 0 512 512" aria-hidden="true">
             <path fill="#4285F4" d="M32.5 12.2c-5.8 6.1-9.3 15.6-9.3 27.8v432c0 12.2 3.5 21.7 9.3 27.8l1.5 1.5L263 272.3v-5.6L34 10.7l-1.5 1.5z"/>
             <path fill="#FBBC04" d="M340.6 349.9l-77.6-77.6v-5.6l77.6-77.6 1.7 1 91.9 52.2c26.2 14.9 26.2 39.2 0 54.1l-91.9 52.2-1.7 1.3z"/>
             <path fill="#EA4335" d="M263 266.7L34 10.7C41.3 2.5 53.6-1.5 67.5 6.4l274.8 156.2-79.3 104.1z"/>
             <path fill="#34A853" d="M263 272.3L67.5 496.6c-13.9 7.9-26.2 3.9-33.5-4.3L263 272.3z"/>
           </svg>
-          <span class="play-text">
-            <span class="play-subtitle">GET IT ON</span>
-            <span class="play-title">Google Play</span>
+          <span class="install-text-wrap">
+            <span class="install-primary-text">Install App</span>
+            <span class="install-secondary-text">Google Play</span>
           </span>
         </a>
         <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
@@ -107,27 +107,139 @@
   </header>
 
   <main>
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="hero-pill">Official Android Release • Google Play Store</div>
-      <h1>Next-Generation 4K & Interactive Wallpaper Engine</h1>
-      <p>KinotiX combines hardware-accelerated 3D gyroscope parallax, real-time OpenGL ES fluid physics, and curated uncompressed 4K artwork into a high-performance wallpaper experience for Android.</p>
-      <div class="hero-cta-group">
-        <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-playstore" aria-label="Get KinotiX on Google Play">
-          <svg viewBox="0 0 512 512" aria-hidden="true">
-            <path fill="#4285F4" d="M32.5 12.2c-5.8 6.1-9.3 15.6-9.3 27.8v432c0 12.2 3.5 21.7 9.3 27.8l1.5 1.5L263 272.3v-5.6L34 10.7l-1.5 1.5z"/>
-            <path fill="#FBBC04" d="M340.6 349.9l-77.6-77.6v-5.6l77.6-77.6 1.7 1 91.9 52.2c26.2 14.9 26.2 39.2 0 54.1l-91.9 52.2-1.7 1.3z"/>
-            <path fill="#EA4335" d="M263 266.7L34 10.7C41.3 2.5 53.6-1.5 67.5 6.4l274.8 156.2-79.3 104.1z"/>
-            <path fill="#34A853" d="M263 272.3L67.5 496.6c-13.9 7.9-26.2 3.9-33.5-4.3L263 272.3z"/>
-          </svg>
-          <span class="play-text">
-            <span class="play-subtitle">GET IT ON</span>
-            <span class="play-title">Google Play</span>
-          </span>
-        </a>
-        <a href="#discovery-grid" class="btn btn-secondary">
-          Explore Wallpaper Gallery ↓
-        </a>
+    <!-- Official Google Play Store Surface -->
+    <section class="playstore-surface" aria-labelledby="playstore-heading">
+      <div class="playstore-app-header">
+        <div class="playstore-meta-col">
+          <div class="playstore-badge-row">
+            <span class="playstore-verified-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Official Google Play Release
+            </span>
+          </div>
+          <h1 id="playstore-heading" class="playstore-app-title">KinotiX:4K Live &amp; 3D Wallpaper</h1>
+          <div class="playstore-dev-row">
+            <a href="https://play.google.com/store/apps/developer?id=Tanmoy+Majumder" target="_blank" rel="noopener noreferrer" class="playstore-dev-name">Tanmoy Majumder</a>
+            <span class="playstore-ads-tag">• Contains ads</span>
+          </div>
+
+          <div class="playstore-stats-strip">
+            <div class="playstore-stat-item">
+              <span class="playstore-stat-value">10+</span>
+              <span class="playstore-stat-label">Downloads</span>
+            </div>
+            <div class="playstore-stat-item">
+              <span class="playstore-stat-value">
+                <span class="playstore-iarc-badge">3+</span>
+              </span>
+              <span class="playstore-stat-label">Rated for 3+</span>
+            </div>
+            <div class="playstore-stat-item">
+              <span class="playstore-stat-value" style="color: #FBBF24;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                5.0 ★
+              </span>
+              <span class="playstore-stat-label">Production Engine</span>
+            </div>
+          </div>
+
+          <div class="playstore-cta-row">
+            <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-store-install" aria-label="Install KinotiX on Google Play">
+              <svg viewBox="0 0 512 512" aria-hidden="true">
+                <path fill="#FFFFFF" d="M32.5 12.2c-5.8 6.1-9.3 15.6-9.3 27.8v432c0 12.2 3.5 21.7 9.3 27.8l1.5 1.5L263 272.3v-5.6L34 10.7l-1.5 1.5z"/>
+                <path fill="#FFFFFF" d="M340.6 349.9l-77.6-77.6v-5.6l77.6-77.6 1.7 1 91.9 52.2c26.2 14.9 26.2 39.2 0 54.1l-91.9 52.2-1.7 1.3z"/>
+                <path fill="#FFFFFF" d="M263 266.7L34 10.7C41.3 2.5 53.6-1.5 67.5 6.4l274.8 156.2-79.3 104.1z"/>
+                <path fill="#FFFFFF" d="M263 272.3L67.5 496.6c-13.9 7.9-26.2 3.9-33.5-4.3L263 272.3z"/>
+              </svg>
+              <span>Install</span>
+            </a>
+            <a href="#discovery-grid" class="btn btn-secondary">
+              Explore 4K Gallery ↓
+            </a>
+          </div>
+        </div>
+
+        <div class="playstore-icon-col">
+          <img src="assets/icons/icon-512.png" alt="KinotiX 4K Wallpaper App Icon" class="playstore-app-icon" width="150" height="150">
+        </div>
+      </div>
+
+      <!-- Official Store Screenshots Strip -->
+      <div class="store-gallery-section">
+        <div class="store-gallery-header">
+          <h3>Official Google Play Screenshots</h3>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Scroll or click to expand</span>
+        </div>
+
+        <div class="store-screenshots-scroll">
+          <div class="store-screenshot-item phone-card" tabindex="0" role="button" aria-label="View screenshot 1: Interactive Fluid Dynamics" data-img="assets/screenshots/store_screenshot_1.png?v=playstore-2026" data-title="Interactive Fluid Dynamics" data-badge="Fluid Physics • 4K Motion">
+            <img src="assets/screenshots/store_screenshot_1.png?v=playstore-2026" alt="KinotiX Interactive Fluid Dynamics - Touch &amp; Swipe Reactive 4K Motion" loading="eager">
+            <div class="store-screenshot-caption">
+              <div class="store-screenshot-title">Interactive Fluid Dynamics</div>
+              <div class="store-screenshot-sub">Touch &amp; Swipe Reactive 4K Motion</div>
+            </div>
+          </div>
+
+          <div class="store-screenshot-item phone-card" tabindex="0" role="button" aria-label="View screenshot 2: Ultra HD 4K Wallpapers" data-img="assets/screenshots/store_screenshot_2.png?v=playstore-2026" data-title="Ultra HD 4K Wallpapers" data-badge="AMOLED Art • Pristine Visuals">
+            <img src="assets/screenshots/store_screenshot_2.png?v=playstore-2026" alt="KinotiX Ultra HD 4K Wallpapers - Pristine Visuals &amp; Dark Aesthetic Art" loading="eager">
+            <div class="store-screenshot-caption">
+              <div class="store-screenshot-title">Ultra HD 4K Wallpapers</div>
+              <div class="store-screenshot-sub">Pristine Visuals &amp; Dark Aesthetic Art</div>
+            </div>
+          </div>
+
+          <div class="store-screenshot-item phone-card" tabindex="0" role="button" aria-label="View screenshot 3: 3D Parallax Effect" data-img="assets/screenshots/store_screenshot_3.png?v=playstore-2026" data-title="3D Parallax Effect" data-badge="Gyro Sensor • Multi-Layer Depth">
+            <img src="assets/screenshots/store_screenshot_3.png?v=playstore-2026" alt="KinotiX 3D Parallax Effect - Motion Depth for Your Home Screen" loading="lazy">
+            <div class="store-screenshot-caption">
+              <div class="store-screenshot-title">3D Parallax Effect</div>
+              <div class="store-screenshot-sub">Motion Depth for Your Home Screen</div>
+            </div>
+          </div>
+
+          <div class="store-screenshot-item phone-card" tabindex="0" role="button" aria-label="View screenshot 4: Live Camera Wallpaper" data-img="assets/screenshots/store_screenshot_4.png?v=playstore-2026" data-title="Live Camera Wallpaper" data-badge="Camera2 API • Transparent Feed">
+            <img src="assets/screenshots/store_screenshot_4.png?v=playstore-2026" alt="KinotiX Live Camera Wallpaper - Real-Time See-Through Screen" loading="lazy">
+            <div class="store-screenshot-caption">
+              <div class="store-screenshot-title">Live Camera Wallpaper</div>
+              <div class="store-screenshot-sub">Real-Time See-Through Screen</div>
+            </div>
+          </div>
+
+          <div class="store-screenshot-item phone-card" tabindex="0" role="button" aria-label="View screenshot 5: Curated 4K Collections" data-img="assets/screenshots/store_screenshot_5.png?v=playstore-2026" data-title="Curated 4K Collections" data-badge="Collections • Anime &amp; Space">
+            <img src="assets/screenshots/store_screenshot_5.png?v=playstore-2026" alt="KinotiX Curated 4K Collections - Anime, Nature, Space &amp; Aesthetic Themes" loading="lazy">
+            <div class="store-screenshot-caption">
+              <div class="store-screenshot-title">Curated 4K Collections</div>
+              <div class="store-screenshot-sub">Anime, Nature, Space &amp; Aesthetic Themes</div>
+            </div>
+          </div>
+
+          <div class="store-screenshot-item phone-card" tabindex="0" role="button" aria-label="View screenshot 6: Custom Fluid Simulations" data-img="assets/screenshots/store_screenshot_6.png?v=playstore-2026" data-title="Fluid Custom Studio" data-badge="Shader Studio • Physics Controls">
+            <img src="assets/screenshots/store_screenshot_6.png?v=playstore-2026" alt="KinotiX Custom Fluid Simulations - Tune Colors, Physics, and Advanced Effects" loading="lazy">
+            <div class="store-screenshot-caption">
+              <div class="store-screenshot-title">Fluid Custom Studio</div>
+              <div class="store-screenshot-sub">Tune Colors, Physics &amp; Advanced Effects</div>
+            </div>
+          </div>
+
+          <div class="store-screenshot-item phone-card" tabindex="0" role="button" aria-label="View screenshot 7: Dynamic Live Wallpapers" data-img="assets/screenshots/store_screenshot_7.png?v=playstore-2026" data-title="Dynamic Live Wallpapers" data-badge="Motion Shaders • Particle Glow">
+            <img src="assets/screenshots/store_screenshot_7.png?v=playstore-2026" alt="KinotiX Dynamic Live Wallpapers - Smooth Motion Loops &amp; Glowing Particle Effects" loading="lazy">
+            <div class="store-screenshot-caption">
+              <div class="store-screenshot-title">Dynamic Live Wallpapers</div>
+              <div class="store-screenshot-sub">Smooth Motion Loops &amp; Glowing Particles</div>
+            </div>
+          </div>
+
+          <div class="store-screenshot-item phone-card" tabindex="0" role="button" aria-label="View screenshot 8: Intuitive &amp; Lightweight" data-img="assets/screenshots/store_screenshot_8.png?v=playstore-2026" data-title="Intuitive &amp; Lightweight" data-badge="Zero Lag • Battery Optimized">
+            <img src="assets/screenshots/store_screenshot_8.png?v=playstore-2026" alt="KinotiX Intuitive &amp; Lightweight - Instant Setup &amp; Battery Friendly" loading="lazy">
+            <div class="store-screenshot-caption">
+              <div class="store-screenshot-title">Intuitive &amp; Lightweight</div>
+              <div class="store-screenshot-sub">Instant Setup &amp; Battery Friendly</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -246,52 +358,6 @@
       </div>
     </section>
 
-    <!-- Official Screenshots Showcase -->
-    <section class="main-container" aria-labelledby="screenshots-heading" style="padding-top: 2rem;">
-      <div class="section-header">
-        <h2 id="screenshots-heading">Production Android Interface</h2>
-        <p>Verified on-device screenshots of the KinotiX application running natively on Android.</p>
-      </div>
-
-      <div class="phone-mockup-grid">
-        <div class="phone-card">
-          <img src="assets/screenshots/play_screenshot_1.png" alt="KinotiX Home Feed and Visual Recommendations" loading="lazy">
-          <div class="phone-card-caption">Personalized Feed</div>
-        </div>
-        <div class="phone-card">
-          <img src="assets/screenshots/play_screenshot_2.png" alt="KinotiX 3D Gyroscope Parallax Wallpaper Preview" loading="lazy">
-          <div class="phone-card-caption">3D Gyro Parallax</div>
-        </div>
-        <div class="phone-card">
-          <img src="assets/screenshots/play_screenshot_3.png" alt="KinotiX OpenGL ES Interactive Fluid Simulation" loading="lazy">
-          <div class="phone-card-caption">Fluid Simulation</div>
-        </div>
-        <div class="phone-card">
-          <img src="assets/screenshots/play_screenshot_4.png" alt="KinotiX Curated Wallpaper Collections" loading="lazy">
-          <div class="phone-card-caption">Curated Collections</div>
-        </div>
-        <div class="phone-card">
-          <img src="assets/screenshots/play_screenshot_5.png" alt="KinotiX Ultra HD 4K Detail and Apply Screen" loading="lazy">
-          <div class="phone-card-caption">Lossless 4K Apply</div>
-        </div>
-        <div class="phone-card">
-          <img src="assets/screenshots/play_screenshot_6.png" alt="KinotiX Live Camera Transparent Background" loading="lazy">
-          <div class="phone-card-caption">Camera Transparent</div>
-        </div>
-        <div class="phone-card">
-          <img src="assets/screenshots/play_screenshot_7.png" alt="KinotiX Discover and Search Hub" loading="lazy">
-          <div class="phone-card-caption">Discover Hub</div>
-        </div>
-        <div class="phone-card">
-          <img src="assets/screenshots/play_screenshot_8.png" alt="KinotiX Saved Offline Favorites" loading="lazy">
-          <div class="phone-card-caption">Offline Library</div>
-        </div>
-        <div class="phone-card">
-          <img src="assets/screenshots/play_screenshot_9.png" alt="KinotiX Modern AMOLED Dark Interface" loading="lazy">
-          <div class="phone-card-caption">AMOLED Dark Mode</div>
-        </div>
-      </div>
-    </section>
 
     <!-- Download Banner CTA -->
     <section class="main-container" style="padding-top: 1rem; padding-bottom: 5rem;">

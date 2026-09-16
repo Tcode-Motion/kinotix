@@ -15,19 +15,18 @@
 
 ---
 
-### 📱 Google Play Store Screenshots
+### 📱 Official Google Play Store Screenshots
 <p align="center">
-  <img src="docs/assets/screenshots/play_screenshot_1.png" width="180" alt="Home Feed & Recommendations" />
-  <img src="docs/assets/screenshots/play_screenshot_2.png" width="180" alt="3D Gyro Parallax Engine" />
-  <img src="docs/assets/screenshots/play_screenshot_3.png" width="180" alt="OpenGL ES Fluid Simulation" />
-  <img src="docs/assets/screenshots/play_screenshot_4.png" width="180" alt="Curated 4K Collections" />
-  <img src="docs/assets/screenshots/play_screenshot_5.png" width="180" alt="Ultra HD 4K Apply" />
+  <img src="docs/assets/screenshots/play_screenshot_1.png" width="180" alt="Interactive Fluid Dynamics - Touch &amp; Swipe Reactive 4K Motion" />
+  <img src="docs/assets/screenshots/play_screenshot_2.png" width="180" alt="Ultra HD 4K Wallpapers - Pristine Visuals &amp; Dark Aesthetic Art" />
+  <img src="docs/assets/screenshots/play_screenshot_3.png" width="180" alt="3D Parallax Effect - Motion Depth for Your Home Screen" />
+  <img src="docs/assets/screenshots/play_screenshot_4.png" width="180" alt="Live Camera Wallpaper - Real-Time See-Through Screen" />
 </p>
 <p align="center">
-  <img src="docs/assets/screenshots/play_screenshot_6.png" width="180" alt="Live Camera Background" />
-  <img src="docs/assets/screenshots/play_screenshot_7.png" width="180" alt="Discover Hub" />
-  <img src="docs/assets/screenshots/play_screenshot_8.png" width="180" alt="Offline Favorites" />
-  <img src="docs/assets/screenshots/play_screenshot_9.png" width="180" alt="Clean Dark Mode UI" />
+  <img src="docs/assets/screenshots/play_screenshot_5.png" width="180" alt="Curated 4K Collections - Anime, Nature, Space &amp; Aesthetic Themes" />
+  <img src="docs/assets/screenshots/play_screenshot_6.png" width="180" alt="Custom Fluid Simulations - Tune Colors, Physics, and Advanced Effects" />
+  <img src="docs/assets/screenshots/play_screenshot_7.png" width="180" alt="Dynamic Live Wallpapers - Smooth Motion Loops &amp; Glowing Particle Effects" />
+  <img src="docs/assets/screenshots/play_screenshot_8.png" width="180" alt="Intuitive &amp; Lightweight - Instant Setup &amp; Battery Friendly" />
 </p>
 
 </div>
