@@ -31443,5 +31443,23 @@
     "creator": "KinotiX Live Studio",
     "category": "engine",
     "isVideo": true
+  },
+  "KX_YZlEAQ-3Du16": {
+    "imageId": "KX_YZlEAQ-3Du16",
+    "title": "Wolf Wallpaper",
+    "typeLabel": "Ultra HD 4K Wallpaper",
+    "previewUrl": "https://cdn.jsdelivr.net/gh/venomleo2o1-byte/phone-wallpaper@master/Animals/Wolf%20%20_Moonlit%20Vigilance_.png",
+    "creator": "Velenrose",
+    "category": "Animals",
+    "isVideo": false
+  },
+  "KX_YZIEAQ-3Du16": {
+    "imageId": "KX_YZIEAQ-3Du16",
+    "title": "Wolf Wallpaper",
+    "typeLabel": "Ultra HD 4K Wallpaper",
+    "previewUrl": "https://cdn.jsdelivr.net/gh/venomleo2o1-byte/phone-wallpaper@master/Animals/Wolf%20%20_Moonlit%20Vigilance_.png",
+    "creator": "Velenrose",
+    "category": "Animals",
+    "isVideo": false
   }
 }

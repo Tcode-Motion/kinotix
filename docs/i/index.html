@@ -161,32 +161,62 @@
     (function() {
       const params = new URLSearchParams(window.location.search);
       const idParam = params.get('id');
-      if (idParam && idParam.startsWith('KX_')) {
-        // Fast redirect to pre-rendered static page
-        window.location.replace('/kinotix/i/' + idParam + '/');
-        return;
-      }
-
       const imageParam = params.get('p') || params.get('image') || params.get('url');
       const resolvedState = document.getElementById('resolved-state');
       const unavailableState = document.getElementById('unavailable-state');
       const imgEl = document.getElementById('wallpaper-display');
       const titleEl = document.getElementById('wallpaper-title');
+      const badgeEl = document.getElementById('type-badge');
       const openAppBtn = document.getElementById('open-app-btn');
 
+      if (idParam && idParam.startsWith('KX_')) {
+        openAppBtn.href = 'kinotix://i/' + idParam;
+
+        if (idParam === 'KX_YZlEAQ-3Du16' || idParam === 'KX_YZIEAQ-3Du16') {
+          titleEl.textContent = 'Wolf Wallpaper';
+          badgeEl.textContent = 'Ultra HD 4K Wallpaper by Velenrose';
+          imgEl.src = 'https://cdn.jsdelivr.net/gh/venomleo2o1-byte/phone-wallpaper@master/Animals/Wolf%20%20_Moonlit%20Vigilance_.png';
+          resolvedState.style.display = 'block';
+          unavailableState.style.display = 'none';
+          return;
+        }
+
+        fetch('catalog.json')
+          .then(r => r.json())
+          .then(catalog => {
+            const item = catalog[idParam];
+            if (item) {
+              titleEl.textContent = item.title;
+              if (item.typeLabel) {
+                badgeEl.textContent = item.creator ? (item.typeLabel + ' by ' + item.creator) : item.typeLabel;
+              }
+              if (item.previewUrl) imgEl.src = item.previewUrl;
+              resolvedState.style.display = 'block';
+              unavailableState.style.display = 'none';
+            } else {
+              titleEl.textContent = 'KinotiX 4K Wallpaper';
+              imgEl.src = '../assets/screenshots/store_screenshot_2.png';
+              resolvedState.style.display = 'block';
+              unavailableState.style.display = 'none';
+            }
+          })
+          .catch(() => {
+            titleEl.textContent = 'KinotiX 4K Wallpaper';
+            resolvedState.style.display = 'block';
+            unavailableState.style.display = 'none';
+          });
+        return;
+      }
+
       if (!imageParam) {
-        // If visited directly without an image target, show clean unavailable state
         resolvedState.style.display = 'none';
         unavailableState.style.display = 'block';
         return;
       }
 
-      // Try decode or use direct url
       try {
         let decodedUrl = imageParam;
-        if (imageParam.startsWith('http')) {
-          decodedUrl = imageParam;
-        } else {
+        if (!imageParam.startsWith('http')) {
           try {
             decodedUrl = atob(imageParam);
           } catch(e) {
@@ -198,6 +228,8 @@
           imgEl.src = decodedUrl;
           titleEl.textContent = 'Shared Wallpaper';
           openAppBtn.href = 'kinotix://share?url=' + encodeURIComponent(decodedUrl);
+          resolvedState.style.display = 'block';
+          unavailableState.style.display = 'none';
         } else {
           resolvedState.style.display = 'none';
           unavailableState.style.display = 'block';
