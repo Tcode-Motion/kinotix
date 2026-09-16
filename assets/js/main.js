@@ -72,7 +72,7 @@
       card.setAttribute('aria-label', `View ${wp.title}`);
 
       card.innerHTML = `
-        <img src="${wp.url}" alt="${wp.title}" loading="lazy" decoding="async">
+        <img src="${wp.url}" alt="${wp.title}" loading="lazy" decoding="async" onerror="if(this.dataset.triedFallback!=='true'){this.dataset.triedFallback='true';this.src='${wp.fallbackUrl}';}">
         <div class="wallpaper-card-overlay">
           <div class="wallpaper-card-title">${wp.title}</div>
           <div class="wallpaper-card-tag">${wp.type} • ${wp.category}</div>
@@ -108,6 +108,13 @@
     if (!lightbox) return;
 
     if (lightboxImg) {
+      lightboxImg.dataset.triedFallback = 'false';
+      lightboxImg.onerror = function() {
+        if (this.dataset.triedFallback !== 'true') {
+          this.dataset.triedFallback = 'true';
+          this.src = wp.fallbackUrl;
+        }
+      };
       lightboxImg.src = wp.url;
       lightboxImg.alt = wp.title;
     }
@@ -115,8 +122,8 @@
     if (lightboxBadge) lightboxBadge.textContent = `${wp.type} • ${wp.category.toUpperCase()}`;
     if (lightboxAppBtn) lightboxAppBtn.href = `kinotix://i/${wp.id}`;
     if (lightboxDownloadBtn) {
-      lightboxDownloadBtn.href = wp.url;
-      lightboxDownloadBtn.setAttribute('download', `${wp.title.replace(/\s+/g, '_')}.jpg`);
+      lightboxDownloadBtn.href = wp.fallbackUrl || wp.url;
+      lightboxDownloadBtn.setAttribute('download', `${wp.title.replace(/[^a-zA-Z0-9_-]/g, '_')}.jpg`);
     }
 
     lightbox.classList.add('active');
