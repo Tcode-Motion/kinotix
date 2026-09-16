@@ -1,4 +1,15 @@
 User-agent: *
 Allow: /
+Allow: /assets/
+Allow: /i/
+Allow: /css/
+Allow: /styles/
 
-Sitemap: https://tcode-motion.github.io/kinotix/sitemap.xml
+# Prevent crawler budget waste on encrypted legacy tokens & tracking params
+Disallow: /*?*p=
+Disallow: /*?*token=
+Disallow: /*?*session_id=
+Disallow: /*?*utm_
+
+# Authoritative Multi-Tier Sitemap Index
+Sitemap: https://techscript.is-a.dev/kinotix/sitemap.xml

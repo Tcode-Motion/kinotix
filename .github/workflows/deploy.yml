@@ -42,13 +42,25 @@ jobs:
         run: |
           node scripts/generate-share-pages.js
 
+      - name: Run Category Hub & Guide Generator
+        run: |
+          node scripts/generate-category-pages.js
+
+      - name: Run Multi-Tier Sitemap Generator
+        run: |
+          node scripts/generate-sitemaps.js
+
+      - name: Run SEO Quality Validator
+        run: |
+          node scripts/seo-validator.js
+
       - name: Commit and Push Generated Pages
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add i/ docs/i/ docs/css/
+          git add i/ docs/ sitemap* robots.txt
           if ! git diff-index --quiet HEAD; then
-            git commit -m "Auto-generate static wallpaper share pages [skip ci]"
+            git commit -m "Auto-generate static wallpaper share pages and SEO sitemaps [skip ci]"
             git push
           else
             echo "No changes to commit."

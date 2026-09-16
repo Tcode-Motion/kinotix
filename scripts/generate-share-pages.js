@@ -150,34 +150,50 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+function getCategorySlugAndName(cat) {
+  const c = (cat || '').toLowerCase();
+  if (c.includes('anime')) return { slug: 'anime-wallpapers', name: 'Anime Wallpapers' };
+  if (c.includes('amoled')) return { slug: 'amoled-wallpapers', name: 'AMOLED Wallpapers' };
+  if (c.includes('3d') || c.includes('optical')) return { slug: '3d-wallpapers', name: '3D Wallpapers' };
+  if (c.includes('live')) return { slug: 'live-wallpapers', name: 'Live Wallpapers' };
+  if (c.includes('nature')) return { slug: 'nature-wallpapers', name: 'Nature Wallpapers' };
+  if (c.includes('cyberpunk') || c.includes('neon')) return { slug: 'cyberpunk-wallpapers', name: 'Cyberpunk Wallpapers' };
+  if (c.includes('cars')) return { slug: 'cars-wallpapers', name: 'Cars Wallpapers' };
+  if (c.includes('space') || c.includes('galaxy')) return { slug: 'space-wallpapers', name: 'Space Wallpapers' };
+  if (c.includes('abstract')) return { slug: 'abstract-wallpapers', name: 'Abstract Wallpapers' };
+  return { slug: '4k-wallpapers', name: '4K Wallpapers' };
+}
+
 function renderSharePageHtml({ imageId, title, typeLabel, cdnUrl, rawUrl, creator, category, isVideo }) {
-  const canonicalUrl = `${BASE_URL}${imageId}`;
+  const canonicalUrl = `${BASE_URL}${imageId}/`;
   const escTitle = escapeHtml(title);
   const escType = escapeHtml(typeLabel);
   const escCdnUrl = escapeHtml(cdnUrl);
   const escRawUrl = escapeHtml(rawUrl);
-  const escCreator = creator ? escapeHtml(creator) : '';
+  const escCreator = creator ? escapeHtml(creator) : 'KinotiX Studio';
+  const { slug: categorySlug, name: categoryName } = getCategorySlugAndName(category);
+  const escCategoryName = escapeHtml(categoryName);
 
-  const creatorBadge = escCreator ? `<div class="creator-tag">Curated by <strong>${escCreator}</strong></div>` : '';
+  const creatorBadge = escCreator ? `<div class="creator-tag">Curated by <strong>${escapeHtml(escCreator)}</strong></div>` : '';
   const creatorOg = escCreator ? ` by ${escCreator}` : '';
-  const ogDesc = `Experience this ${escType}${creatorOg} with 3D Parallax Gyro & OpenGL ES Fluid simulation in KinotiX for Android.`;
+  const ogDesc = `Download and experience this ${escType}${creatorOg} in 4K resolution on KinotiX for Android. Calibrated for AMOLED displays with 3D Parallax support.`;
 
   // Preload tag in <head> ensures immediate network discovery
   const preloadTag = isVideo
     ? `<link rel="preload" as="video" href="${escCdnUrl}">`
     : `<link rel="preload" as="image" href="${escCdnUrl}" fetchpriority="high">`;
 
-  // Media element with eager loading and instant fallback
+  // Media element with eager loading, explicit dimensions, and instant fallback
   const mediaElement = isVideo
-    ? `<video src="${escCdnUrl}" autoplay loop muted playsinline class="wallpaper-img loaded" onerror="if(this.src!=='${escRawUrl}'){this.src='${escRawUrl}';}"></video>`
-    : `<img src="${escCdnUrl}" alt="${escTitle}" class="wallpaper-img" loading="eager" fetchpriority="high" decoding="async" onload="this.classList.add('loaded');" onerror="if(this.src!=='${escRawUrl}'){this.src='${escRawUrl}';}else{this.classList.add('loaded');}">`;
+    ? `<video src="${escCdnUrl}" autoplay loop muted playsinline width="1080" height="1920" class="wallpaper-img loaded" onerror="if(this.src!=='${escRawUrl}'){this.src='${escRawUrl}';}"></video>`
+    : `<img src="${escCdnUrl}" alt="${escTitle} • 4K ${escType} for phone" width="1080" height="1920" class="wallpaper-img" loading="eager" fetchpriority="high" decoding="async" onload="this.classList.add('loaded');" onerror="if(this.src!=='${escRawUrl}'){this.src='${escRawUrl}';}else{this.classList.add('loaded');}">`;
 
   return `<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escTitle} • KinotiX</title>
+  <title>${escTitle} • 4K Wallpaper for Android | KinotiX</title>
   <meta name="description" content="${ogDesc}">
   <link rel="canonical" href="${canonicalUrl}">
   <link rel="icon" type="image/png" href="../../assets/icons/icon-192.png">
@@ -187,7 +203,7 @@ function renderSharePageHtml({ imageId, title, typeLabel, cdnUrl, rawUrl, creato
   ${preloadTag}
 
   <!-- OpenGraph Metadata for WhatsApp, Telegram, Discord, Facebook, X -->
-  <meta property="og:title" content="${escTitle} • KinotiX">
+  <meta property="og:title" content="${escTitle} • 4K Wallpaper | KinotiX">
   <meta property="og:description" content="${ogDesc}">
   <meta property="og:type" content="article">
   <meta property="og:image" content="${escRawUrl}">
@@ -200,9 +216,58 @@ function renderSharePageHtml({ imageId, title, typeLabel, cdnUrl, rawUrl, creato
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${escTitle} • KinotiX">
+  <meta name="twitter:title" content="${escTitle} • 4K Wallpaper | KinotiX">
   <meta name="twitter:description" content="${ogDesc}">
   <meta name="twitter:image" content="${escRawUrl}">
+
+  <!-- Schema.org JSON-LD Structured Data: ImageObject & BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ImageObject",
+        "@id": "${canonicalUrl}#image",
+        "name": "${escTitle}",
+        "caption": "${escTitle} - 4K Ultra HD Wallpaper for Android",
+        "contentUrl": "${escRawUrl}",
+        "thumbnailUrl": "${escCdnUrl}",
+        "encodingFormat": "image/jpeg",
+        "width": 1080,
+        "height": 1920,
+        "author": {
+          "@type": "Organization",
+          "name": "KinotiX"
+        },
+        "license": "https://techscript.is-a.dev/kinotix/licenses.html",
+        "acquireLicensePage": "https://techscript.is-a.dev/kinotix/download.html"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "${BASE_URL}"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "${escCategoryName}",
+            "item": "${BASE_URL}${categorySlug}/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "${escTitle}",
+            "item": "${canonicalUrl}"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <style>
     .share-container {
@@ -371,6 +436,14 @@ function renderSharePageHtml({ imageId, title, typeLabel, cdnUrl, rawUrl, creato
 
   <main class="share-container">
     <div class="wallpaper-preview-card">
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.85rem; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+        <a href="../../index.html" style="color: var(--text-muted); text-decoration: none;">Home</a>
+        <span style="margin: 0 0.35rem; opacity: 0.5;">/</span>
+        <a href="../../${categorySlug}/" style="color: var(--text-muted); text-decoration: none;">${escCategoryName}</a>
+        <span style="margin: 0 0.35rem; opacity: 0.5;">/</span>
+        <span style="color: var(--text-primary); font-weight: 500;">${escTitle}</span>
+      </nav>
+
       <div class="image-frame">
         ${mediaElement}
       </div>
@@ -388,8 +461,11 @@ function renderSharePageHtml({ imageId, title, typeLabel, cdnUrl, rawUrl, creato
         <a href="kinotix://i/${imageId}" class="btn-apply-app">
           Open in KinotiX App
         </a>
-        <a href="${PLAY_STORE_URL}" target="_blank" rel="noopener noreferrer" class="btn-play-store">
-          Get KinotiX on Google Play
+        <a href="../../${categorySlug}/" class="btn-play-store">
+          Explore More ${escCategoryName}
+        </a>
+        <a href="${PLAY_STORE_URL}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="font-size: 0.82rem; color: var(--text-muted);">
+          Get KinotiX on Google Play ↗
         </a>
       </div>
     </div>
