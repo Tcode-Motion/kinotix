@@ -159,9 +159,39 @@
 
   <script>
     (function() {
+      // Symmetrical XOR Cipher Decryption for KinotiX Shared Links
+      function decryptPayload(token) {
+        try {
+          const CIPHER_KEY = "KinotiX_Token_Cipher_Key_2026_v1";
+          let str = token;
+          let isEncrypted = false;
+          if (str.startsWith("e_")) {
+            str = str.substring(2);
+            isEncrypted = true;
+          }
+          let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+          while (base64.length % 4) base64 += '=';
+          const binary = atob(base64);
+          if (!isEncrypted) {
+            return JSON.parse(decodeURIComponent(escape(binary)));
+          }
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++) {
+            const k = CIPHER_KEY.charCodeAt(i % CIPHER_KEY.length);
+            const b = binary.charCodeAt(i);
+            bytes[i] = (b ^ ((i * 7 + 13) & 0xFF) ^ k) & 0xFF;
+          }
+          const decoder = new TextDecoder('utf-8');
+          return JSON.parse(decoder.decode(bytes));
+        } catch (e) {
+          return null;
+        }
+      }
+
       const params = new URLSearchParams(window.location.search);
       const idParam = params.get('id');
-      const imageParam = params.get('p') || params.get('image') || params.get('url');
+      const pParam = params.get('p');
+      const imageParam = params.get('image') || params.get('url');
       const resolvedState = document.getElementById('resolved-state');
       const unavailableState = document.getElementById('unavailable-state');
       const imgEl = document.getElementById('wallpaper-display');
@@ -169,13 +199,37 @@
       const badgeEl = document.getElementById('type-badge');
       const openAppBtn = document.getElementById('open-app-btn');
 
+      // 1. Check if encrypted payload token ?p= is present
+      if (pParam) {
+        const payload = decryptPayload(pParam);
+        if (payload && payload.u) {
+          imgEl.src = payload.u;
+          titleEl.textContent = payload.t || 'KinotiX 4K Wallpaper';
+          badgeEl.textContent = (payload.k === 'live' ? '4K Video Wallpaper' : 'Ultra HD 4K Wallpaper') + (payload.a ? (' by ' + payload.a) : '');
+          openAppBtn.href = idParam ? ('kinotix://i/' + idParam + '?p=' + encodeURIComponent(pParam)) : ('kinotix://share?url=' + encodeURIComponent(payload.u));
+          resolvedState.style.display = 'block';
+          unavailableState.style.display = 'none';
+          return;
+        }
+      }
+
+      // 2. ID-based resolution
       if (idParam && idParam.startsWith('KX_')) {
         openAppBtn.href = 'kinotix://i/' + idParam;
 
-        if (idParam === 'KX_YZlEAQ-3Du16' || idParam === 'KX_YZIEAQ-3Du16') {
+        if (idParam === 'KX_YZlEAQ-3Du16' || idParam === 'KX_YZIEAQ-3Du16' || idParam === 'KX_CcYuIZy1ybd6') {
           titleEl.textContent = 'Wolf Wallpaper';
           badgeEl.textContent = 'Ultra HD 4K Wallpaper by Velenrose';
-          imgEl.src = 'https://cdn.jsdelivr.net/gh/venomleo2o1-byte/phone-wallpaper@master/Animals/Wolf%20%20_Moonlit%20Vigilance_.png';
+          imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Animals/Wolf  _Moonlit Vigilance_.png';
+          resolvedState.style.display = 'block';
+          unavailableState.style.display = 'none';
+          return;
+        }
+
+        if (idParam === 'KX_jt0AUH4MWAeM' || idParam === 'KX_o7Bsquu6pQZW') {
+          titleEl.textContent = 'Galaxy Ultra HD 4K Wallpaper';
+          badgeEl.textContent = 'Ultra HD 4K Wallpaper by KinotiX Studio';
+          imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy 4k Wallpaper.jpg';
           resolvedState.style.display = 'block';
           unavailableState.style.display = 'none';
           return;
@@ -194,14 +248,17 @@
               resolvedState.style.display = 'block';
               unavailableState.style.display = 'none';
             } else {
-              titleEl.textContent = 'KinotiX 4K Wallpaper';
-              imgEl.src = '../assets/screenshots/store_screenshot_2.png';
+              titleEl.textContent = 'KinotiX Ultra HD 4K Wallpaper';
+              badgeEl.textContent = 'Ultra HD 4K Wallpaper';
+              imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy%204k%20Wallpaper.jpg';
               resolvedState.style.display = 'block';
               unavailableState.style.display = 'none';
             }
           })
           .catch(() => {
-            titleEl.textContent = 'KinotiX 4K Wallpaper';
+            titleEl.textContent = 'KinotiX Ultra HD 4K Wallpaper';
+            badgeEl.textContent = 'Ultra HD 4K Wallpaper';
+            imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy%204k%20Wallpaper.jpg';
             resolvedState.style.display = 'block';
             unavailableState.style.display = 'none';
           });
@@ -227,6 +284,7 @@
         if (decodedUrl && decodedUrl.startsWith('http')) {
           imgEl.src = decodedUrl;
           titleEl.textContent = 'Shared Wallpaper';
+          badgeEl.textContent = 'Ultra HD 4K Wallpaper';
           openAppBtn.href = 'kinotix://share?url=' + encodeURIComponent(decodedUrl);
           resolvedState.style.display = 'block';
           unavailableState.style.display = 'none';

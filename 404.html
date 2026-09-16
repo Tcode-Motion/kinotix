@@ -188,7 +188,7 @@
     <div id="shared-wallpaper-view" class="wallpaper-preview-card" style="display: none;">
       <div class="image-frame">
         <img id="wallpaper-img" 
-             src="/kinotix/assets/screenshots/store_screenshot_2.png" 
+             src="https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy%204k%20Wallpaper.jpg" 
              alt="KinotiX 4K Wallpaper" 
              class="wallpaper-img" 
              loading="eager" 
@@ -254,6 +254,35 @@
 
   <script>
     (function() {
+      // Symmetrical XOR Cipher Decryption for KinotiX Shared Links
+      function decryptPayload(token) {
+        try {
+          const CIPHER_KEY = "KinotiX_Token_Cipher_Key_2026_v1";
+          let str = token;
+          let isEncrypted = false;
+          if (str.startsWith("e_")) {
+            str = str.substring(2);
+            isEncrypted = true;
+          }
+          let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+          while (base64.length % 4) base64 += '=';
+          const binary = atob(base64);
+          if (!isEncrypted) {
+            return JSON.parse(decodeURIComponent(escape(binary)));
+          }
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++) {
+            const k = CIPHER_KEY.charCodeAt(i % CIPHER_KEY.length);
+            const b = binary.charCodeAt(i);
+            bytes[i] = (b ^ ((i * 7 + 13) & 0xFF) ^ k) & 0xFF;
+          }
+          const decoder = new TextDecoder('utf-8');
+          return JSON.parse(decoder.decode(bytes));
+        } catch (e) {
+          return null;
+        }
+      }
+
       // Dynamic Single Page App (SPA) Share Route Resolver:
       // ZERO redirect loops, ZERO flickering.
       try {
@@ -286,19 +315,48 @@
 
         // It is a valid shared wallpaper ID! Show shared wallpaper view immediately
         sharedView.style.display = 'block';
-        openAppBtn.href = 'kinotix://i/' + imageId;
+        openAppBtn.href = 'kinotix://i/' + imageId + (search || '');
 
-        // Custom resolution for Wolf Wallpaper
-        if (imageId === 'KX_YZlEAQ-3Du16' || imageId === 'KX_YZIEAQ-3Du16') {
+        // 1. Check if encrypted payload token ?p= is present
+        const pToken = params.get('p');
+        if (pToken) {
+          const payload = decryptPayload(pToken);
+          if (payload && payload.u) {
+            imgEl.src = payload.u;
+            const displayTitle = payload.t || 'KinotiX 4K Wallpaper';
+            titleEl.textContent = displayTitle;
+            pageTitle.textContent = displayTitle + ' • 4K Wallpaper | KinotiX';
+            const badge = payload.k === 'live' ? '4K Video Wallpaper' : 'Ultra HD 4K Wallpaper';
+            badgeEl.textContent = badge;
+            if (payload.a) {
+              creatorEl.innerHTML = 'Curated by <strong>' + payload.a + '</strong> on KinotiX';
+            }
+            openAppBtn.href = 'kinotix://i/' + imageId + '?p=' + encodeURIComponent(pToken);
+            return;
+          }
+        }
+
+        // 2. Custom resolution for Wolf Wallpaper
+        if (imageId === 'KX_YZlEAQ-3Du16' || imageId === 'KX_YZIEAQ-3Du16' || imageId === 'KX_CcYuIZy1ybd6') {
           titleEl.textContent = 'Wolf Wallpaper';
           pageTitle.textContent = 'Wolf Wallpaper • 4K Wallpaper | KinotiX';
           badgeEl.textContent = 'Ultra HD 4K Wallpaper';
           creatorEl.innerHTML = 'Curated by <strong>Velenrose</strong> on KinotiX';
-          imgEl.src = 'https://cdn.jsdelivr.net/gh/venomleo2o1-byte/phone-wallpaper@master/Animals/Wolf%20%20_Moonlit%20Vigilance_.png';
+          imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Animals/Wolf  _Moonlit Vigilance_.png';
           return;
         }
 
-        // General lookup in catalog.json
+        // 3. Custom resolution for Galaxy 4K Wallpaper
+        if (imageId === 'KX_jt0AUH4MWAeM' || imageId === 'KX_o7Bsquu6pQZW') {
+          titleEl.textContent = 'Galaxy Ultra HD 4K Wallpaper';
+          pageTitle.textContent = 'Galaxy Ultra HD 4K Wallpaper • 4K Wallpaper | KinotiX';
+          badgeEl.textContent = 'Ultra HD 4K Wallpaper';
+          creatorEl.innerHTML = 'Curated by <strong>KinotiX Studio</strong>';
+          imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy 4k Wallpaper.jpg';
+          return;
+        }
+
+        // 4. General lookup in catalog.json
         const catalogUrl = path.includes('/kinotix/') ? '/kinotix/i/catalog.json' : 'i/catalog.json';
         fetch(catalogUrl)
           .then(r => r.json())
@@ -315,12 +373,15 @@
                 imgEl.src = item.previewUrl;
               }
             } else {
-              titleEl.textContent = 'KinotiX 4K Wallpaper';
+              titleEl.textContent = 'KinotiX Ultra HD 4K Wallpaper';
+              pageTitle.textContent = 'KinotiX Ultra HD 4K Wallpaper • 4K Wallpaper | KinotiX';
               badgeEl.textContent = 'Ultra HD 4K Wallpaper';
+              imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy%204k%20Wallpaper.jpg';
             }
           })
           .catch(() => {
-            titleEl.textContent = 'KinotiX 4K Wallpaper';
+            titleEl.textContent = 'KinotiX Ultra HD 4K Wallpaper';
+            imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy%204k%20Wallpaper.jpg';
           });
       } catch (err) {
         document.getElementById('standard-404-view').style.display = 'block';

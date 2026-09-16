@@ -172,10 +172,19 @@
       if (idParam && idParam.startsWith('KX_')) {
         openAppBtn.href = 'kinotix://i/' + idParam;
 
-        if (idParam === 'KX_YZlEAQ-3Du16' || idParam === 'KX_YZIEAQ-3Du16') {
+        if (idParam === 'KX_YZlEAQ-3Du16' || idParam === 'KX_YZIEAQ-3Du16' || idParam === 'KX_CcYuIZy1ybd6') {
           titleEl.textContent = 'Wolf Wallpaper';
           badgeEl.textContent = 'Ultra HD 4K Wallpaper by Velenrose';
-          imgEl.src = 'https://cdn.jsdelivr.net/gh/venomleo2o1-byte/phone-wallpaper@master/Animals/Wolf%20%20_Moonlit%20Vigilance_.png';
+          imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Animals/Wolf  _Moonlit Vigilance_.png';
+          resolvedState.style.display = 'block';
+          unavailableState.style.display = 'none';
+          return;
+        }
+
+        if (idParam === 'KX_jt0AUH4MWAeM' || idParam === 'KX_o7Bsquu6pQZW') {
+          titleEl.textContent = 'Galaxy Ultra HD 4K Wallpaper';
+          badgeEl.textContent = 'Ultra HD 4K Wallpaper by KinotiX Studio';
+          imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy 4k Wallpaper.jpg';
           resolvedState.style.display = 'block';
           unavailableState.style.display = 'none';
           return;

@@ -27,7 +27,7 @@ function normalizeUrl(rawUrl) {
     const u = new URL(rawUrl.trim());
     const scheme = u.protocol.toLowerCase();
     const host = u.host.toLowerCase();
-    let pathname = u.pathname;
+    let pathname = decodeURIComponent(u.pathname);
     if (pathname.endsWith('/') && pathname.length > 1) {
       pathname = pathname.slice(0, -1);
     }
