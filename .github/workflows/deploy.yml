@@ -30,12 +30,13 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Sync CSS and Styles
+      - name: Sync Static Assets and Pages
         run: |
-          mkdir -p docs/css
+          mkdir -p docs/css docs/styles docs/assets
           cp -rf css/* docs/css/ || true
-          mkdir -p docs/styles
           cp -rf styles/* docs/styles/ || true
+          cp -rf assets/* docs/assets/ || true
+          cp -rf index.html download.html features.html 404.html manifest.webmanifest docs/ || true
 
       - name: Run Share Page Generator
         run: |

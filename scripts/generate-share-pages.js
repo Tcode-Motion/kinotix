@@ -1,8 +1,9 @@
 /**
  * KinotiX Automated Share Page Generator
+ * Production-Grade Static Generator for GitHub Pages & Social Previews
  * 
- * Generates static /kinotix/i/{imageId}/index.html pages for all wallpapers
- * with genuine HTTP 200 server-rendered Open Graph & Twitter metadata.
+ * Generates static /kinotix/i/{imageId}/index.html pages with genuine
+ * HTTP 200 server-rendered Open Graph & Twitter Card metadata.
  */
 
 const fs = require('fs');
@@ -135,9 +136,9 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
   const escPreview = escapeHtml(previewUrl);
   const escCreator = creator ? escapeHtml(creator) : '';
 
-  const creatorBadge = escCreator ? `<div class="creator-tag">by <strong>${escCreator}</strong></div>` : '';
+  const creatorBadge = escCreator ? `<div class="creator-tag">Curated by <strong>${escCreator}</strong></div>` : '';
   const creatorOg = escCreator ? ` by ${escCreator}` : '';
-  const ogDesc = `Discover this ${escType}${creatorOg} on KinotiX — 3D Parallax & OpenGL ES Fluid Wallpaper Engine.`;
+  const ogDesc = `Experience this ${escType}${creatorOg} with 3D Parallax Gyro & OpenGL ES Fluid simulation in KinotiX for Android.`;
 
   return `<!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -147,9 +148,10 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
   <title>${escTitle} • KinotiX</title>
   <meta name="description" content="${ogDesc}">
   <link rel="canonical" href="${canonicalUrl}">
+  <link rel="icon" type="image/png" href="../../assets/icons/icon-192.png">
   <link rel="stylesheet" href="../../css/style.css">
 
-  <!-- OpenGraph Metadata (Pre-rendered for WhatsApp, Telegram, Discord, Facebook) -->
+  <!-- OpenGraph Metadata (WhatsApp, Telegram, Discord, Facebook, X) -->
   <meta property="og:title" content="${escTitle} • KinotiX">
   <meta property="og:description" content="${ogDesc}">
   <meta property="og:type" content="article">
@@ -174,18 +176,16 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1rem;
+      padding: 3rem 1.5rem;
     }
     .wallpaper-preview-card {
-      background: var(--bg-card);
+      background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
       padding: 1.5rem;
-      max-width: 460px;
+      max-width: 440px;
       width: 100%;
       box-shadow: var(--shadow-lg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -193,7 +193,6 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
     }
     .wallpaper-preview-card:hover {
       border-color: var(--border-hover);
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
     }
     .image-frame {
       width: 100%;
@@ -201,12 +200,12 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
       max-height: 480px;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      background: #020408;
+      background: #000000;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-subtle);
       margin-bottom: 1.25rem;
     }
     .wallpaper-img {
@@ -214,36 +213,29 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.4s ease;
-    }
-    .wallpaper-img:hover {
-      transform: scale(1.02);
     }
     .meta-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(0, 240, 255, 0.1);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      color: var(--cyan);
+      display: inline-block;
       font-size: 0.75rem;
-      font-weight: 700;
-      padding: 0.35rem 0.8rem;
-      border-radius: 999px;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
       margin-bottom: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
     }
     .title-display {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      margin-bottom: 0.35rem;
-      letter-spacing: -0.02em;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
     }
     .creator-tag {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
+      font-size: 0.82rem;
+      color: var(--text-muted);
       margin-bottom: 1.25rem;
     }
     .feature-pills {
@@ -251,16 +243,16 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
       flex-wrap: wrap;
       gap: 0.4rem;
       justify-content: center;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
     .feature-pill {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 0.25rem 0.7rem;
-      border-radius: 12px;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
       font-size: 0.75rem;
       color: var(--text-muted);
-      font-weight: 600;
+      font-weight: 500;
     }
     .btn-action-group {
       display: flex;
@@ -269,9 +261,9 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
       width: 100%;
     }
     .btn-apply-app {
-      background: linear-gradient(135deg, var(--cyan), #0070f3);
-      color: #000;
-      font-weight: 800;
+      background: var(--primary);
+      color: #FFFFFF;
+      font-weight: 600;
       padding: 0.85rem 1.5rem;
       border-radius: var(--radius-md);
       text-decoration: none;
@@ -280,15 +272,15 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
       justify-content: center;
       gap: 0.5rem;
       transition: var(--transition);
-      box-shadow: 0 4px 14px rgba(0, 240, 255, 0.4);
+      box-shadow: var(--shadow-primary);
     }
     .btn-apply-app:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 240, 255, 0.6);
+      background: var(--primary-hover);
+      transform: translateY(-1px);
     }
     .btn-play-store {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
       color: var(--text-primary);
       padding: 0.75rem 1.25rem;
       border-radius: var(--radius-md);
@@ -302,27 +294,32 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
       transition: var(--transition);
     }
     .btn-play-store:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.3);
+      background: var(--bg-surface-hover);
+      border-color: var(--border-hover);
     }
   </style>
 </head>
 <body>
   <header>
-    <a href="../../index.html" class="brand">
-      <span>KinotiX 🌌</span>
-    </a>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="../../features.html">Features</a></li>
-        <li><a href="../../download.html">Download</a></li>
-        <li><a href="https://github.com/Tcode-Motion/kinotix" target="_blank">GitHub ↗</a></li>
-      </ul>
-      <a href="${PLAY_STORE_URL}" target="_blank" rel="noopener noreferrer" class="btn-playstore btn-playstore-sm" aria-label="Get KinotiX on Google Play">
-        <span class="play-title">Google Play</span>
+    <div class="header-inner">
+      <a href="../../index.html" class="brand" aria-label="KinotiX Home">
+        <img src="../../assets/icons/icon.png" alt="KinotiX Icon" class="brand-icon">
+        <span>KinotiX</span>
       </a>
-    </nav>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../features.html">Features</a></li>
+          <li><a href="../../download.html">Download</a></li>
+          <li><a href="https://github.com/Tcode-Motion/kinotix" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="${PLAY_STORE_URL}" target="_blank" rel="noopener noreferrer" class="btn-playstore btn-playstore-sm" aria-label="Get KinotiX on Google Play">
+          <span class="play-title">Google Play</span>
+        </a>
+      </div>
+    </div>
   </header>
 
   <main class="share-container">
@@ -335,25 +332,25 @@ function renderSharePageHtml({ imageId, title, typeLabel, previewUrl, creator, c
       ${creatorBadge}
 
       <div class="feature-pills">
-        <span class="feature-pill">⚡ Ultra HD 4K</span>
-        <span class="feature-pill">🛡️ Lossless Quality</span>
-        <span class="feature-pill">🔋 Zero Battery Drain</span>
+        <span class="feature-pill">Ultra HD 4K</span>
+        <span class="feature-pill">Lossless Quality</span>
+        <span class="feature-pill">AMOLED Calibrated</span>
       </div>
 
       <div class="btn-action-group">
         <a href="kinotix://i/${imageId}" class="btn-apply-app">
-          <span>🚀 Open in KinotiX App</span>
+          Open in KinotiX App
         </a>
         <a href="${PLAY_STORE_URL}" target="_blank" rel="noopener noreferrer" class="btn-play-store">
-          <span>Get KinotiX on Google Play</span>
+          Get KinotiX on Google Play
         </a>
       </div>
     </div>
   </main>
 
   <footer>
-    <div class="footer-bottom">
-      <span>&copy; 2026 KinotiX Engine • Tcode-Motion</span>
+    <div class="footer-bottom" style="border: none; padding-top: 0; justify-content: center;">
+      <span>&copy; 2026 KinotiX Engine • Developed by Tcode-Motion</span>
     </div>
   </footer>
 </body>
@@ -448,110 +445,52 @@ function main() {
     }
   }
 
-  // 3. Built-in interactive engine presets
-  const presets = [
-    {
-      canonicalUrl: 'kinotix://engine/fluid/cosmic_glow',
-      title: 'Cosmic Glow Fluid',
-      typeLabel: 'Fluid Live Wallpaper',
-      previewUrl: 'https://techscript.is-a.dev/kinotix/assets/screenshots/discover_feed.png',
-      creator: 'KinotiX Fluid Studio',
-      isFluid: true
-    },
-    {
-      canonicalUrl: 'kinotix://engine/particle/astropixel',
-      title: 'Astropixel 3D Engine',
-      typeLabel: 'Particle Live Wallpaper',
-      previewUrl: 'https://techscript.is-a.dev/kinotix/assets/screenshots/collections.png',
-      creator: 'KinotiX Particle Studio',
-      isParticle: true
-    },
-    {
-      canonicalUrl: 'kinotix://engine/camera/camera_live',
-      title: 'Transparent Camera Live',
-      typeLabel: 'Camera Live Wallpaper',
-      previewUrl: 'https://techscript.is-a.dev/kinotix/assets/screenshots/home_feed.png',
-      creator: 'KinotiX Camera Studio'
-    },
-    {
-      canonicalUrl: 'https://raw.githubusercontent.com/venomleo2o1-byte/live-wallpaper/main/previews/ocean_loop.mp4',
-      title: 'Deep Ocean Loop',
-      typeLabel: '4K Video Wallpaper',
-      previewUrl: 'https://techscript.is-a.dev/kinotix/assets/screenshots/detail_apply.png',
-      creator: 'KinotiX Live Studio',
-      isVideo: true
-    }
-  ];
-
-  for (const preset of presets) {
-    const imageId = generateImageId(normalizeUrl(preset.canonicalUrl));
-    wallpapers.push({
-      imageId,
-      title: preset.title,
-      typeLabel: preset.typeLabel,
-      previewUrl: preset.previewUrl,
-      creator: preset.creator,
-      category: 'engine',
-      isVideo: preset.isVideo,
-      isFluid: preset.isFluid,
-      isParticle: preset.isParticle
-    });
-  }
-
   // Deduplicate by imageId
-  const uniqueWallpapers = new Map();
-  const catalogObj = {};
+  const uniqueMap = new Map();
   for (const wp of wallpapers) {
-    if (!uniqueWallpapers.has(wp.imageId)) {
-      uniqueWallpapers.set(wp.imageId, wp);
-      catalogObj[wp.imageId] = wp;
+    if (!uniqueMap.has(wp.imageId)) {
+      uniqueMap.set(wp.imageId, wp);
     }
   }
+  const uniqueWallpapers = Array.from(uniqueMap.values());
+  console.log(`Total unique share pages to generate: ${uniqueWallpapers.length}`);
 
-  console.log(`Generating static share pages for ${uniqueWallpapers.size} unique wallpapers...`);
-
+  // Targets: both /i/ and /docs/i/
   const outDirs = [
     path.join(rootDir, 'i'),
     path.join(rootDir, 'docs', 'i')
   ];
 
-  // Auto-sync CSS to docs/css if docs exists
-  const docsDir = path.join(rootDir, 'docs');
-  const cssDir = path.join(rootDir, 'css');
-  const docsCssDir = path.join(docsDir, 'css');
-  if (fs.existsSync(docsDir) && fs.existsSync(cssDir)) {
-    if (!fs.existsSync(docsCssDir)) {
-      fs.mkdirSync(docsCssDir, { recursive: true });
-    }
-    const cssFiles = fs.readdirSync(cssDir);
-    for (const file of cssFiles) {
-      fs.copyFileSync(path.join(cssDir, file), path.join(docsCssDir, file));
-    }
-  }
-
-  let generatedCount = 0;
-  for (const wp of uniqueWallpapers.values()) {
-    const html = renderSharePageHtml(wp);
-    for (const outDir of outDirs) {
-      const pageDir = path.join(outDir, wp.imageId);
-      if (!fs.existsSync(pageDir)) {
-        fs.mkdirSync(pageDir, { recursive: true });
-      }
-      fs.writeFileSync(path.join(pageDir, 'index.html'), html, 'utf8');
-    }
-    generatedCount++;
-  }
-
-  // Write catalog.json to both i/ and docs/i/
-  const catalogJson = JSON.stringify(catalogObj, null, 2);
   for (const outDir of outDirs) {
     if (!fs.existsSync(outDir)) {
       fs.mkdirSync(outDir, { recursive: true });
     }
-    fs.writeFileSync(path.join(outDir, 'catalog.json'), catalogJson, 'utf8');
+
+    let generatedCount = 0;
+    for (const wp of uniqueWallpapers) {
+      const pageDir = path.join(outDir, wp.imageId);
+      if (!fs.existsSync(pageDir)) {
+        fs.mkdirSync(pageDir, { recursive: true });
+      }
+      const filePath = path.join(pageDir, 'index.html');
+      const html = renderSharePageHtml(wp);
+      fs.writeFileSync(filePath, html, 'utf8');
+      generatedCount++;
+    }
+    console.log(`Wrote ${generatedCount} static share pages into ${outDir}`);
   }
 
-  console.log(`Successfully generated ${generatedCount} wallpaper pages and catalog.json in i/ and docs/i/!`);
+  console.log('Share page generation completed successfully!');
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  normalizeUrl,
+  generateImageId,
+  isMeaningfulTitle,
+  getShareDisplayName,
+  renderSharePageHtml
+};
