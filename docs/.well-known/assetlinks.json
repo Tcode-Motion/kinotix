@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.kinotix.app",
+      "sha256_cert_fingerprints": [
+        "14:D5:7B:A2:3E:5E:2A:B4:48:9A:FF:D2:C3:68:57:05:3F:8F:7C:1E:E7:09:A4:47:06:54:19:D9:D2:FF:16:D5"
+      ]
+    }
+  }
+]

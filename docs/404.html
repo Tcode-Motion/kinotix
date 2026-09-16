@@ -3,65 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="page-title">KinotiX Shared Wallpaper — Ultra HD 4K & Live Engine</title>
-  <meta name="description" id="page-desc" content="View and apply high-resolution wallpapers with KinotiX for Android.">
+  <title id="page-title">KinotiX Wallpaper</title>
+  <meta name="description" id="page-desc" content="Preview high-resolution wallpapers in KinotiX for Android.">
   <meta name="robots" content="noindex, follow">
   <link rel="icon" type="image/png" href="/kinotix/assets/icons/icon-192.png">
   <link rel="stylesheet" href="/kinotix/css/style.css">
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+
+    :root {
+      --bg-dark: #090A0F;
+      --bg-surface: #121520;
+      --bg-surface-elevated: #181C2B;
+      --bg-surface-hover: #1E2336;
+      --primary: #6366F1;
+      --primary-hover: #4F46E5;
+      --text-primary: #FFFFFF;
+      --text-muted: #9CA3AF;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.16);
+      --radius-md: 12px;
+      --radius-xl: 20px;
+      --radius-full: 9999px;
+      --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+      --shadow-xl: 0 20px 48px rgba(0, 0, 0, 0.7);
+      --shadow-primary: 0 4px 20px rgba(99, 102, 241, 0.35);
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      height: 72px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 10, 15, 0.85);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+    .header-inner {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+    .nav-menu {
+      display: none;
+      list-style: none;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .nav-menu {
+        display: flex;
+      }
+    }
+    .nav-menu a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: var(--transition);
+    }
+    .nav-menu a:hover {
+      color: #FFFFFF;
+    }
+    .btn-top-install {
+      background: var(--primary);
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .btn-top-install:hover {
+      background: var(--primary-hover);
+    }
     .share-container {
-      min-height: calc(100vh - 160px);
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 2.5rem 1.5rem;
     }
-    .wallpaper-preview-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: 1.75rem;
-      max-width: 440px;
+    .share-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
       width: 100%;
-      box-shadow: var(--shadow-lg);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      transition: var(--transition);
+      max-width: 920px;
+      margin: auto;
+    }
+    @media (min-width: 768px) {
+      .share-layout {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 3.5rem;
+      }
     }
     .image-frame {
       width: 100%;
+      max-width: 380px;
       aspect-ratio: 9 / 16;
-      max-height: 460px;
-      border-radius: var(--radius-lg);
+      max-height: 580px;
+      border-radius: var(--radius-xl);
       overflow: hidden;
-      background: linear-gradient(110deg, #121520 8%, #1c2132 18%, #121520 33%);
-      background-size: 200% 100%;
-      animation: 1.6s shimmer linear infinite;
+      background: #090c12;
+      border: 1px solid var(--border);
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--border-subtle);
-      margin-bottom: 1.25rem;
-    }
-    @keyframes shimmer {
-      to {
-        background-position-x: -200%;
-      }
+      box-shadow: var(--shadow-xl);
     }
     .wallpaper-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
       opacity: 0;
       transition: opacity 0.25s ease-out;
     }
     .wallpaper-img.loaded {
       opacity: 1;
+    }
+    .share-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 380px;
+      width: 100%;
+    }
+    @media (min-width: 768px) {
+      .share-details {
+        align-items: flex-start;
+        text-align: left;
+      }
     }
     .meta-badge {
       display: inline-block;
@@ -76,16 +187,16 @@
       letter-spacing: 0.03em;
     }
     .title-display {
-      font-size: 1.35rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: #FFFFFF;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.4rem;
       line-height: 1.3;
     }
     .creator-tag {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
     .btn-action-group {
       display: flex;
@@ -93,7 +204,7 @@
       gap: 0.75rem;
       width: 100%;
     }
-    .btn-apply-app {
+    .btn-primary-app {
       background: var(--primary);
       color: #FFFFFF;
       font-weight: 600;
@@ -106,47 +217,93 @@
       gap: 0.5rem;
       transition: var(--transition);
       box-shadow: var(--shadow-primary);
+      font-size: 0.95rem;
     }
-    .btn-apply-app:hover {
+    .btn-primary-app:hover {
       background: var(--primary-hover);
       transform: translateY(-1px);
     }
-    .btn-store {
-      background: #01875F;
-      color: #FFFFFF;
-      padding: 0.8rem 1.25rem;
+    .btn-secondary-action {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-weight: 600;
+      padding: 0.8rem 1.5rem;
       border-radius: var(--radius-md);
       text-decoration: none;
-      font-size: 0.92rem;
-      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
       transition: var(--transition);
-      box-shadow: 0 4px 14px rgba(1, 135, 95, 0.3);
+      font-size: 0.92rem;
+      cursor: pointer;
     }
-    .btn-store:hover {
-      background: #00704E;
+    .btn-secondary-action:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--border-hover);
       transform: translateY(-1px);
+    }
+    .btn-ghost-action {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .btn-ghost-action:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
     }
     .error-card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
       padding: 3rem 2rem;
-      max-width: 520px;
+      max-width: 480px;
       width: 100%;
       box-shadow: var(--shadow-lg);
       text-align: center;
+      margin: auto;
     }
-    .error-code {
-      font-size: 5rem;
-      font-weight: 800;
-      color: var(--primary);
-      line-height: 1;
-      margin-bottom: 1rem;
-      font-family: 'Outfit', sans-serif;
+    .error-card h1 {
+      font-size: 1.6rem;
+      margin-bottom: 0.6rem;
+      color: #FFFFFF;
+    }
+    .error-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .copy-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: #FFFFFF;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .copy-toast.show {
+      transform: translateX(-50%) translateY(0);
     }
   </style>
 </head>
@@ -168,12 +325,6 @@
       </nav>
       <div class="header-actions">
         <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-top-install" aria-label="Install KinotiX on Google Play">
-          <svg viewBox="0 0 512 512" width="16" height="16" aria-hidden="true">
-            <path fill="#4285F4" d="M32.5 12.2c-5.8 6.1-9.3 15.6-9.3 27.8v432c0 12.2 3.5 21.7 9.3 27.8l1.5 1.5L263 272.3v-5.6L34 10.7l-1.5 1.5z"/>
-            <path fill="#FBBC04" d="M340.6 349.9l-77.6-77.6v-5.6l77.6-77.6 1.7 1 91.9 52.2c26.2 14.9 26.2 39.2 0 54.1l-91.9 52.2-1.7 1.3z"/>
-            <path fill="#EA4335" d="M263 266.7L34 10.7C41.3 2.5 53.6-1.5 67.5 6.4l274.8 156.2-79.3 104.1z"/>
-            <path fill="#34A853" d="M263 272.3L67.5 496.6c-13.9 7.9-26.2 3.9-33.5-4.3L263 272.3z"/>
-          </svg>
           <span class="install-text-wrap">
             <span class="install-primary-text">Install App</span>
             <span class="install-secondary-text">Google Play</span>
@@ -184,67 +335,54 @@
   </header>
 
   <main class="share-container">
-    <!-- State 1: Dynamic Shared Wallpaper (Shown if route matches /i/KX_...) -->
-    <div id="shared-wallpaper-view" class="wallpaper-preview-card" style="display: none;">
+    <!-- State 1: Active Wallpaper View -->
+    <div id="shared-wallpaper-view" class="share-layout" style="display: none;">
       <div class="image-frame">
         <img id="wallpaper-img" 
-             src="https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy%204k%20Wallpaper.jpg" 
-             alt="KinotiX 4K Wallpaper" 
+             src="" 
+             alt="KinotiX Wallpaper" 
              class="wallpaper-img" 
              loading="eager" 
              fetchpriority="high"
+             decoding="async"
              onload="this.classList.add('loaded');">
       </div>
-      <span id="wallpaper-type-badge" class="meta-badge">Ultra HD 4K Wallpaper</span>
-      <h1 id="wallpaper-title" class="title-display">KinotiX Shared Wallpaper</h1>
-      <div id="wallpaper-creator" class="creator-tag">Curated for <strong>KinotiX Android Engine</strong></div>
+      <div class="share-details">
+        <span id="wallpaper-type-badge" class="meta-badge">Ultra HD 4K Wallpaper</span>
+        <h1 id="wallpaper-title" class="title-display">KinotiX Wallpaper</h1>
+        <div id="wallpaper-creator" class="creator-tag">Curated for <strong>KinotiX</strong></div>
 
-      <div class="btn-action-group">
-        <a id="btn-open-app" href="kinotix://" class="btn-apply-app" aria-label="Open in KinotiX Android App">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <polyline points="9 21 3 21 3 15"></polyline>
-            <line x1="21" y1="3" x2="14" y2="10"></line>
-            <line x1="3" y1="21" x2="10" y2="14"></line>
-          </svg>
-          Open in KinotiX App
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn-store" aria-label="Install KinotiX on Google Play">
-          <svg viewBox="0 0 512 512" width="18" height="18" aria-hidden="true">
-            <path fill="#FFFFFF" d="M32.5 12.2c-5.8 6.1-9.3 15.6-9.3 27.8v432c0 12.2 3.5 21.7 9.3 27.8l1.5 1.5L263 272.3v-5.6L34 10.7l-1.5 1.5z"/>
-            <path fill="#FFFFFF" d="M340.6 349.9l-77.6-77.6v-5.6l77.6-77.6 1.7 1 91.9 52.2c26.2 14.9 26.2 39.2 0 54.1l-91.9 52.2-1.7 1.3z"/>
-            <path fill="#FFFFFF" d="M263 266.7L34 10.7C41.3 2.5 53.6-1.5 67.5 6.4l274.8 156.2-79.3 104.1z"/>
-            <path fill="#FFFFFF" d="M263 272.3L67.5 496.6c-13.9 7.9-26.2 3.9-33.5-4.3L263 272.3z"/>
-          </svg>
-          Install on Google Play
-        </a>
-        <a href="/kinotix/index.html#discovery-grid" class="btn btn-secondary" style="font-size: 0.88rem;">
-          Explore Wallpaper Gallery ↓
-        </a>
+        <div class="btn-action-group">
+          <a id="btn-open-app" href="https://play.google.com/store/apps/details?id=com.kinotix.app" class="btn-primary-app" aria-label="Open in KinotiX">
+            Open in KinotiX
+          </a>
+          <a id="btn-download" href="#" download class="btn-secondary-action" aria-label="Download Wallpaper">
+            Download
+          </a>
+          <button id="btn-share" class="btn-ghost-action" aria-label="Share Wallpaper">
+            Share
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- State 2: Standard 404 (Shown for actual non-wallpaper broken routes) -->
-    <div id="standard-404-view" class="error-card" style="display: none;">
-      <div class="error-code">404</div>
-      <h1 style="font-size: 1.75rem; margin-bottom: 0.75rem; color: #FFFFFF;">Page Not Found</h1>
-      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem;">
-        The link you followed may be broken or the page may have been relocated. You can return to our homepage or explore our wallpaper collection.
-      </p>
+    <!-- State 2: Wallpaper Unavailable (Section 18) -->
+    <div id="unavailable-view" class="error-card" style="display: none;">
+      <h1>Wallpaper unavailable</h1>
+      <p>This KinotiX share link is no longer valid or the wallpaper could not be found.</p>
+      <a href="/kinotix/index.html" class="btn-primary-app">Back to KinotiX</a>
+    </div>
 
-      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-        <a href="/kinotix/index.html" class="btn btn-primary" style="width: 100%;">
-          Back to KinotiX Home
-        </a>
-        <a href="/kinotix/index.html#discovery-grid" class="btn btn-secondary" style="width: 100%;">
-          Explore Wallpaper Gallery
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.kinotix.app" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="width: 100%;">
-          Download Android App
-        </a>
-      </div>
+    <!-- State 3: Generic 404 for broken non-share URLs -->
+    <div id="standard-404-view" class="error-card" style="display: none;">
+      <div style="font-size: 4.5rem; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 0.75rem; font-family: 'Outfit', sans-serif;">404</div>
+      <h1>Page Not Found</h1>
+      <p>The link you followed may be broken or the page may have been relocated.</p>
+      <a href="/kinotix/index.html" class="btn-primary-app">Back to KinotiX Home</a>
     </div>
   </main>
+
+  <div id="copy-toast" class="copy-toast">Link copied to clipboard</div>
 
   <footer>
     <div class="footer-bottom" style="border: none; padding-top: 0; justify-content: center;">
@@ -254,10 +392,19 @@
 
   <script>
     (function() {
-      // Symmetrical XOR Cipher Decryption for KinotiX Shared Links
+      const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.kinotix.app";
+      const CIPHER_KEY = "KinotiX_Token_Cipher_Key_2026_v1";
+
+      function showToast(msg) {
+        const toast = document.getElementById('copy-toast');
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      }
+
       function decryptPayload(token) {
         try {
-          const CIPHER_KEY = "KinotiX_Token_Cipher_Key_2026_v1";
           let str = token;
           let isEncrypted = false;
           if (str.startsWith("e_")) {
@@ -283,8 +430,6 @@
         }
       }
 
-      // Dynamic Single Page App (SPA) Share Route Resolver:
-      // ZERO redirect loops, ZERO flickering.
       try {
         const path = window.location.pathname;
         const search = window.location.search;
@@ -299,92 +444,101 @@
         }
 
         const sharedView = document.getElementById('shared-wallpaper-view');
+        const unavailView = document.getElementById('unavailable-view');
         const notFoundView = document.getElementById('standard-404-view');
         const imgEl = document.getElementById('wallpaper-img');
         const titleEl = document.getElementById('wallpaper-title');
         const badgeEl = document.getElementById('wallpaper-type-badge');
         const creatorEl = document.getElementById('wallpaper-creator');
         const openAppBtn = document.getElementById('btn-open-app');
+        const downloadBtn = document.getElementById('btn-download');
+        const shareBtn = document.getElementById('btn-share');
         const pageTitle = document.getElementById('page-title');
 
         if (!imageId) {
-          // Standard broken link 404
           notFoundView.style.display = 'block';
           return;
         }
 
-        // It is a valid shared wallpaper ID! Show shared wallpaper view immediately
-        sharedView.style.display = 'block';
-        openAppBtn.href = 'kinotix://i/' + imageId + (search || '');
+        function setupInteractions(shareUrl, directImageUrl, displayTitle) {
+          downloadBtn.href = directImageUrl;
+          downloadBtn.setAttribute('target', '_blank');
+          
+          openAppBtn.onclick = function(e) {
+            e.preventDefault();
+            // Try opening Android app link / custom scheme
+            const intentUri = 'kinotix://i/' + imageId;
+            const start = Date.now();
+            window.location.href = intentUri;
+            setTimeout(function() {
+              if (Date.now() - start < 1500) {
+                window.location.href = PLAY_STORE_URL;
+              }
+            }, 800);
+          };
 
-        // 1. Check if encrypted payload token ?p= is present
+          shareBtn.onclick = function() {
+            const shareText = "A wallpaper worth checking out from KinotiX.\n" + shareUrl + "\nPreview it and explore more wallpapers in the app.";
+            if (navigator.share) {
+              navigator.share({ text: shareText }).catch(() => {});
+            } else if (navigator.clipboard) {
+              navigator.clipboard.writeText(shareText).then(() => showToast('Link copied to clipboard'));
+            } else {
+              showToast('Link copied');
+            }
+          };
+        }
+
+        // 1. Check encrypted payload param ?p=
         const pToken = params.get('p');
         if (pToken) {
           const payload = decryptPayload(pToken);
           if (payload && payload.u) {
+            sharedView.style.display = 'flex';
             imgEl.src = payload.u;
-            const displayTitle = payload.t || 'KinotiX 4K Wallpaper';
+            const displayTitle = payload.t || 'KinotiX Wallpaper';
             titleEl.textContent = displayTitle;
-            pageTitle.textContent = displayTitle + ' • 4K Wallpaper | KinotiX';
+            pageTitle.textContent = displayTitle + ' • KinotiX';
             const badge = payload.k === 'live' ? '4K Video Wallpaper' : 'Ultra HD 4K Wallpaper';
             badgeEl.textContent = badge;
             if (payload.a) {
               creatorEl.innerHTML = 'Curated by <strong>' + payload.a + '</strong> on KinotiX';
             }
-            openAppBtn.href = 'kinotix://i/' + imageId + '?p=' + encodeURIComponent(pToken);
+            const canonicalShareUrl = "https://techscript.is-a.dev/kinotix/i/" + imageId;
+            setupInteractions(canonicalShareUrl, payload.u, displayTitle);
             return;
           }
         }
 
-        // 2. Custom resolution for Wolf Wallpaper
-        if (imageId === 'KX_YZlEAQ-3Du16' || imageId === 'KX_YZIEAQ-3Du16' || imageId === 'KX_CcYuIZy1ybd6') {
-          titleEl.textContent = 'Wolf Wallpaper';
-          pageTitle.textContent = 'Wolf Wallpaper • 4K Wallpaper | KinotiX';
-          badgeEl.textContent = 'Ultra HD 4K Wallpaper';
-          creatorEl.innerHTML = 'Curated by <strong>Velenrose</strong> on KinotiX';
-          imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Animals/Wolf  _Moonlit Vigilance_.png';
-          return;
-        }
-
-        // 3. Custom resolution for Galaxy 4K Wallpaper
-        if (imageId === 'KX_jt0AUH4MWAeM' || imageId === 'KX_o7Bsquu6pQZW') {
-          titleEl.textContent = 'Galaxy Ultra HD 4K Wallpaper';
-          pageTitle.textContent = 'Galaxy Ultra HD 4K Wallpaper • 4K Wallpaper | KinotiX';
-          badgeEl.textContent = 'Ultra HD 4K Wallpaper';
-          creatorEl.innerHTML = 'Curated by <strong>KinotiX Studio</strong>';
-          imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy 4k Wallpaper.jpg';
-          return;
-        }
-
-        // 4. General lookup in catalog.json
+        // 2. Fetch catalog.json
         const catalogUrl = path.includes('/kinotix/') ? '/kinotix/i/catalog.json' : 'i/catalog.json';
         fetch(catalogUrl)
-          .then(r => r.json())
+          .then(r => {
+            if (!r.ok) throw new Error('Catalog not accessible');
+            return r.json();
+          })
           .then(catalog => {
             const item = catalog[imageId];
-            if (item) {
+            if (item && item.previewUrl) {
+              sharedView.style.display = 'flex';
+              imgEl.src = item.previewUrl;
               titleEl.textContent = item.title;
-              pageTitle.textContent = item.title + ' • 4K Wallpaper | KinotiX';
+              pageTitle.textContent = item.title + ' • KinotiX';
               if (item.typeLabel) badgeEl.textContent = item.typeLabel;
               if (item.creator) {
                 creatorEl.innerHTML = 'Curated by <strong>' + item.creator + '</strong>';
               }
-              if (item.previewUrl) {
-                imgEl.src = item.previewUrl;
-              }
+              const canonicalShareUrl = "https://techscript.is-a.dev/kinotix/i/" + imageId;
+              setupInteractions(canonicalShareUrl, item.rawUrl || item.previewUrl, item.title);
             } else {
-              titleEl.textContent = 'KinotiX Ultra HD 4K Wallpaper';
-              pageTitle.textContent = 'KinotiX Ultra HD 4K Wallpaper • 4K Wallpaper | KinotiX';
-              badgeEl.textContent = 'Ultra HD 4K Wallpaper';
-              imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy%204k%20Wallpaper.jpg';
+              unavailView.style.display = 'block';
             }
           })
           .catch(() => {
-            titleEl.textContent = 'KinotiX Ultra HD 4K Wallpaper';
-            imgEl.src = 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy%204k%20Wallpaper.jpg';
+            unavailView.style.display = 'block';
           });
       } catch (err) {
-        document.getElementById('standard-404-view').style.display = 'block';
+        document.getElementById('unavailable-view').style.display = 'block';
       }
     })();
   </script>
