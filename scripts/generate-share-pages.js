@@ -24,7 +24,18 @@ const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.kinoti
 function normalizeUrl(rawUrl) {
   if (!rawUrl || typeof rawUrl !== 'string') return '';
   try {
-    const u = new URL(rawUrl.trim());
+    let clean = rawUrl.trim();
+    if (clean.includes('cdn.jsdelivr.net/gh/venomleo2o1-byte/phone-wallpaper')) {
+      const p = clean.split(/@(master|main)\//)[2] || clean.split(/@(master|main)\//)[1] || clean.split(/@(master|main)\//)[0];
+      clean = `https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/${p}`;
+    } else if (clean.includes('cdn.jsdelivr.net/gh/venomleo2o1-byte/live-wallpaper')) {
+      const p = clean.split(/@(master|main)\//)[2] || clean.split(/@(master|main)\//)[1] || clean.split(/@(master|main)\//)[0];
+      clean = `https://raw.githubusercontent.com/venomleo2o1-byte/live-wallpaper/main/${p}`;
+    }
+    if (clean.includes('raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/wallpapers/')) {
+      clean = clean.replace('/phone-wallpaper/master/wallpapers/', '/phone-wallpaper/master/');
+    }
+    const u = new URL(clean);
     const scheme = u.protocol.toLowerCase();
     const host = u.host.toLowerCase();
     let pathname = decodeURIComponent(u.pathname);
@@ -649,6 +660,118 @@ function main() {
     }
     console.log(`Wrote ${generatedCount} ultra-fast share pages into ${outDir}`);
   }
+
+  // Generate universal catalog.json
+  const catalogMap = {};
+  for (const wp of uniqueWallpapers) {
+    catalogMap[wp.imageId] = {
+      title: wp.title,
+      typeLabel: wp.typeLabel,
+      previewUrl: wp.cdnUrl || wp.rawUrl,
+      rawUrl: wp.rawUrl,
+      creator: wp.creator,
+      category: wp.category,
+      isVideo: wp.isVideo
+    };
+  }
+
+  // Pre-seed known engine templates
+  const enginePresets = [
+    { id: 'kinotix://engine/fluid/default', title: 'Fluid Simulation Live Wallpaper', type: 'Fluid Live Wallpaper', cat: 'fluid' },
+    { id: 'kinotix://engine/fluid/abstract', title: 'Abstract Fluid Live Wallpaper', type: 'Fluid Live Wallpaper', cat: 'fluid' },
+    { id: 'kinotix://engine/particle/galaxy', title: 'Galaxy 3D Particle Wallpaper', type: '3D Parallax Wallpaper', cat: 'particle' },
+    { id: 'kinotix://engine/particle/neon', title: 'Neon 3D Particle Wallpaper', type: '3D Parallax Wallpaper', cat: 'particle' },
+    { id: 'kinotix://engine/camera/live', title: 'Transparent Dual Camera Wallpaper', type: 'Camera Live Wallpaper', cat: 'camera' },
+    { id: 'kinotix://engine/3d/default', title: '3D Gyro Parallax Wallpaper', type: '3D Parallax Wallpaper', cat: '3d' }
+  ];
+  for (const ep of enginePresets) {
+    const kxId = generateImageId(ep.id);
+    catalogMap[kxId] = {
+      title: ep.title,
+      typeLabel: ep.type,
+      previewUrl: 'https://techscript.is-a.dev/kinotix/assets/icons/icon-512.png',
+      rawUrl: 'https://techscript.is-a.dev/kinotix/assets/icons/icon-512.png',
+      creator: 'KinotiX Engine Studio',
+      category: ep.cat,
+      isVideo: false
+    };
+  }
+
+  // Pre-seed curated wallpapers referenced in app hardcoded defaults
+  const curatedEntries = [
+    {
+      ids: ['KX_o7Bsquu6pQZW', 'KX_jt0AUH4MWAeM'],
+      title: 'Galaxy Ultra HD 4K Wallpaper',
+      typeLabel: 'Ultra HD 4K Wallpaper',
+      cdnUrl: 'https://cdn.jsdelivr.net/gh/venomleo2o1-byte/phone-wallpaper@master/Space/Galaxy%204k%20Wallpaper.jpg',
+      rawUrl: 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Space/Galaxy%204k%20Wallpaper.jpg',
+      creator: 'KinotiX Space Studio',
+      category: 'Space',
+      isVideo: false
+    },
+    {
+      ids: ['KX_YZlEAQ-3Du16', 'KX_YZIEAQ-3Du16'],
+      title: 'Wolf Moonlit Vigilance',
+      typeLabel: 'Ultra HD 4K Wallpaper',
+      cdnUrl: 'https://cdn.jsdelivr.net/gh/venomleo2o1-byte/phone-wallpaper@master/Animals/Wolf%20%20_Moonlit%20Vigilance_.png',
+      rawUrl: 'https://raw.githubusercontent.com/venomleo2o1-byte/phone-wallpaper/master/Animals/Wolf%20%20_Moonlit%20Vigilance_.png',
+      creator: 'Velenrose',
+      category: 'Animals',
+      isVideo: false
+    },
+    {
+      ids: ['KX_kbSL7wx32adf', 'KX_6G5rCkJq9WiF'],
+      title: 'Ultra HD 4K Wallpaper',
+      typeLabel: 'Ultra HD 4K Wallpaper',
+      cdnUrl: 'https://i.pinimg.com/originals/43/5b/92/435b9276f43737f1ae7af221c988b1c1.jpg',
+      rawUrl: 'https://i.pinimg.com/originals/43/5b/92/435b9276f43737f1ae7af221c988b1c1.jpg',
+      creator: 'KinotiX Studio',
+      category: '4K',
+      isVideo: false
+    }
+  ];
+
+  for (const c of curatedEntries) {
+    for (const cid of c.ids) {
+      catalogMap[cid] = {
+        title: c.title,
+        typeLabel: c.typeLabel,
+        previewUrl: c.cdnUrl,
+        rawUrl: c.rawUrl,
+        creator: c.creator,
+        category: c.category,
+        isVideo: c.isVideo
+      };
+      // Write static pages for them as well
+      for (const outDir of outDirs) {
+        const pageDir = path.join(outDir, cid);
+        if (!fs.existsSync(pageDir)) fs.mkdirSync(pageDir, { recursive: true });
+        const html = renderSharePageHtml({
+          imageId: cid,
+          title: c.title,
+          typeLabel: c.typeLabel,
+          cdnUrl: c.cdnUrl,
+          rawUrl: c.rawUrl,
+          creator: c.creator,
+          category: c.category,
+          isVideo: c.isVideo
+        });
+        fs.writeFileSync(path.join(pageDir, 'index.html'), html, 'utf8');
+      }
+    }
+  }
+
+  const catalogJsonStr = JSON.stringify(catalogMap, null, 2);
+  const catalogLocations = [
+    path.join(rootDir, 'i', 'catalog.json'),
+    path.join(rootDir, 'docs', 'i', 'catalog.json'),
+    path.join(rootDir, 'docs', 'catalog.json'),
+    path.join(rootDir, 'catalog.json')
+  ];
+  for (const catPath of catalogLocations) {
+    fs.writeFileSync(catPath, catalogJsonStr, 'utf8');
+  }
+  console.log(`Saved catalog.json with ${Object.keys(catalogMap).length} entries across all target paths.`);
 
   console.log('Share page generation completed successfully!');
 }

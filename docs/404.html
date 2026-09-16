@@ -489,54 +489,73 @@
           };
         }
 
-        // 1. Check encrypted payload param ?p=
-        const pToken = params.get('p');
-        if (pToken) {
-          const payload = decryptPayload(pToken);
-          if (payload && payload.u) {
-            sharedView.style.display = 'flex';
-            imgEl.src = payload.u;
-            const displayTitle = payload.t || 'KinotiX Wallpaper';
-            titleEl.textContent = displayTitle;
-            pageTitle.textContent = displayTitle + ' • KinotiX';
-            const badge = payload.k === 'live' ? '4K Video Wallpaper' : 'Ultra HD 4K Wallpaper';
-            badgeEl.textContent = badge;
-            if (payload.a) {
-              creatorEl.innerHTML = 'Curated by <strong>' + payload.a + '</strong> on KinotiX';
-            }
-            const canonicalShareUrl = "https://techscript.is-a.dev/kinotix/i/" + imageId;
-            setupInteractions(canonicalShareUrl, payload.u, displayTitle);
-            return;
-          }
+        // 1. Check if imageId itself or ?p= contains an encrypted payload
+        let payload = null;
+        if (imageId && imageId.startsWith('KX_e_')) {
+          payload = decryptPayload(imageId.substring(3));
+        } else if (params.get('p')) {
+          payload = decryptPayload(params.get('p'));
         }
 
-        // 2. Fetch catalog.json
-        const catalogUrl = path.includes('/kinotix/') ? '/kinotix/i/catalog.json' : 'i/catalog.json';
-        fetch(catalogUrl)
-          .then(r => {
-            if (!r.ok) throw new Error('Catalog not accessible');
-            return r.json();
-          })
-          .then(catalog => {
-            const item = catalog[imageId];
-            if (item && item.previewUrl) {
-              sharedView.style.display = 'flex';
-              imgEl.src = item.previewUrl;
-              titleEl.textContent = item.title;
-              pageTitle.textContent = item.title + ' • KinotiX';
-              if (item.typeLabel) badgeEl.textContent = item.typeLabel;
-              if (item.creator) {
-                creatorEl.innerHTML = 'Curated by <strong>' + item.creator + '</strong>';
-              }
-              const canonicalShareUrl = "https://techscript.is-a.dev/kinotix/i/" + imageId;
-              setupInteractions(canonicalShareUrl, item.rawUrl || item.previewUrl, item.title);
-            } else {
-              unavailView.style.display = 'block';
-            }
-          })
-          .catch(() => {
+        if (payload && payload.u) {
+          sharedView.style.display = 'flex';
+          imgEl.src = payload.u;
+          const displayTitle = payload.t || 'KinotiX Wallpaper';
+          titleEl.textContent = displayTitle;
+          pageTitle.textContent = displayTitle + ' • KinotiX';
+          const badge = payload.k === 'live' ? '4K Video Wallpaper' : 'Ultra HD 4K Wallpaper';
+          badgeEl.textContent = badge;
+          if (payload.a) {
+            creatorEl.innerHTML = 'Curated by <strong>' + payload.a + '</strong> on KinotiX';
+          }
+          const canonicalShareUrl = "https://techscript.is-a.dev/kinotix/i/" + imageId;
+          setupInteractions(canonicalShareUrl, payload.u, displayTitle);
+          return;
+        }
+
+        // 2. Fetch catalog.json with multi-path fallback
+        async function loadCatalog() {
+          const candidateUrls = [
+            '/kinotix/i/catalog.json',
+            '/i/catalog.json',
+            '../i/catalog.json',
+            'i/catalog.json',
+            './catalog.json',
+            '/kinotix/catalog.json',
+            '/catalog.json'
+          ];
+          for (const u of candidateUrls) {
+            try {
+              const res = await fetch(u);
+              if (res.ok) return await res.json();
+            } catch (e) {}
+          }
+          return null;
+        }
+
+        loadCatalog().then(catalog => {
+          if (!catalog) {
             unavailView.style.display = 'block';
-          });
+            return;
+          }
+          const item = catalog[imageId];
+          if (item && (item.previewUrl || item.rawUrl)) {
+            sharedView.style.display = 'flex';
+            imgEl.src = item.previewUrl || item.rawUrl;
+            titleEl.textContent = item.title;
+            pageTitle.textContent = item.title + ' • KinotiX';
+            if (item.typeLabel) badgeEl.textContent = item.typeLabel;
+            if (item.creator) {
+              creatorEl.innerHTML = 'Curated by <strong>' + item.creator + '</strong>';
+            }
+            const canonicalShareUrl = "https://techscript.is-a.dev/kinotix/i/" + imageId;
+            setupInteractions(canonicalShareUrl, item.rawUrl || item.previewUrl, item.title);
+          } else {
+            unavailView.style.display = 'block';
+          }
+        }).catch(() => {
+          unavailView.style.display = 'block';
+        });
       } catch (err) {
         document.getElementById('unavailable-view').style.display = 'block';
       }
